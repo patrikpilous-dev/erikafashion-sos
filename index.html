@@ -600,6 +600,28 @@ tr.target-row:hover td { background: rgba(255,107,53,0.18); }
         </table>
     </div>
 
+    <!-- GSC DATA -->
+    <div class="chart-section">
+        <h2>Google Search Console -- realna data erikafashion.cz</h2>
+        <div class="info-box">
+            Na rozdil od Ahrefs odhadu, Google Search Console ukazuje skutecne kliky a imprese z Google vyhledavani. Porovnani obou zdroju odhaluje, jak presne Ahrefs odhaduje traffic a kde jsou odchylky.
+        </div>
+        <div class="chart-wrap"><canvas id="chartGSC"></canvas></div>
+        <div class="note">Data: Google Search Console propojeny pres Ahrefs projekt. Unor 2026 obsahuje jen castecna data.</div>
+        <div class="insights-card">
+            <h3>Klicove zjisteni</h3>
+            <ul>
+                <li>Leden 2026 byl rekordni mesic: 49 975 kliku z 1,95 milionu impresi -- nejvyssi navstevnost v historii.</li>
+                <li>Prumerne CTR se drzi kolem 2,0-2,7 % -- typicka hodnota pro fashion e-shop s sirokym portfoliem.</li>
+                <li>Prumerna pozice se zlepsila z 10,2 (brezen 2025) na 6,5 (leden 2026) -- posun o 4 pozice nahoru.</li>
+                <li>Imprese rostou: z 954 tisic (prosinec 2024) na 1,95 milionu (leden 2026) -- zdvojnasobeni viditelnosti.</li>
+                <li>Sezonni vzorec odpovida brandovemu hledani -- peak v lednu (novorocni nakupy), propad v lete.</li>
+                <li>Ahrefs odhaduje ~89 tisic navstev, GSC ukazuje ~50 tisic kliku -- Ahrefs nadhodnocuje zhruba 1,8x.</li>
+                <li>CTR trend je mirne klesajici (z 2,7 % na 2,5 %) -- mozny vliv zvysenych impresi na nizkych pozicich.</li>
+            </ul>
+        </div>
+    </div>
+
     <!-- METHODOLOGY -->
     <div class="methodology-card">
         <h2>Metodika a zdroje</h2>
@@ -1077,6 +1099,105 @@ document.querySelectorAll('#snapshotTable th[data-col]').forEach(th => {
     });
 });
 
+// ========== GSC DATA ==========
+const GSC_DATES = ["2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02"];
+const GSC_CLICKS = [20587,36984,29639,28737,30080,36129,34261,26258,25042,30706,36201,35875,29914,49975,16655];
+const GSC_IMPRESSIONS = [954008,1357357,1198376,1246007,1346078,1633627,1727700,1449462,1336994,1415709,1664246,1745573,1501675,1954619,659076];
+const GSC_CTR = [2.16,2.72,2.47,2.31,2.23,2.21,1.98,1.81,1.87,2.17,2.18,2.06,1.99,2.56,2.53];
+const GSC_POSITION = [7.06,7.69,10.23,9.73,10.07,11.10,12.54,15.13,12.96,8.40,6.79,6.53,7.08,6.49,6.51];
+
+function initChartGSC() {
+    const ctx = document.getElementById('chartGSC').getContext('2d');
+    const gscLabels = GSC_DATES.map(dateLabel);
+    charts.gsc = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: gscLabels,
+            datasets: [
+                {
+                    label: 'Kliky',
+                    data: GSC_CLICKS,
+                    backgroundColor: '#FF6B3566',
+                    borderColor: '#FF6B35',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    order: 2,
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'Imprese (tisice)',
+                    data: GSC_IMPRESSIONS.map(v => Math.round(v/1000)),
+                    type: 'line',
+                    borderColor: '#3B82F6',
+                    backgroundColor: '#3B82F622',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    tension: 0.3,
+                    order: 1,
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'CTR (%)',
+                    data: GSC_CTR,
+                    type: 'line',
+                    borderColor: '#10B981',
+                    backgroundColor: '#10B98122',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    tension: 0.3,
+                    borderDash: [5, 3],
+                    order: 0,
+                    yAxisID: 'y2',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#8891a5', padding: 12, usePointStyle: true, font: { size: 11 } }
+                },
+                tooltip: {
+                    backgroundColor: '#141829',
+                    titleColor: '#e2e4ea',
+                    bodyColor: '#e2e4ea',
+                    borderColor: '#1e2340',
+                    borderWidth: 1,
+                    padding: 10,
+                    callbacks: {
+                        label: function(ctx2) {
+                            if (ctx2.dataset.label === 'Kliky') return 'Kliky: ' + fmtNum(ctx2.parsed.y);
+                            if (ctx2.dataset.label.startsWith('Imprese')) return 'Imprese: ' + fmtNum(GSC_IMPRESSIONS[ctx2.dataIndex]);
+                            return 'CTR: ' + ctx2.parsed.y.toFixed(2).replace('.',',') + ' %';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: { ticks: { color: '#5a6178', font: { size: 10 } }, grid: { color: 'rgba(30,35,64,0.5)' } },
+                y: {
+                    position: 'left',
+                    ticks: { color: '#5a6178', font: { size: 10 }, callback: v => v >= 1000 ? (v/1000).toFixed(0)+'k' : v },
+                    grid: { color: 'rgba(30,35,64,0.5)' },
+                    title: { display: true, text: 'Kliky / Imprese (tis.)', color: '#5a6178', font: { size: 11 } }
+                },
+                y2: {
+                    position: 'right',
+                    min: 0,
+                    max: 5,
+                    ticks: { color: '#10B981', font: { size: 10 }, callback: v => v.toFixed(1)+'%' },
+                    grid: { display: false },
+                    title: { display: true, text: 'CTR (%)', color: '#10B981', font: { size: 11 } }
+                }
+            },
+            animation: { duration: 400 }
+        }
+    });
+}
+
 // ========== INIT ==========
 renderBrandChips();
 initChart1();
@@ -1084,6 +1205,7 @@ initChart2();
 initChart3();
 initChart4();
 renderTable();
+initChartGSC();
 </script>
 </body>
 </html>
