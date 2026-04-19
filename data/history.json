@@ -1,0 +1,179 @@
+{
+  "lastUpdated": "2026-04-19",
+  "dates": ["2024-04","2024-05","2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04"],
+  "brands": [
+    {"id":"erikafashion","label":"erikafashion.cz","domain":"erikafashion.cz","color":"#FF6B35","tier":2,"isTarget":true},
+    {"id":"sinsay","label":"Sinsay","domain":"sinsay.com","color":"#E91E63","tier":1,"isTarget":false},
+    {"id":"shein","label":"Shein","domain":"shein.com","color":"#9C27B0","tier":1,"isTarget":false},
+    {"id":"aboutyou","label":"About You","domain":"aboutyou.cz","color":"#2196F3","tier":1,"isTarget":false},
+    {"id":"reserved","label":"Reserved","domain":"reserved.com","color":"#4CAF50","tier":1,"isTarget":false},
+    {"id":"bonprix","label":"Bonprix","domain":"bonprix.cz","color":"#FF9800","tier":1,"isTarget":false},
+    {"id":"zalando","label":"Zalando","domain":"zalando.cz","color":"#00BCD4","tier":1,"isTarget":false},
+    {"id":"mohito","label":"Mohito","domain":"mohito.com","color":"#795548","tier":1,"isTarget":false},
+    {"id":"lelosi","label":"Lelosi","domain":"lelosi.cz","color":"#607D8B","tier":2,"isTarget":false},
+    {"id":"glami","label":"Glami","domain":"glami.cz","color":"#CDDC39","tier":2,"isTarget":false},
+    {"id":"orsay","label":"Orsay","domain":"orsay.cz","color":"#F44336","tier":2,"isTarget":false},
+    {"id":"buga","label":"Buga","domain":"buga.cz","color":"#8BC34A","tier":3,"isTarget":false},
+    {"id":"evona","label":"Evona","domain":"evona.cz","color":"#03A9F4","tier":3,"isTarget":false},
+    {"id":"miadresses","label":"MiaDresses","domain":"miadresses.cz","color":"#FF5722","tier":3,"isTarget":false},
+    {"id":"blankastraka","label":"Blanka Straka","domain":"blankastraka.cz","color":"#9E9E9E","tier":3,"isTarget":false},
+    {"id":"londonclub","label":"London Club","domain":"londonclub.cz","color":"#FFC107","tier":3,"isTarget":false},
+    {"id":"coolboutique","label":"CoolBoutique","domain":"coolboutique.cz","color":"#673AB7","tier":3,"isTarget":false},
+    {"id":"bestmoda","label":"BestModa","domain":"bestmoda.cz","color":"#009688","tier":3,"isTarget":false}
+  ],
+  "brandSearch": {
+    "erikafashion": [22138,21263,24450,24310,22733,20853,18777,17993,16922,26738,21640,15542,17730,20547,23392,19685,17749,17435,18294,18545,15979,17992,16376,16225,18460],
+    "sinsay": [187862,181107,200006,170945,187248,240329,247437,260910,209995,161779,160360,181602,168501,168399,173232,183406,196194,221932,235708,263393,231749,157153,156441,219664,230206],
+    "shein": [247200,251610,262833,262503,247647,247400,246342,256503,162216,220829,181553,179568,166386,184905,209454,220524,190858,178108,181569,180591,141654,175231,171701,183388,187452],
+    "aboutyou": [250764,204039,171185,181163,181676,201704,191437,235819,188527,168101,160147,154100,153575,165016,148462,149899,151404,169514,182797,232107,205468,179669,150607,166975,160029],
+    "reserved": [102632,108129,110069,111552,92924,125620,129810,137299,114719,114970,103951,107127,98671,100600,105444,109886,109805,118510,129982,148273,123822,116463,105893,104717,105867],
+    "bonprix": [144219,136808,141134,123548,105088,114894,107138,110977,82572,97560,82204,88433,77775,85419,96309,76863,71386,83306,82439,83774,65451,83204,88816,84247,85290],
+    "zalando": [68784,60679,60325,51230,53811,67634,67840,81754,81844,65043,48010,65358,56271,54825,58631,57511,55231,58868,62213,74538,62461,56909,56056,56984,60453],
+    "mohito": [62439,58061,66105,56254,48159,55496,52591,48833,43681,48016,35290,40930,42981,43677,45657,49950,40186,44172,43775,44975,42476,44159,39367,40272,44516],
+    "lelosi": [26924,29164,24004,23112,24807,24908,26700,28887,29057,27223,24875,24343,24905,26696,21921,20753,22696,22629,24583,26671,26948,25057,22782,22219,22833],
+    "glami": [13573,11738,10096,10282,10536,16170,16934,22197,13385,17257,13869,16511,15148,12505,11156,7414,9251,15009,15632,20938,12088,16047,12646,15315,13913],
+    "orsay": [18451,18430,16430,13611,13190,16844,17460,17533,13561,14825,13008,12783,13223,12747,11136,9818,9213,12456,13594,12681,9818,11875,12316,8452,8493],
+    "buga": [10195,10506,10161,9689,9611,10404,9847,9362,8823,9363,9631,10216,10591,10905,10561,10090,10013,10808,10252,9768,9231,9773,10042,10628,11005],
+    "evona": [1378,1474,1615,1470,1341,1576,1609,1818,1661,1525,1464,1562,1509,1605,1746,1600,1472,1707,1740,1949,1791,1656,1595,1693,1640],
+    "miadresses": [2056,1678,1374,1137,1350,1389,1647,2046,2485,6924,4515,2454,1671,1701,1681,1437,1407,1650,1344,1376,912,2845,1639,1308,1112],
+    "londonclub": [714,636,646,549,548,655,810,866,598,703,682,723,671,621,636,530,519,627,774,842,567,647,643,692,645],
+    "coolboutique": [396,452,570,411,759,954,633,575,378,721,495,520,409,519,547,540,629,959,768,584,395,831,517,477,397],
+    "blankastraka": [118,120,111,87,86,89,87,87,73,132,132,110,87,109,109,86,86,109,109,87,59,111,110,109,105],
+    "bestmoda": [105,124,102,119,89,135,166,165,136,169,163,104,104,123,101,118,89,134,165,164,136,168,162,104,103]
+  },
+  "organicTraffic": {
+    "erikafashion": [47393,56158,71788,66681,68428,68102,74156,82480,77162,97802,93071,88144,107963,123409,113711,86444,82606,95386,106245,106446,101447,116587,120941,99368,89295],
+    "glami": [372100,339567,300390,280877,291047,293713,292082,300738,268929,273433,264864,247194,232632,224920,221965,204303,193213,159134,156571,193138,198245,194552,172420,189188,146298],
+    "aboutyou": [308201,269605,257752,238457,236039,238720,261305,291085,263340,293720,289951,262178,248035,258570,234855,209203,188189,160836,199991,226821,210278,185807,165942,173143,154997],
+    "bonprix": [163022,149822,163474,126697,128431,112211,92854,81021,78119,96442,113020,123016,100546,113398,130258,97396,91558,102585,118889,120112,83269,121990,120398,125690,122090],
+    "orsay": [46963,48091,51133,43607,37417,41531,54959,56914,56710,64747,62146,59528,51407,57156,53944,46116,48572,54803,60285,63124,55104,48052,47853,45096,36811],
+    "londonclub": [17101,16320,17147,14310,13589,15263,15225,13276,12363,12965,16608,18749,16384,14608,12930,11718,12499,12960,11816,12289,11691,10138,8611,9776,7411],
+    "miadresses": [8983,9666,9203,7079,8613,8876,10429,13284,12162,22573,19302,17256,13795,14514,14000,14024,14778,14093,13996,14254,12404,15354,16876,13223,9814],
+    "zalando": [561745,540660,504523,482171,519622,617014,628152,787033,723046,597038,561151,607519,568610,569243,597727,568553,499036,536223,572970,632178,629071,560003,512686,494217,428549]
+  },
+  "snapshot": {
+    "erikafashion": {"orgTraffic":91468,"orgKeywords":4473,"orgKeywords1_3":2023},
+    "sinsay": {"orgTraffic":295313,"orgKeywords":3192,"orgKeywords1_3":839},
+    "shein": {"orgTraffic":220588,"orgKeywords":350,"orgKeywords1_3":246},
+    "aboutyou": {"orgTraffic":155576,"orgKeywords":12111,"orgKeywords1_3":null},
+    "reserved": {"orgTraffic":174926,"orgKeywords":3114,"orgKeywords1_3":833},
+    "bonprix": {"orgTraffic":123867,"orgKeywords":2656,"orgKeywords1_3":null},
+    "zalando": {"orgTraffic":460920,"orgKeywords":29703,"orgKeywords1_3":12673},
+    "mohito": {"orgTraffic":89853,"orgKeywords":2027,"orgKeywords1_3":474},
+    "lelosi": {"orgTraffic":29678,"orgKeywords":316,"orgKeywords1_3":129},
+    "glami": {"orgTraffic":142386,"orgKeywords":28487,"orgKeywords1_3":null},
+    "orsay": {"orgTraffic":36711,"orgKeywords":1616,"orgKeywords1_3":null},
+    "buga": {"orgTraffic":18454,"orgKeywords":238,"orgKeywords1_3":82},
+    "evona": {"orgTraffic":30686,"orgKeywords":1303,"orgKeywords1_3":523},
+    "miadresses": {"orgTraffic":9772,"orgKeywords":792,"orgKeywords1_3":null},
+    "blankastraka": {"orgTraffic":9771,"orgKeywords":557,"orgKeywords1_3":183},
+    "londonclub": {"orgTraffic":6933,"orgKeywords":1631,"orgKeywords1_3":null},
+    "coolboutique": {"orgTraffic":6287,"orgKeywords":371,"orgKeywords1_3":151},
+    "bestmoda": {"orgTraffic":5186,"orgKeywords":363,"orgKeywords1_3":75}
+  },
+  "gsc": {
+    "dates": ["2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01"],
+    "clicks": [20408,24082,26065,20587,36984,29639,28737,30080,36129,34261,26258,25042,30706,36201,35875,29914,49975],
+    "impressions": [860876,1055795,1153826,954008,1357357,1198376,1246007,1346078,1633627,1727700,1449462,1336994,1415709,1664246,1745573,1501675,1954619],
+    "ctr": [2.37,2.28,2.26,2.16,2.72,2.47,2.31,2.23,2.21,1.98,1.81,1.87,2.17,2.18,2.06,1.99,2.56],
+    "position": [6.73,7.10,6.86,7.06,7.69,10.23,9.73,10.07,11.10,12.54,15.13,12.96,8.40,6.79,6.53,7.08,6.49]
+  },
+  "brandTerms": {
+    "erikafashion": [
+      {"kw":"erikafashion","vol":15000},
+      {"kw":"erika fashion","vol":3400},
+      {"kw":"erikafashion.cz","vol":450},
+      {"kw":"erika fashion recenze","vol":350},
+      {"kw":"erikafashion recenze","vol":350},
+      {"kw":"erikafashion saty","vol":350},
+      {"kw":"erika italy fashion","vol":150},
+      {"kw":"erika fashion fotky","vol":100},
+      {"kw":"erikafashion praha","vol":100},
+      {"kw":"erika fashion cz","vol":90},
+      {"kw":"erika fashion saty","vol":80},
+      {"kw":"erikafashion obchod","vol":80},
+      {"kw":"erikafashion.cz recenze","vol":60},
+      {"kw":"fashion erika","vol":50}
+    ]
+  },
+  "brandAssociations": {
+    "erikafashion": [
+      {"kw":"erikafashion saty","vol":350},
+      {"kw":"erika fashion recenze","vol":350},
+      {"kw":"erikafashion recenze","vol":350},
+      {"kw":"erika italy fashion","vol":150},
+      {"kw":"erika fashion fotky","vol":100},
+      {"kw":"erikafashion praha","vol":100},
+      {"kw":"erika fashion saty","vol":80},
+      {"kw":"erikafashion obchod","vol":80}
+    ],
+    "shein": [
+      {"kw":"shein cz","vol":27000},
+      {"kw":"shein recenze","vol":1100},
+      {"kw":"shein kupon","vol":600},
+      {"kw":"shein saty","vol":150},
+      {"kw":"shein sleva","vol":150},
+      {"kw":"shein doprava","vol":80}
+    ],
+    "sinsay": [
+      {"kw":"sinsay cz","vol":15000},
+      {"kw":"sinsay praha","vol":2200},
+      {"kw":"sinsay recenze","vol":600},
+      {"kw":"sinsay eshop","vol":600},
+      {"kw":"sinsay sleva","vol":450},
+      {"kw":"sinsay saty","vol":400}
+    ],
+    "aboutyou": [
+      {"kw":"about you sleva","vol":3800},
+      {"kw":"about you recenze","vol":600},
+      {"kw":"aboutyou sleva","vol":500},
+      {"kw":"about you kupon","vol":450},
+      {"kw":"about you vraceni","vol":300}
+    ],
+    "zalando": [
+      {"kw":"zalando sleva","vol":2500},
+      {"kw":"zalando recenze","vol":1000},
+      {"kw":"zalando kupon","vol":500},
+      {"kw":"zalando cz","vol":500},
+      {"kw":"zalando vraceni","vol":400}
+    ],
+    "mohito": [
+      {"kw":"mohito cz","vol":5300},
+      {"kw":"mohito eshop","vol":1100},
+      {"kw":"mohito saty","vol":600},
+      {"kw":"mohito sleva","vol":250},
+      {"kw":"mohito recenze","vol":150}
+    ],
+    "reserved": [
+      {"kw":"reserved eshop","vol":5900},
+      {"kw":"reserved praha","vol":2000},
+      {"kw":"reserved sleva","vol":1000},
+      {"kw":"reserved cz","vol":800},
+      {"kw":"reserved saty","vol":450},
+      {"kw":"reserved recenze","vol":100}
+    ],
+    "bonprix": [
+      {"kw":"bonprix sleva","vol":2900},
+      {"kw":"bonprix katalog","vol":500},
+      {"kw":"bonprix saty","vol":350},
+      {"kw":"bonprix recenze","vol":300},
+      {"kw":"bonprix kupon","vol":80}
+    ],
+    "glami": [
+      {"kw":"glami recenze","vol":350},
+      {"kw":"glami boty","vol":150},
+      {"kw":"glami saty","vol":20}
+    ],
+    "orsay": [
+      {"kw":"orsay eshop","vol":1700},
+      {"kw":"orsay saty","vol":300},
+      {"kw":"orsay sleva","vol":50},
+      {"kw":"orsay recenze","vol":40}
+    ],
+    "lelosi": [
+      {"kw":"lelosi sleva","vol":600},
+      {"kw":"lelosi recenze","vol":250},
+      {"kw":"lelosi eshop","vol":20}
+    ]
+  }
+}

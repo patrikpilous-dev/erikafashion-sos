@@ -10,1202 +10,1201 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 :root {
-    --bg-primary: #0b0e1a;
-    --bg-card: #141829;
-    --bg-card-hover: #1a1f38;
-    --bg-info: #111528;
-    --border: #1e2340;
-    --text-primary: #e2e4ea;
-    --text-secondary: #8891a5;
-    --text-muted: #5a6178;
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --border: #e2e5ed;
+    --text: #1a1a2e;
+    --text-sec: #4a5568;
+    --text-muted: #9ca3af;
     --accent: #FF6B35;
-    --accent-dim: rgba(255,107,53,0.12);
-    --accent-blue: #3B82F6;
-    --accent-blue-dim: rgba(59,130,246,0.12);
-    --radius: 16px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.25);
+    --accent-dim: rgba(255,107,53,0.08);
+    --blue: #2563eb;
+    --blue-dim: rgba(37,99,235,0.08);
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
-    min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
 .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header {
-    background: linear-gradient(135deg, #0f1324 0%, #141832 50%, #0f1324 100%);
+    background: var(--card);
     border-bottom: 1px solid var(--border);
-    padding: 40px 0 32px;
+    padding: 28px 0;
 }
 .header-inner {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
     flex-wrap: wrap;
 }
-.header-logo {
-    width: 200px;
-    height: auto;
-    filter: brightness(0) invert(1);
-    flex-shrink: 0;
-}
-.header-text { flex: 1; min-width: 280px; }
-.header h1 {
-    font-size: 1.65rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-    letter-spacing: -0.02em;
-}
-.header .subtitle {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: 10px;
-}
-.header .badge {
-    display: inline-block;
-    font-size: 0.72rem;
+.header-logo { height: 36px; flex-shrink: 0; }
+.header-text { flex: 1; }
+.header-text h1 { font-size: 22px; font-weight: 700; color: var(--text); }
+.header-text p { font-size: 14px; color: var(--text-sec); margin-top: 2px; }
+.header-badge {
+    font-size: 12px;
     color: var(--text-muted);
-    background: rgba(255,255,255,0.04);
+    background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 14px;
-    letter-spacing: 0.01em;
+    padding: 6px 14px;
+    border-radius: 0;
+    white-space: nowrap;
 }
 
-/* ===== INTRO CARD ===== */
-.intro-card {
-    background: var(--bg-card);
+/* CARDS */
+.card {
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
-    margin-bottom: 28px;
+    border-radius: 0;
     box-shadow: var(--shadow);
+    padding: 28px 32px;
+    margin-bottom: 32px;
 }
-.intro-card h2 {
-    font-size: 1.15rem;
+.card-title {
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--text-primary);
+    margin-bottom: 16px;
+    color: var(--text);
 }
-.intro-card .intro-text {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
+.card-subtitle {
+    font-size: 14px;
+    color: var(--text-sec);
+    margin-bottom: 20px;
     line-height: 1.7;
-    max-width: 900px;
-    margin-bottom: 24px;
 }
+
+/* INTRO QUOTES */
 .quotes-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    margin-top: 20px;
 }
 .quote-block {
+    background: var(--bg);
     border-left: 3px solid var(--accent);
-    padding: 16px 20px;
-    background: rgba(255,255,255,0.02);
-    border-radius: 0 12px 12px 0;
-}
-.quote-block .quote-text {
-    font-style: italic;
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.65;
-    margin-bottom: 10px;
+    padding: 18px 20px;
+    border-radius: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-sec);
 }
 .quote-block .quote-author {
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    display: block;
+    margin-top: 10px;
     font-weight: 600;
+    color: var(--text);
+    font-size: 12px;
 }
 
-/* ===== FILTER BAR ===== */
+/* FILTER BAR */
 .filter-bar {
-    background: #111528;
+    background: var(--card);
     border-bottom: 1px solid var(--border);
-    padding: 16px 0;
+    padding: 14px 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
-.filter-section { margin-bottom: 10px; }
-.filter-section:last-child { margin-bottom: 0; }
+.filter-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 .filter-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
-    margin-bottom: 6px;
+    font-size: 13px;
     font-weight: 600;
+    color: var(--text-sec);
+    margin-right: 4px;
 }
-.tier-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
 .tier-btn {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
     padding: 6px 16px;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg-card);
-    color: var(--text-secondary);
+    background: var(--card);
+    color: var(--text-sec);
     cursor: pointer;
-    font-size: 0.78rem;
-    font-weight: 500;
-    font-family: inherit;
-    transition: all 0.2s;
+    border-radius: 0;
+    transition: all 0.15s;
 }
-.tier-btn:hover { border-color: var(--accent); color: var(--text-primary); }
-.tier-btn.active {
-    background: var(--accent-dim);
-    border-color: var(--accent);
-    color: var(--accent);
+.tier-btn:hover { border-color: var(--accent); color: var(--accent); }
+.tier-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.filter-sep {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+    margin: 0 4px;
 }
-.brand-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .brand-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.73rem;
+    font-family: inherit;
+    font-size: 12px;
     font-weight: 500;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text-sec);
     cursor: pointer;
-    transition: all 0.2s;
-    border: 1px solid transparent;
-    user-select: none;
-}
-.brand-chip .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
+    border-radius: 0;
+    border-left: 3px solid var(--border);
+    transition: all 0.15s;
+    white-space: nowrap;
 }
 .brand-chip.active {
-    background: var(--bg-card);
-    border-color: var(--border);
-    color: var(--text-primary);
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 600;
 }
-.brand-chip.inactive {
-    background: transparent;
-    border-color: transparent;
-    color: var(--text-muted);
-    opacity: 0.45;
-}
-.brand-chip.target {
-    border-color: var(--accent) !important;
-    background: var(--accent-dim) !important;
-    opacity: 1 !important;
-}
+.brand-chip.target { border-left-color: var(--accent); }
 
-/* ===== CONTENT ===== */
-.content { padding: 28px 0 60px; }
-
-/* ===== CHART SECTION ===== */
-.chart-section {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 28px;
-    box-shadow: var(--shadow);
-}
-.chart-section h2 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
-}
+/* INFO BOX */
 .info-box {
-    background: var(--bg-info);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    background: var(--blue-dim);
+    border-left: 3px solid var(--blue);
     padding: 14px 18px;
-    margin-bottom: 20px;
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.65;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-sec);
+    line-height: 1.7;
+    border-radius: 0;
 }
+.info-box.note {
+    background: var(--accent-dim);
+    border-left-color: var(--accent);
+}
+
+/* CHART CONTAINER */
 .chart-wrap {
     position: relative;
-    width: 100%;
     height: 420px;
+    margin: 20px 0;
 }
-.chart-note {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-}
+.chart-wrap canvas { width: 100% !important; }
 
-/* ===== FINDINGS CARD ===== */
-.findings-card {
-    background: rgba(255,255,255,0.02);
+/* FINDINGS */
+.findings {
+    background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
+    padding: 24px 28px;
     margin-top: 20px;
+    border-radius: 0;
 }
-.findings-card h3 {
-    font-size: 0.88rem;
+.findings-title {
+    font-size: 15px;
     font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    color: var(--text);
 }
-.findings-list {
-    list-style: none;
-    padding: 0;
+.findings ol {
+    padding-left: 20px;
 }
-.findings-list li {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.65;
-    padding: 6px 0 6px 20px;
-    position: relative;
-    border-bottom: 1px solid rgba(30,35,64,0.5);
-}
-.findings-list li:last-child { border-bottom: none; }
-.findings-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 14px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
+.findings li {
+    font-size: 13px;
+    color: var(--text-sec);
+    line-height: 1.8;
+    margin-bottom: 4px;
 }
 
-/* ===== TABLE ===== */
-.table-section {
-    background: var(--bg-card);
+/* DETAILS / METHODOLOGY COLLAPSE */
+details {
+    margin-bottom: 16px;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 28px;
-    overflow-x: auto;
-    box-shadow: var(--shadow);
+    border-radius: 0;
 }
-.table-section h2 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+details summary {
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--bg);
+    color: var(--text-sec);
+    border-radius: 0;
 }
-table {
+details summary:hover { color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details .details-content {
+    padding: 16px 18px;
+    font-size: 13px;
+    color: var(--text-sec);
+    line-height: 1.7;
+}
+details .details-content p { margin-bottom: 10px; }
+details .details-content p:last-child { margin-bottom: 0; }
+
+/* TABLE */
+.data-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.84rem;
+    font-size: 13px;
 }
-th {
+.data-table th {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 2px solid var(--border);
-    color: var(--text-muted);
     font-weight: 600;
-    font-size: 0.72rem;
+    font-size: 12px;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+    background: var(--bg);
     cursor: pointer;
     white-space: nowrap;
     user-select: none;
-    transition: color 0.2s;
 }
-th:hover { color: var(--text-secondary); }
-th .sort-arrow { margin-left: 4px; font-size: 0.62rem; }
-td {
-    padding: 9px 14px;
-    border-bottom: 1px solid rgba(30,35,64,0.6);
-    white-space: nowrap;
+.data-table th:hover { color: var(--accent); }
+.data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-sec);
 }
-tr:hover td { background: var(--bg-card-hover); }
-tr.target-row td {
+.data-table tr:hover td { background: var(--bg); }
+.data-table tr.target-row td {
     background: var(--accent-dim);
     font-weight: 600;
+    color: var(--text);
 }
-tr.target-row:hover td { background: rgba(255,107,53,0.18); }
-.rank-cell { color: var(--text-muted); font-size: 0.78rem; width: 36px; }
-.brand-cell { display: flex; align-items: center; gap: 8px; }
-.brand-cell .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.brand-cell .domain { font-size: 0.68rem; color: var(--text-muted); margin-left: 4px; }
-.num-cell { text-align: right; font-variant-numeric: tabular-nums; }
-.na-cell { color: var(--text-muted); text-align: right; }
+.data-table tr.target-row td:first-child { border-left: 3px solid var(--accent); }
+.data-table td:first-child { font-weight: 500; }
 
-/* ===== METHODOLOGY ===== */
-.methodology-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 28px;
-    box-shadow: var(--shadow);
-}
-.methodology-card h2 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-.methodology-card .method-intro {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 20px;
-    max-width: 900px;
-}
-.method-grid {
+/* BRAND ASSOCIATIONS */
+.assoc-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.assoc-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 0;
+}
+.assoc-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+.assoc-card table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+}
+.assoc-card td {
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-sec);
+}
+.assoc-card td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--text);
+}
+.assoc-card .no-data {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* BRAND TERMS TABLE */
+.brand-terms-table {
+    width: 100%;
+    font-size: 13px;
+    border-collapse: collapse;
+    max-width: 500px;
+}
+.brand-terms-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border);
+    background: var(--bg);
+}
+.brand-terms-table td {
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-sec);
+}
+.brand-terms-table td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* METHODOLOGY GRID */
+.method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
+    margin-top: 16px;
 }
 .method-item {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    padding: 14px 18px;
+    border-left: 3px solid var(--blue);
+    border-radius: 0;
 }
-.method-item:last-child { border-bottom: none; }
-.method-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--accent);
+.method-item strong {
+    display: block;
+    font-size: 12px;
+    color: var(--text);
     margin-bottom: 4px;
 }
-.method-value {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.55;
+.method-item span {
+    font-size: 13px;
+    color: var(--text-sec);
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer {
-    text-align: center;
-    padding: 28px 0;
+    background: var(--card);
     border-top: 1px solid var(--border);
+    padding: 24px 0;
+    margin-top: 32px;
+    text-align: center;
+    font-size: 12px;
     color: var(--text-muted);
-    font-size: 0.72rem;
-    letter-spacing: 0.01em;
 }
 
-/* ===== PRINT ===== */
-@media print {
-    body { background: #fff; color: #111; }
-    .filter-bar { position: static; background: #f5f5f5; }
-    .chart-section, .table-section, .intro-card, .methodology-card { border-color: #ddd; break-inside: avoid; background: #fff; box-shadow: none; }
-    .header { background: #f5f5f5; }
-    .header-logo { filter: none; }
-    .footer { border-color: #ddd; }
-    .findings-card, .info-box { background: #f9f9f9; }
-    .quote-block { background: #f5f5f5; }
-    :root {
-        --bg-primary: #fff;
-        --bg-card: #fff;
-        --bg-info: #f9f9f9;
-        --border: #ddd;
-        --text-primary: #111;
-        --text-secondary: #444;
-        --text-muted: #777;
-    }
+/* DOG */
+.dog-caption {
+    text-align: center;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 24px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-    .quotes-grid { grid-template-columns: 1fr; }
-    .method-grid { grid-template-columns: 1fr; }
-}
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .container { padding: 0 16px; }
-    .header { padding: 24px 0 20px; }
-    .header h1 { font-size: 1.25rem; }
-    .header-logo { width: 150px; }
-    .header-inner { gap: 16px; }
-    .chart-wrap { height: 320px; }
-    .chart-section, .intro-card, .methodology-card, .table-section { padding: 18px; }
-    table { font-size: 0.75rem; }
-    th, td { padding: 7px 8px; }
-    .intro-card { padding: 20px; }
-    .quote-block { padding: 12px 14px; }
+    .card { padding: 20px; }
+    .quotes-grid { grid-template-columns: 1fr; }
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .filter-inner { gap: 8px; }
+    .brand-chip { font-size: 11px; padding: 3px 8px; }
+    .chart-wrap { height: 300px; }
+    .assoc-grid { grid-template-columns: 1fr; }
+    .method-grid { grid-template-columns: 1fr; }
+    .data-table { font-size: 11px; }
+    .data-table th, .data-table td { padding: 8px 8px; }
+}
+
+/* PRINT */
+@media print {
+    .filter-bar { position: static; }
+    body { background: #fff; }
+    .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+    .chart-wrap { height: 300px; }
 }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<div class="header">
-    <div class="container">
-        <div class="header-inner">
-            <img src="https://www.erikafashion.cz/user/logos/logo-erikafashion.svg" alt="erikafashion" class="header-logo">
-            <div class="header-text">
-                <h1>Share of Search Dashboard</h1>
-                <div class="subtitle">Kompetitivni analyza ceskeho fashion trhu</div>
-                <span class="badge">Posledni aktualizace: duben 2026 | Data: Ahrefs API</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- INTRO CARD -->
-<div class="content">
+<header class="header">
 <div class="container">
-
-<div class="intro-card">
-    <h2>Co je Share of Search?</h2>
-    <p class="intro-text">
-        Share of Search je metrika vyvinuta Lesem Binetem (IPA, 2020), ktera meri podil znacky na celkovem brandovem vyhledavani v dane kategorii. Vyzkum ukazuje, ze Share of Search vysvetluje 83 % variability trzniho podilu (James Hankins, IPA).
-    </p>
-    <div class="quotes-grid">
-        <div class="quote-block">
-            <div class="quote-text">"Share of Search has enormous potential and predictive power to track brands and advertising going forward."</div>
-            <div class="quote-author">-- Les Binet, IPA EffWorks 2020</div>
+    <div class="header-inner">
+        <img src="https://www.erikafashion.cz/user/logos/logo-erikafashion.svg" alt="Erika Fashion" class="header-logo">
+        <div class="header-text">
+            <h1>Share of Search Dashboard</h1>
+            <p>Kompetitivn&#237; anal&#253;za &#269;esk&#233;ho fashion trhu</p>
         </div>
-        <div class="quote-block">
-            <div class="quote-text">"Share of search is a simple and elegant alternative to share of voice -- it measures real consumer demand, not just media spend."</div>
-            <div class="quote-author">-- Mark Ritson, Marketing Week</div>
-        </div>
-        <div class="quote-block">
-            <div class="quote-text">"When Share of Search exceeds market share, brand growth typically follows within 6-12 months."</div>
-            <div class="quote-author">-- James Hankins, IPA Think Tank</div>
-        </div>
+        <span class="header-badge" id="headerBadge">Posledn&#237; aktualizace: duben 2026 | Data: Ahrefs API + Google Search Console</span>
     </div>
 </div>
-
-</div>
-</div>
+</header>
 
 <!-- FILTER BAR -->
-<div class="filter-bar">
-    <div class="container">
-        <div class="filter-section">
-            <div class="filter-label">Filtr podle velikosti</div>
-            <div class="tier-buttons">
-                <button class="tier-btn active" data-tier="all" onclick="setTierFilter('all')">Vsichni</button>
-                <button class="tier-btn" data-tier="12" onclick="setTierFilter('12')">Tier 1 + 2</button>
-                <button class="tier-btn" data-tier="1" onclick="setTierFilter('1')">Jen velci (Tier 1)</button>
-            </div>
-        </div>
-        <div class="filter-section">
-            <div class="filter-label">Znacky</div>
-            <div class="brand-chips" id="brandChips"></div>
-        </div>
-    </div>
-</div>
-
-<!-- CHARTS + TABLE -->
-<div class="content" style="padding-top:0">
+<nav class="filter-bar">
 <div class="container">
-
-    <!-- CHART 1: SoS Brand Search -->
-    <div class="chart-section">
-        <h2>Share of Search -- brandove hledani v CR</h2>
-        <div class="info-box">
-            Podil brandoveho vyhledavani kazde znacky na celku. Tato metrika je nejsilnejsim prediktorem trzniho podilu -- kdyz Share of Search roste, trzni podil typicky nasleduje za 6-12 mesicu (Les Binet, 2020). Vypocet: hledanost znacky / suma hledanosti vsech znacek.
-        </div>
-        <div class="chart-wrap"><canvas id="chartSoSBrand"></canvas></div>
-        <div class="findings-card">
-            <h3>Klicove zjisteni</h3>
-            <ul class="findings-list">
-                <li>Sinsay a Shein dominuji s kombinovanym podilem pres 40 % -- masivni brandova poptavka tazena agresivnim marketingem a socialni siti.</li>
-                <li>About You zaznamena pokles ze 25 % na 17 % -- vyrazna ztrata brandove dynamiky za poslednich 18 mesicu.</li>
-                <li>erikafashion drzi stabilni podil kolem 2 % celkoveho brandoveho hledani, coz je silnejsi nez nektere etablovane znacky (glami, buga).</li>
-                <li>Bonprix trvale klesa (z 15 % na 9 %) -- signalizuje klesajici zajem o znacku u ceskych spotrebitelu.</li>
-                <li>Orsay propadl ze 2 % na 0,9 % -- varovny signal mozneho odchodu znacky z trhu.</li>
-                <li>Sezonni vzorce jsou patrne u vsech znacek -- spicky v Q4 (Vanoce), propad v Q3 (leto).</li>
-                <li>Lelosi si drzi stabilni podil kolem 2,5 % bez vyraznych vykyvu -- konzistentni znackova poptavka.</li>
-            </ul>
-        </div>
+    <div class="filter-inner" id="filterBar">
+        <span class="filter-label">Tier:</span>
+        <button class="tier-btn active" data-tier="all">V&#353;ichni</button>
+        <button class="tier-btn" data-tier="12">Tier 1+2</button>
+        <button class="tier-btn" data-tier="1">Jen velc&#237; (Tier 1)</button>
+        <div class="filter-sep"></div>
+        <span class="filter-label">Zna&#269;ky:</span>
+        <div id="brandChips"></div>
     </div>
-
-    <!-- CHART 2: Brand Search Abs -->
-    <div class="chart-section">
-        <h2>Brandove hledani -- absolutni objem</h2>
-        <div class="info-box">
-            Absolutni mesicni objem brandoveho vyhledavani ukazuje skutecnou velikost poptavky po kazde znacce. Na rozdil od procentualniho podilu zde vidime, zda celkova poptavka v kategorii roste nebo klesa.
-        </div>
-        <div class="chart-wrap"><canvas id="chartBrandAbs"></canvas></div>
-        <div class="findings-card">
-            <h3>Klicove zjisteni</h3>
-            <ul class="findings-list">
-                <li>erikafashion se drzi v pasmu 15-24 tisic hledani mesicne s peak v lednu -- sezonni vzorec vazany na novorocni nakupy.</li>
-                <li>Shein klesl z 262 tisic (cerven 2024) na 187 tisic -- pokles o 29 %, mozny dopad regulaci a zmeny vnimani znacky.</li>
-                <li>Sinsay roste od Q1 2025 ze 157 tisic na 230 tisic -- nejsilnejsi rustovy trend mezi velkymi hracu.</li>
-                <li>About You propadl z 235 tisic (duben 2024) na 150 tisic -- pokles o 36 %, ztrata pozice na ceskem trhu.</li>
-                <li>Bonprix klesl ze 144 tisic na 85 tisic -- pokles o 41 %, nejsilnejsi propad v celem setu.</li>
-                <li>Mohito zustava stabilni kolem 40-50 tisic hledani mesicne bez vyrazneho trendu.</li>
-                <li>Celkova poptavka v kategorii stagnuje -- rust jedne znacky jde typicky na ukor jine.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- CHART 3: SoS Organic Traffic -->
-    <div class="chart-section">
-        <h2>Share of Search -- organicky traffic (odhad Ahrefs)</h2>
-        <div class="info-box">
-            Organicky traffic ukazuje, jak uspesne znacka premena brandove poptavku a generic vyhledavani na skutecne navstevy. Vysoky podil organickeho trafficu = dobre SEO + silna znacka. Data jsou k dispozici pouze pro domeny s .cz TLD, kde globalni data odpovadaji CR.
-        </div>
-        <div class="chart-wrap"><canvas id="chartSoSTraffic"></canvas></div>
-        <div class="chart-note">Pozn.: Pro mezinarodni domeny (shein.com, sinsay.com, mohito.com, reserved.com) historicka data na urovni CR nejsou k dispozici -- CZ metriky se zacinaji sbirat od dubna 2026.</div>
-        <div class="findings-card">
-            <h3>Klicove zjisteni</h3>
-            <ul class="findings-list">
-                <li>erikafashion.cz zaznamenala nejsilnejsi rust v celem setu -- z 3 % na 9 % podilu, temer ztrojnasobeni za 2 roky.</li>
-                <li>Zalando.cz dominuje s 43 % podilu organickeho trafficu, ale v absolutnich cislech klesa (z 562 tisic na 429 tisic).</li>
-                <li>Glami.cz zaznamena dramaticky propad ze 25 % na 15 % podilu -- ztrata organicke viditelnosti o 61 % v absolutnich cislech.</li>
-                <li>About You klesl z 21 % na 16 % -- v absolutnich cislech propad o polovinu (z 308 tisic na 155 tisic).</li>
-                <li>Bonprix.cz je relativne stabilni: kolisa mezi 78-163 tisic navstev bez jasneho trendu nahoru nebo dolu.</li>
-                <li>erikafashion.cz vykazuje jasne nejsilnejsi rustovy trend -- jde o jediny web v setu s konzistentnim mezirocnim rustem.</li>
-                <li>Londonclub.cz klesa z 17 tisic na 7 tisic (pokles o 59 %) -- signalizuje ztraceni pozice v organiku.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- CHART 4: Organic Traffic Abs -->
-    <div class="chart-section">
-        <h2>Organicky traffic -- absolutni cisla (CZ)</h2>
-        <div class="info-box">
-            Absolutni cisla organickeho trafficu (mesicni odhad Ahrefs) ukazuji realne objemy. Porovnani s brandovym hledanim odhaluje, jak efektivne kazda znacka premena poptavku na navstevy.
-        </div>
-        <div class="chart-wrap"><canvas id="chartTrafficAbs"></canvas></div>
-        <div class="findings-card">
-            <h3>Klicove zjisteni</h3>
-            <ul class="findings-list">
-                <li>erikafashion.cz vzrostla z 47 tisic na 89 tisic mesicnich navstev -- narust o 88 % za 2 roky.</li>
-                <li>Zalando.cz klesl z 562 tisic na 429 tisic -- i pres pokles zustava absolutnim lidrem.</li>
-                <li>Glami.cz zaznamenal nejvetsi absolutni propad: z 372 tisic na 146 tisic (-61 %). Agregatorni model ztraci na relevanci.</li>
-                <li>About You propadl z 308 tisic na 155 tisic -- polovicni traffic za 2 roky, mozny dukaz snizovania investic do CZ trhu.</li>
-                <li>erikafashion.cz v kvetnu 2025 dosahla sveho maxima 123 tisic navstev -- sezonni peak jarni kolekce.</li>
-                <li>miadresses.cz mela jednorazovy spike v lednu 2025 (23 tisic), jinak stabilne kolem 10-14 tisic.</li>
-                <li>Pomer branded search ku org. trafficu: erikafashion 18K:89K = 1:5, Zalando 60K:429K = 1:7. Vyssi pomer = lepsi SEO na nebrandove dotazy.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- TABLE -->
-    <div class="table-section">
-        <h2>Aktualni stav -- duben 2026</h2>
-        <table id="snapshotTable">
-            <thead>
-                <tr>
-                    <th data-col="rank">#</th>
-                    <th data-col="brand" data-sort="asc">Znacka</th>
-                    <th data-col="brandSearch" data-sort="desc" class="num-cell">Brand search/mes <span class="sort-arrow">&#9660;</span></th>
-                    <th data-col="orgTraffic" data-sort="desc" class="num-cell">Org. traffic CZ</th>
-                    <th data-col="orgKeywords" data-sort="desc" class="num-cell">Org. KW</th>
-                    <th data-col="orgKeywords1_3" data-sort="desc" class="num-cell">KW v top 3</th>
-                    <th data-col="trafficValue" data-sort="desc" class="num-cell">Traffic value ($)</th>
-                </tr>
-            </thead>
-            <tbody id="snapshotBody"></tbody>
-        </table>
-    </div>
-
-    <!-- GSC DATA -->
-    <div class="chart-section">
-        <h2>Google Search Console -- realna data erikafashion.cz</h2>
-        <div class="info-box">
-            Na rozdil od Ahrefs odhadu, Google Search Console ukazuje skutecne kliky a imprese z Google vyhledavani. Porovnani obou zdroju odhaluje, jak presne Ahrefs odhaduje traffic a kde jsou odchylky.
-        </div>
-        <div class="chart-wrap"><canvas id="chartGSC"></canvas></div>
-        <div class="note">Data: Google Search Console propojeny pres Ahrefs projekt. Unor 2026 obsahuje jen castecna data.</div>
-        <div class="insights-card">
-            <h3>Klicove zjisteni</h3>
-            <ul>
-                <li>Leden 2026 byl rekordni mesic: 49 975 kliku z 1,95 milionu impresi -- nejvyssi navstevnost v historii.</li>
-                <li>Prumerne CTR se drzi kolem 2,0-2,7 % -- typicka hodnota pro fashion e-shop s sirokym portfoliem.</li>
-                <li>Prumerna pozice se zlepsila z 10,2 (brezen 2025) na 6,5 (leden 2026) -- posun o 4 pozice nahoru.</li>
-                <li>Imprese rostou: z 954 tisic (prosinec 2024) na 1,95 milionu (leden 2026) -- zdvojnasobeni viditelnosti.</li>
-                <li>Sezonni vzorec odpovida brandovemu hledani -- peak v lednu (novorocni nakupy), propad v lete.</li>
-                <li>Ahrefs odhaduje ~89 tisic navstev, GSC ukazuje ~50 tisic kliku -- Ahrefs nadhodnocuje zhruba 1,8x.</li>
-                <li>CTR trend je mirne klesajici (z 2,7 % na 2,5 %) -- mozny vliv zvysenych impresi na nizkych pozicich.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- METHODOLOGY -->
-    <div class="methodology-card">
-        <h2>Metodika a zdroje</h2>
-        <p class="method-intro">
-            Share of Search (SoS) meri podil brandoveho vyhledavani kazde znacky na celkovem objemu brandovych dotazu v dane kategorii. Koncept vyvinul Les Binet v roce 2020 jako levnou a rychlou alternativu ke Share of Voice.
-        </p>
-        <div class="method-grid">
-            <div class="method-item">
-                <div class="method-label">Datovy zdroj</div>
-                <div class="method-value">Ahrefs API (Keywords Explorer pro brandova data, Site Explorer pro organicke metriky)</div>
-            </div>
-            <div class="method-item">
-                <div class="method-label">Region</div>
-                <div class="method-value">Ceska republika</div>
-            </div>
-            <div class="method-item">
-                <div class="method-label">Obdobi</div>
-                <div class="method-value">Duben 2024 -- duben 2026 (25 mesicu)</div>
-            </div>
-            <div class="method-item">
-                <div class="method-label">Brandove hledani</div>
-                <div class="method-value">Soucet objemu hlavnich brandovych variant (napr. "erikafashion" + "erika fashion")</div>
-            </div>
-            <div class="method-item">
-                <div class="method-label">Organicky traffic</div>
-                <div class="method-value">Mesicni odhad Ahrefs na zaklade pozic v SERPu a CTR modelu</div>
-            </div>
-            <div class="method-item">
-                <div class="method-label">Aktualizace</div>
-                <div class="method-value">Mesicne, automaticky pres GitHub Actions</div>
-            </div>
-            <div class="method-item">
-                <div class="method-label">Limitace</div>
-                <div class="method-value">Pro mezinarodni domeny historicka CZ data nejsou k dispozici na Ahrefs Standard planu</div>
-            </div>
-        </div>
-    </div>
-
 </div>
-</div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="container" style="padding-top: 32px;" id="mainContent">
+<div id="loading" style="text-align:center;padding:80px 0;color:var(--text-muted);font-size:14px;">Na&#269;&#237;t&#225;m data...</div>
+</main>
 
 <!-- FOOTER -->
-<div class="footer">
-    <div class="container">
-        Data: Ahrefs API | Metodika: Share of Search (Les Binet, IPA 2020) | Dashboard: erikafashion.cz | Generovano: 2026-04-18
-    </div>
-</div>
+<footer class="footer">
+<div class="container" id="footerText"></div>
+</footer>
 
 <script>
-// ========== DATA ==========
-const DATES = ["2024-04","2024-05","2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04"];
+// ========== GLOBALS ==========
+var DATA = null;
+var activeFilter = 'all';
+var activeBrands = new Set();
+var chartInstances = {};
 
-const BRANDS = [
-    {id:'erikafashion', label:'erikafashion', domain:'erikafashion.cz', color:'#FF6B35', tier:2, isTarget:true},
-    {id:'sinsay', label:'sinsay', domain:'sinsay.com', color:'#E91E63', tier:1, isTarget:false},
-    {id:'shein', label:'shein', domain:'shein.com', color:'#9C27B0', tier:1, isTarget:false},
-    {id:'aboutyou', label:'about you', domain:'aboutyou.cz', color:'#2196F3', tier:1, isTarget:false},
-    {id:'reserved', label:'reserved', domain:'reserved.com', color:'#4CAF50', tier:1, isTarget:false},
-    {id:'bonprix', label:'bonprix', domain:'bonprix.cz', color:'#FF9800', tier:1, isTarget:false},
-    {id:'zalando', label:'zalando', domain:'zalando.cz', color:'#00BCD4', tier:1, isTarget:false},
-    {id:'mohito', label:'mohito', domain:'mohito.com', color:'#795548', tier:1, isTarget:false},
-    {id:'lelosi', label:'lelosi', domain:'lelosi.cz', color:'#607D8B', tier:2, isTarget:false},
-    {id:'glami', label:'glami', domain:'glami.cz', color:'#CDDC39', tier:2, isTarget:false},
-    {id:'orsay', label:'orsay', domain:'orsay.cz', color:'#F44336', tier:2, isTarget:false},
-    {id:'buga', label:'buga', domain:'buga.cz', color:'#8BC34A', tier:3, isTarget:false},
-    {id:'evona', label:'evona', domain:'evona.cz', color:'#03A9F4', tier:3, isTarget:false},
-    {id:'miadresses', label:'miadresses', domain:'miadresses.cz', color:'#FF5722', tier:3, isTarget:false},
-    {id:'blankastraka', label:'blankastraka', domain:'blankastraka.cz', color:'#9E9E9E', tier:3, isTarget:false},
-    {id:'londonclub', label:'london club', domain:'londonclub.cz', color:'#FFC107', tier:3, isTarget:false},
-    {id:'coolboutique', label:'coolboutique', domain:'coolboutique.cz', color:'#673AB7', tier:3, isTarget:false},
-    {id:'bestmoda', label:'bestmoda', domain:'bestmoda.cz', color:'#009688', tier:3, isTarget:false},
-];
-
-// Branded search volumes (combined where needed)
-const BRAND_SEARCH = {
-    erikafashion: [22138,21263,24450,24310,22733,20853,18777,17993,16922,26738,21640,15542,17730,20547,23392,19685,17749,17435,18294,18545,15979,17992,16376,16225,18460],
-    sinsay: [187862,181107,200006,170945,187248,240329,247437,260910,209995,161779,160360,181602,168501,168399,173232,183406,196194,221932,235708,263393,231749,157153,156441,219664,230206],
-    shein: [247200,251610,262833,262503,247647,247400,246342,256503,162216,220829,181553,179568,166386,184905,209454,220524,190858,178108,181569,180591,141654,175231,171701,183388,187452],
-    aboutyou: [250764,204039,171185,181163,181676,201704,191437,235819,188527,168101,160147,154100,153575,165016,148462,149899,151404,169514,182797,232107,205468,179669,150607,166975,160029],
-    reserved: [102632,108129,110069,111552,92924,125620,129810,137299,114719,114970,103951,107127,98671,100600,105444,109886,109805,118510,129982,148273,123822,116463,105893,104717,105867],
-    bonprix: [144219,136808,141134,123548,105088,114894,107138,110977,82572,97560,82204,88433,77775,85419,96309,76863,71386,83306,82439,83774,65451,83204,88816,84247,85290],
-    zalando: [68784,60679,60325,51230,53811,67634,67840,81754,81844,65043,48010,65358,56271,54825,58631,57511,55231,58868,62213,74538,62461,56909,56056,56984,60453],
-    mohito: [62439,58061,66105,56254,48159,55496,52591,48833,43681,48016,35290,40930,42981,43677,45657,49950,40186,44172,43775,44975,42476,44159,39367,40272,44516],
-    lelosi: [26924,29164,24004,23112,24807,24908,26700,28887,29057,27223,24875,24343,24905,26696,21921,20753,22696,22629,24583,26671,26948,25057,22782,22219,22833],
-    glami: [13573,11738,10096,10282,10536,16170,16934,22197,13385,17257,13869,16511,15148,12505,11156,7414,9251,15009,15632,20938,12088,16047,12646,15315,13913],
-    orsay: [18451,18430,16430,13611,13190,16844,17460,17533,13561,14825,13008,12783,13223,12747,11136,9818,9213,12456,13594,12681,9818,11875,12316,8452,8493],
-    buga: [10195,10506,10161,9689,9611,10404,9847,9362,8823,9363,9631,10216,10591,10905,10561,10090,10013,10808,10252,9768,9231,9773,10042,10628,11005],
-    evona: [1378,1474,1615,1470,1341,1576,1609,1818,1661,1525,1464,1562,1509,1605,1746,1600,1472,1707,1740,1949,1791,1656,1595,1693,1640],
-    miadresses: [2056,1678,1374,1137,1350,1389,1647,2046,2485,6924,4515,2454,1671,1701,1681,1437,1407,1650,1344,1376,912,2845,1639,1308,1112],
-    londonclub: [714,636,646,549,548,655,810,866,598,703,682,723,671,621,636,530,519,627,774,842,567,647,643,692,645],
-    coolboutique: [396,452,570,411,759,954,633,575,378,721,495,520,409,519,547,540,629,959,768,584,395,831,517,477,397],
-    blankastraka: [118,120,111,87,86,89,87,87,73,132,132,110,87,109,109,86,86,109,109,87,59,111,110,109,105],
-    bestmoda: [105,124,102,119,89,135,166,165,136,169,163,104,104,123,101,118,89,134,165,164,136,168,162,104,103],
-};
-
-// Organic traffic history (only for CZ domains / erikafashion)
-const ORG_TRAFFIC_HISTORY = {
-    erikafashion: [47393,56158,71788,66681,68428,68102,74156,82480,77162,97802,93071,88144,107963,123409,113711,86444,82606,95386,106245,106446,101447,116587,120941,99368,89295],
-    glami: [372100,339567,300390,280877,291047,293713,292082,300738,268929,273433,264864,247194,232632,224920,221965,204303,193213,159134,156571,193138,198245,194552,172420,189188,146298],
-    aboutyou: [308201,269605,257752,238457,236039,238720,261305,291085,263340,293720,289951,262178,248035,258570,234855,209203,188189,160836,199991,226821,210278,185807,165942,173143,154997],
-    bonprix: [163022,149822,163474,126697,128431,112211,92854,81021,78119,96442,113020,123016,100546,113398,130258,97396,91558,102585,118889,120112,83269,121990,120398,125690,122090],
-    orsay: [46963,48091,51133,43607,37417,41531,54959,56914,56710,64747,62146,59528,51407,57156,53944,46116,48572,54803,60285,63124,55104,48052,47853,45096,36811],
-    londonclub: [17101,16320,17147,14310,13589,15263,15225,13276,12363,12965,16608,18749,16384,14608,12930,11718,12499,12960,11816,12289,11691,10138,8611,9776,7411],
-    miadresses: [8983,9666,9203,7079,8613,8876,10429,13284,12162,22573,19302,17256,13795,14514,14000,14024,14778,14093,13996,14254,12404,15354,16876,13223,9814],
-    zalando: [561745,540660,504523,482171,519622,617014,628152,787033,723046,597038,561151,607519,568610,569243,597727,568553,499036,536223,572970,632178,629071,560003,512686,494217,428549],
-};
-
-// Current snapshot
-const SNAPSHOT = {
-    erikafashion: {orgTraffic:91468, orgKeywords:4473, orgKeywords1_3:2023, orgCost:1072190, dr:null},
-    sinsay: {orgTraffic:295313, orgKeywords:3192, orgKeywords1_3:839, orgCost:750719, dr:null},
-    shein: {orgTraffic:220588, orgKeywords:350, orgKeywords1_3:246, orgCost:2514203, dr:null},
-    aboutyou: {orgTraffic:155576, orgKeywords:12111, orgKeywords1_3:null, orgCost:null, dr:47},
-    reserved: {orgTraffic:174926, orgKeywords:3114, orgKeywords1_3:833, orgCost:975433, dr:72},
-    bonprix: {orgTraffic:123867, orgKeywords:2656, orgKeywords1_3:null, orgCost:null, dr:34},
-    zalando: {orgTraffic:460920, orgKeywords:29703, orgKeywords1_3:12673, orgCost:7539503, dr:null},
-    mohito: {orgTraffic:89853, orgKeywords:2027, orgKeywords1_3:474, orgCost:699997, dr:62},
-    lelosi: {orgTraffic:29678, orgKeywords:316, orgKeywords1_3:129, orgCost:798634, dr:null},
-    glami: {orgTraffic:142386, orgKeywords:28487, orgKeywords1_3:null, orgCost:null, dr:70},
-    orsay: {orgTraffic:36711, orgKeywords:1616, orgKeywords1_3:null, orgCost:null, dr:26},
-    buga: {orgTraffic:18454, orgKeywords:238, orgKeywords1_3:82, orgCost:393087, dr:null},
-    evona: {orgTraffic:30686, orgKeywords:1303, orgKeywords1_3:523, orgCost:753208, dr:null},
-    miadresses: {orgTraffic:9772, orgKeywords:792, orgKeywords1_3:null, orgCost:null, dr:13},
-    blankastraka: {orgTraffic:9771, orgKeywords:557, orgKeywords1_3:183, orgCost:115284, dr:14},
-    londonclub: {orgTraffic:6933, orgKeywords:1631, orgKeywords1_3:null, orgCost:null, dr:22},
-    coolboutique: {orgTraffic:6287, orgKeywords:371, orgKeywords1_3:151, orgCost:95943, dr:19},
-    bestmoda: {orgTraffic:5186, orgKeywords:363, orgKeywords1_3:75, orgCost:74601, dr:1.4},
-};
-
-// ========== STATE ==========
-let activeBrands = new Set(BRANDS.map(b => b.id));
-let currentTier = 'all';
-let charts = {};
-let tableSortCol = 'brandSearch';
-let tableSortDir = 'desc';
-
-// ========== UTILS ==========
+// ========== NUMBER FORMATTING ==========
 function fmtNum(n) {
-    if (n === null || n === undefined) return '--';
-    return n.toLocaleString('cs-CZ');
+    if (n == null) return '\u2013';
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
+}
+function fmtPct(n, dec) {
+    if (n == null) return '\u2013';
+    return n.toFixed(dec || 1).replace('.', ',') + '\u00A0%';
+}
+function fmtK(n) {
+    if (n == null) return '\u2013';
+    if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.', ',') + '\u00A0M';
+    if (n >= 1000) return (n / 1000).toFixed(0) + '\u00A0tis.';
+    return n.toString();
 }
 
-function fmtPct(n) {
-    if (n === null || n === undefined) return '--';
-    return n.toFixed(1).replace('.', ',') + ' %';
-}
-
+// ========== DATE LABEL ==========
 function dateLabel(d) {
-    const [y, m] = d.split('-');
-    const months = ['','led','uno','bre','dub','kve','cer','cvc','srp','zar','rij','lis','pro'];
-    return months[parseInt(m)] + ' ' + y.slice(2);
+    var parts = d.split('-');
+    var months = ['Led','%C3%9Ano','B%C5%99e','Dub','Kv%C4%9B','%C4%8Cer','%C4%8Cvc','Srp','Z%C3%A1%C5%99','%C5%98%C3%ADj','Lis','Pro'];
+    // Use simple decoded strings
+    var ms = ['Led','\u00DAno','B\u0159e','Dub','Kv\u011B','\u010Cer','\u010Cvc','Srp','Z\u00E1\u0159','\u0158\u00EDj','Lis','Pro'];
+    return ms[parseInt(parts[1])-1] + ' ' + parts[0].slice(2);
 }
 
-// ========== BRAND CHIPS ==========
-function renderBrandChips() {
-    const container = document.getElementById('brandChips');
-    container.innerHTML = '';
-    BRANDS.forEach(b => {
-        const chip = document.createElement('span');
-        const isActive = activeBrands.has(b.id);
-        chip.className = 'brand-chip ' + (isActive ? 'active' : 'inactive') + (b.isTarget ? ' target' : '');
-        chip.innerHTML = '<span class="dot" style="background:' + b.color + '"></span>' + b.label;
-        chip.onclick = () => toggleBrand(b.id);
-        container.appendChild(chip);
-    });
-}
-
-function toggleBrand(id) {
-    const brand = BRANDS.find(b => b.id === id);
-    if (brand && brand.isTarget) return;
-    if (activeBrands.has(id)) {
-        activeBrands.delete(id);
-    } else {
-        activeBrands.add(id);
+// ========== SHARE CALCULATION ==========
+function calcShares(dataObj, dates) {
+    var ids = Object.keys(dataObj);
+    var result = {};
+    ids.forEach(function(id) { result[id] = []; });
+    for (var i = 0; i < dates.length; i++) {
+        var total = 0;
+        ids.forEach(function(id) { total += (dataObj[id][i] || 0); });
+        ids.forEach(function(id) {
+            result[id].push(total > 0 ? ((dataObj[id][i] || 0) / total * 100) : 0);
+        });
     }
-    updateAll();
+    return result;
 }
 
-function setTierFilter(tier) {
-    currentTier = tier;
-    document.querySelectorAll('.tier-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.tier === tier);
+// ========== VISIBLE BRANDS ==========
+function getVisibleBrands() {
+    return DATA.brands.filter(function(b) {
+        return activeBrands.has(b.id);
     });
-    activeBrands.clear();
-    BRANDS.forEach(b => {
-        if (b.isTarget) { activeBrands.add(b.id); return; }
-        if (tier === 'all') { activeBrands.add(b.id); }
-        else if (tier === '12' && (b.tier === 1 || b.tier === 2)) { activeBrands.add(b.id); }
-        else if (tier === '1' && b.tier === 1) { activeBrands.add(b.id); }
+}
+
+// ========== BUILD DATASETS ==========
+function buildDatasets(dataMap, visibleBrands) {
+    return visibleBrands.map(function(b) {
+        var isTarget = b.isTarget;
+        return {
+            label: b.label,
+            data: dataMap[b.id] || [],
+            borderColor: b.color,
+            backgroundColor: b.color + '18',
+            borderWidth: isTarget ? 3 : 1.5,
+            pointRadius: isTarget ? 3 : 0,
+            pointHoverRadius: 5,
+            tension: 0.3,
+            order: isTarget ? 0 : 1
+        };
     });
-    updateAll();
 }
 
-function updateAll() {
-    renderBrandChips();
-    updateChart1();
-    updateChart2();
-    updateChart3();
-    updateChart4();
-    renderTable();
-}
-
-// ========== CHART CONFIG HELPERS ==========
-const dateLabels = DATES.map(dateLabel);
-
-function chartTooltipCallbacks(isShare) {
-    return {
-        label: function(ctx) {
-            const brand = BRANDS.find(b => b.label === ctx.dataset.label || b.id === ctx.dataset.brandId);
-            if (isShare) {
-                return (brand ? brand.label : ctx.dataset.label) + ': ' + fmtPct(ctx.parsed.y);
-            }
-            return (brand ? brand.label : ctx.dataset.label) + ': ' + fmtNum(Math.round(ctx.parsed.y));
-        }
-    };
-}
-
-function makeChartOptions(isShare, yLabel) {
+// ========== CHART DEFAULTS ==========
+function chartDefaults() {
     return {
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
             legend: {
-                display: true,
                 position: 'bottom',
                 labels: {
-                    color: '#8891a5',
-                    padding: 14,
                     usePointStyle: true,
-                    pointStyle: 'circle',
-                    font: { size: 11, family: 'Inter' }
-                },
-                onClick: function(e, legendItem, legend) {
-                    const index = legendItem.datasetIndex;
-                    const ci = legend.chart;
-                    if (ci.isDatasetVisible(index)) {
-                        ci.hide(index);
-                        legendItem.hidden = true;
-                    } else {
-                        ci.show(index);
-                        legendItem.hidden = false;
-                    }
+                    pointStyle: 'rect',
+                    padding: 16,
+                    font: { family: 'Inter', size: 12 },
+                    color: '#4a5568'
                 }
             },
             tooltip: {
-                backgroundColor: '#1a1f38',
-                titleColor: '#e2e4ea',
-                bodyColor: '#e2e4ea',
-                borderColor: '#1e2340',
-                borderWidth: 1,
+                backgroundColor: '#1a1a2e',
+                titleFont: { family: 'Inter', size: 13 },
+                bodyFont: { family: 'Inter', size: 12 },
                 padding: 12,
-                titleFont: { family: 'Inter', size: 12 },
-                bodyFont: { family: 'Inter', size: 11 },
-                callbacks: chartTooltipCallbacks(isShare)
+                cornerRadius: 0,
+                callbacks: {}
             }
         },
         scales: {
             x: {
-                ticks: { color: '#5a6178', font: { size: 10, family: 'Inter' } },
-                grid: { color: 'rgba(30,35,64,0.5)' }
+                grid: { color: '#e2e5ed', drawBorder: false },
+                ticks: { font: { family: 'Inter', size: 11 }, color: '#9ca3af' }
             },
             y: {
-                ticks: {
-                    color: '#5a6178',
-                    font: { size: 10, family: 'Inter' },
-                    callback: function(v) {
-                        if (isShare) return v.toFixed(0) + ' %';
-                        if (v >= 1000000) return (v/1000000).toFixed(1) + 'M';
-                        if (v >= 1000) return (v/1000).toFixed(0) + 'k';
-                        return v;
-                    }
-                },
-                grid: { color: 'rgba(30,35,64,0.4)' },
-                title: {
-                    display: true,
-                    text: yLabel,
-                    color: '#5a6178',
-                    font: { size: 11, family: 'Inter' }
-                }
+                grid: { color: '#e2e5ed', drawBorder: false },
+                ticks: { font: { family: 'Inter', size: 11 }, color: '#9ca3af' },
+                beginAtZero: true
             }
-        },
-        animation: { duration: 400 }
+        }
     };
-}
-
-function buildDatasets(dataObj, visibleIds) {
-    return BRANDS.filter(b => visibleIds.has(b.id) && dataObj[b.id]).map(b => ({
-        label: b.label,
-        brandId: b.id,
-        data: dataObj[b.id],
-        borderColor: b.color,
-        backgroundColor: b.color + '22',
-        borderWidth: b.isTarget ? 3 : 1.5,
-        pointRadius: b.isTarget ? 3 : 1,
-        pointHoverRadius: 5,
-        tension: 0.3,
-        order: b.isTarget ? 0 : 1,
-    }));
-}
-
-// ========== CHART 1: SoS Brand Search ==========
-function calcShareData(dataObj, visibleIds) {
-    const ids = BRANDS.filter(b => visibleIds.has(b.id) && dataObj[b.id]).map(b => b.id);
-    const shareData = {};
-    ids.forEach(id => { shareData[id] = []; });
-    for (let i = 0; i < DATES.length; i++) {
-        let total = 0;
-        ids.forEach(id => { total += dataObj[id][i]; });
-        ids.forEach(id => {
-            shareData[id].push(total > 0 ? (dataObj[id][i] / total * 100) : 0);
-        });
-    }
-    return shareData;
-}
-
-function initChart1() {
-    const shareData = calcShareData(BRAND_SEARCH, activeBrands);
-    const ctx = document.getElementById('chartSoSBrand').getContext('2d');
-    charts.sosBrand = new Chart(ctx, {
-        type: 'line',
-        data: { labels: dateLabels, datasets: buildDatasets(shareData, activeBrands) },
-        options: makeChartOptions(true, 'Podil (%)')
-    });
-    charts.sosBrand.options.plugins.tooltip.callbacks.label = function(ctx2) {
-        const brand = BRANDS.find(b => b.label === ctx2.dataset.label);
-        const idx = ctx2.dataIndex;
-        const absVal = brand ? BRAND_SEARCH[brand.id][idx] : 0;
-        return (brand ? brand.label : ctx2.dataset.label) + ': ' + fmtPct(ctx2.parsed.y) + ' (' + fmtNum(absVal) + ')';
-    };
-}
-
-function updateChart1() {
-    const shareData = calcShareData(BRAND_SEARCH, activeBrands);
-    charts.sosBrand.data.datasets = buildDatasets(shareData, activeBrands);
-    charts.sosBrand.options.plugins.tooltip.callbacks.label = function(ctx2) {
-        const brand = BRANDS.find(b => b.label === ctx2.dataset.label);
-        const idx = ctx2.dataIndex;
-        const absVal = brand ? BRAND_SEARCH[brand.id][idx] : 0;
-        return (brand ? brand.label : ctx2.dataset.label) + ': ' + fmtPct(ctx2.parsed.y) + ' (' + fmtNum(absVal) + ')';
-    };
-    charts.sosBrand.update();
-}
-
-// ========== CHART 2: Brand Search Abs ==========
-function initChart2() {
-    const ctx = document.getElementById('chartBrandAbs').getContext('2d');
-    charts.brandAbs = new Chart(ctx, {
-        type: 'line',
-        data: { labels: dateLabels, datasets: buildDatasets(BRAND_SEARCH, activeBrands) },
-        options: makeChartOptions(false, 'Hledani / mesic')
-    });
-}
-
-function updateChart2() {
-    charts.brandAbs.data.datasets = buildDatasets(BRAND_SEARCH, activeBrands);
-    charts.brandAbs.update();
-}
-
-// ========== CHART 3: SoS Traffic ==========
-function initChart3() {
-    const trafficBrands = new Set([...activeBrands].filter(id => ORG_TRAFFIC_HISTORY[id]));
-    const shareData = calcShareData(ORG_TRAFFIC_HISTORY, trafficBrands);
-    const ctx = document.getElementById('chartSoSTraffic').getContext('2d');
-    charts.sosTraffic = new Chart(ctx, {
-        type: 'line',
-        data: { labels: dateLabels, datasets: buildDatasets(shareData, trafficBrands) },
-        options: makeChartOptions(true, 'Podil (%)')
-    });
-}
-
-function updateChart3() {
-    const trafficBrands = new Set([...activeBrands].filter(id => ORG_TRAFFIC_HISTORY[id]));
-    const shareData = calcShareData(ORG_TRAFFIC_HISTORY, trafficBrands);
-    charts.sosTraffic.data.datasets = buildDatasets(shareData, trafficBrands);
-    charts.sosTraffic.update();
-}
-
-// ========== CHART 4: Traffic Abs ==========
-function initChart4() {
-    const trafficBrands = new Set([...activeBrands].filter(id => ORG_TRAFFIC_HISTORY[id]));
-    const ctx = document.getElementById('chartTrafficAbs').getContext('2d');
-    charts.trafficAbs = new Chart(ctx, {
-        type: 'line',
-        data: { labels: dateLabels, datasets: buildDatasets(ORG_TRAFFIC_HISTORY, trafficBrands) },
-        options: makeChartOptions(false, 'Navstevy / mesic')
-    });
-}
-
-function updateChart4() {
-    const trafficBrands = new Set([...activeBrands].filter(id => ORG_TRAFFIC_HISTORY[id]));
-    charts.trafficAbs.data.datasets = buildDatasets(ORG_TRAFFIC_HISTORY, trafficBrands);
-    charts.trafficAbs.update();
-}
-
-// ========== TABLE ==========
-function getTableData() {
-    return BRANDS.map(b => {
-        const lastIdx = DATES.length - 1;
-        const bs = BRAND_SEARCH[b.id] ? BRAND_SEARCH[b.id][lastIdx] : 0;
-        const snap = SNAPSHOT[b.id] || {};
-        return {
-            id: b.id,
-            brand: b.label,
-            domain: b.domain,
-            color: b.color,
-            isTarget: b.isTarget,
-            tier: b.tier,
-            brandSearch: bs,
-            orgTraffic: snap.orgTraffic || 0,
-            orgKeywords: snap.orgKeywords || 0,
-            orgKeywords1_3: snap.orgKeywords1_3,
-            trafficValue: snap.orgCost != null ? Math.round(snap.orgCost / 100) : null,
-        };
-    });
-}
-
-function renderTable() {
-    const data = getTableData();
-    data.sort((a, b) => {
-        let va = a[tableSortCol], vb = b[tableSortCol];
-        if (tableSortCol === 'brand') {
-            va = va.toLowerCase(); vb = vb.toLowerCase();
-            if (tableSortDir === 'asc') return va < vb ? -1 : va > vb ? 1 : 0;
-            return va > vb ? -1 : va < vb ? 1 : 0;
-        }
-        if (va === null) va = -1;
-        if (vb === null) vb = -1;
-        if (tableSortDir === 'desc') return vb - va;
-        return va - vb;
-    });
-
-    const tbody = document.getElementById('snapshotBody');
-    tbody.innerHTML = '';
-    data.forEach((row, i) => {
-        const tr = document.createElement('tr');
-        if (row.isTarget) tr.className = 'target-row';
-        tr.innerHTML =
-            '<td class="rank-cell">' + (i + 1) + '</td>' +
-            '<td><div class="brand-cell"><span class="dot" style="background:' + row.color + '"></span>' +
-            row.brand + '<span class="domain">' + row.domain + '</span></div></td>' +
-            '<td class="num-cell">' + fmtNum(row.brandSearch) + '</td>' +
-            '<td class="num-cell">' + fmtNum(row.orgTraffic) + '</td>' +
-            '<td class="num-cell">' + fmtNum(row.orgKeywords) + '</td>' +
-            '<td class="' + (row.orgKeywords1_3 != null ? 'num-cell' : 'na-cell') + '">' + (row.orgKeywords1_3 != null ? fmtNum(row.orgKeywords1_3) : '--') + '</td>' +
-            '<td class="' + (row.trafficValue != null ? 'num-cell' : 'na-cell') + '">' + (row.trafficValue != null ? '$' + fmtNum(row.trafficValue) : '--') + '</td>';
-        tbody.appendChild(tr);
-    });
-
-    document.querySelectorAll('#snapshotTable th').forEach(th => {
-        const col = th.dataset.col;
-        const arrow = th.querySelector('.sort-arrow');
-        if (arrow) arrow.remove();
-        if (col === tableSortCol) {
-            const span = document.createElement('span');
-            span.className = 'sort-arrow';
-            span.innerHTML = tableSortDir === 'desc' ? '&#9660;' : '&#9650;';
-            th.appendChild(span);
-        }
-    });
-}
-
-// Table sorting
-document.querySelectorAll('#snapshotTable th[data-col]').forEach(th => {
-    th.addEventListener('click', () => {
-        const col = th.dataset.col;
-        if (col === 'rank') return;
-        if (tableSortCol === col) {
-            tableSortDir = tableSortDir === 'desc' ? 'asc' : 'desc';
-        } else {
-            tableSortCol = col;
-            tableSortDir = th.dataset.sort || 'desc';
-        }
-        renderTable();
-    });
-});
-
-// ========== GSC DATA ==========
-const GSC_DATES = ["2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02"];
-const GSC_CLICKS = [20587,36984,29639,28737,30080,36129,34261,26258,25042,30706,36201,35875,29914,49975,16655];
-const GSC_IMPRESSIONS = [954008,1357357,1198376,1246007,1346078,1633627,1727700,1449462,1336994,1415709,1664246,1745573,1501675,1954619,659076];
-const GSC_CTR = [2.16,2.72,2.47,2.31,2.23,2.21,1.98,1.81,1.87,2.17,2.18,2.06,1.99,2.56,2.53];
-const GSC_POSITION = [7.06,7.69,10.23,9.73,10.07,11.10,12.54,15.13,12.96,8.40,6.79,6.53,7.08,6.49,6.51];
-
-function initChartGSC() {
-    const ctx = document.getElementById('chartGSC').getContext('2d');
-    const gscLabels = GSC_DATES.map(dateLabel);
-    charts.gsc = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: gscLabels,
-            datasets: [
-                {
-                    label: 'Kliky',
-                    data: GSC_CLICKS,
-                    backgroundColor: '#FF6B3566',
-                    borderColor: '#FF6B35',
-                    borderWidth: 1,
-                    borderRadius: 4,
-                    order: 2,
-                    yAxisID: 'y',
-                },
-                {
-                    label: 'Imprese (tisice)',
-                    data: GSC_IMPRESSIONS.map(v => Math.round(v/1000)),
-                    type: 'line',
-                    borderColor: '#3B82F6',
-                    backgroundColor: '#3B82F622',
-                    borderWidth: 2,
-                    pointRadius: 3,
-                    tension: 0.3,
-                    order: 1,
-                    yAxisID: 'y',
-                },
-                {
-                    label: 'CTR (%)',
-                    data: GSC_CTR,
-                    type: 'line',
-                    borderColor: '#10B981',
-                    backgroundColor: '#10B98122',
-                    borderWidth: 2,
-                    pointRadius: 3,
-                    tension: 0.3,
-                    borderDash: [5, 3],
-                    order: 0,
-                    yAxisID: 'y2',
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { color: '#8891a5', padding: 12, usePointStyle: true, font: { size: 11 } }
-                },
-                tooltip: {
-                    backgroundColor: '#141829',
-                    titleColor: '#e2e4ea',
-                    bodyColor: '#e2e4ea',
-                    borderColor: '#1e2340',
-                    borderWidth: 1,
-                    padding: 10,
-                    callbacks: {
-                        label: function(ctx2) {
-                            if (ctx2.dataset.label === 'Kliky') return 'Kliky: ' + fmtNum(ctx2.parsed.y);
-                            if (ctx2.dataset.label.startsWith('Imprese')) return 'Imprese: ' + fmtNum(GSC_IMPRESSIONS[ctx2.dataIndex]);
-                            return 'CTR: ' + ctx2.parsed.y.toFixed(2).replace('.',',') + ' %';
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: { ticks: { color: '#5a6178', font: { size: 10 } }, grid: { color: 'rgba(30,35,64,0.5)' } },
-                y: {
-                    position: 'left',
-                    ticks: { color: '#5a6178', font: { size: 10 }, callback: v => v >= 1000 ? (v/1000).toFixed(0)+'k' : v },
-                    grid: { color: 'rgba(30,35,64,0.5)' },
-                    title: { display: true, text: 'Kliky / Imprese (tis.)', color: '#5a6178', font: { size: 11 } }
-                },
-                y2: {
-                    position: 'right',
-                    min: 0,
-                    max: 5,
-                    ticks: { color: '#10B981', font: { size: 10 }, callback: v => v.toFixed(1)+'%' },
-                    grid: { display: false },
-                    title: { display: true, text: 'CTR (%)', color: '#10B981', font: { size: 11 } }
-                }
-            },
-            animation: { duration: 400 }
-        }
-    });
 }
 
 // ========== INIT ==========
-renderBrandChips();
-initChart1();
-initChart2();
-initChart3();
-initChart4();
-renderTable();
-initChartGSC();
+fetch('data/history.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        DATA = data;
+        window.DATA = data;
+        initPage();
+    })
+    .catch(function(e) {
+        document.getElementById('loading').textContent = 'Chyba p\u0159i na\u010D\u00EDt\u00E1n\u00ED dat: ' + e.message;
+    });
+
+function initPage() {
+    // Init active brands (all ON)
+    DATA.brands.forEach(function(b) { activeBrands.add(b.id); });
+
+    // Render filter chips
+    renderFilterChips();
+    initFilterEvents();
+
+    // Render main content
+    renderAll();
+
+    // Footer
+    document.getElementById('footerText').textContent =
+        'Data: Ahrefs API + Google Search Console | Metodika: Share of Search (Les Binet, IPA 2020) | Generov\u00E1no: ' + DATA.lastUpdated;
+}
+
+// ========== FILTER CHIPS ==========
+function renderFilterChips() {
+    var container = document.getElementById('brandChips');
+    container.innerHTML = '';
+    DATA.brands.forEach(function(b) {
+        var chip = document.createElement('button');
+        chip.className = 'brand-chip' + (activeBrands.has(b.id) ? ' active' : '') + (b.isTarget ? ' target' : '');
+        chip.textContent = b.label;
+        chip.dataset.brand = b.id;
+        chip.style.borderLeftColor = activeBrands.has(b.id) ? b.color : '';
+        container.appendChild(chip);
+    });
+}
+
+function initFilterEvents() {
+    // Tier buttons
+    document.querySelectorAll('.tier-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tier-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            activeFilter = btn.dataset.tier;
+            activeBrands.clear();
+            DATA.brands.forEach(function(b) {
+                if (activeFilter === 'all') activeBrands.add(b.id);
+                else if (activeFilter === '12' && b.tier <= 2) activeBrands.add(b.id);
+                else if (activeFilter === '1' && b.tier <= 1) activeBrands.add(b.id);
+                if (b.isTarget) activeBrands.add(b.id);
+            });
+            renderFilterChips();
+            updateCharts();
+        });
+    });
+
+    // Brand chip clicks (delegated)
+    document.getElementById('brandChips').addEventListener('click', function(e) {
+        var chip = e.target.closest('.brand-chip');
+        if (!chip) return;
+        var id = chip.dataset.brand;
+        var brand = DATA.brands.find(function(b) { return b.id === id; });
+        if (brand && brand.isTarget) return;
+        if (activeBrands.has(id)) activeBrands.delete(id);
+        else activeBrands.add(id);
+        chip.classList.toggle('active');
+        chip.style.borderLeftColor = activeBrands.has(id) ? brand.color : '';
+        updateCharts();
+    });
+}
+
+// ========== RENDER ALL ==========
+function renderAll() {
+    var main = document.getElementById('mainContent');
+    main.innerHTML = '';
+
+    // 1. INTRO CARD
+    main.innerHTML += buildIntroCard();
+
+    // 2. CHART 1: SoS Brand search %
+    main.innerHTML += buildChartSection('chart1',
+        'Share of Search \u2014 brandov\u00E9 hled\u00E1n\u00ED v \u010CR',
+        buildMethodologyDetails(),
+        'Pod\u00EDl brandov\u00E9ho vyhled\u00E1v\u00E1n\u00ED ka\u017Ed\u00E9 zna\u010Dky na celku. Tato metrika je nejsiln\u011Bj\u0161\u00EDm prediktorem tr\u017En\u00EDho pod\u00EDlu \u2014 kdy\u017E Share of Search roste, tr\u017En\u00ED pod\u00EDl typicky n\u00E1sleduje za 6\u201312 m\u011Bs\u00EDc\u016F (Les Binet, 2020).',
+        null,
+        buildFindings1()
+    );
+
+    // 3. CHART 2: Brand search absolute
+    main.innerHTML += buildChartSection('chart2',
+        'Brandov\u00E9 hled\u00E1n\u00ED \u2014 absolutn\u00ED objem',
+        null,
+        'Absolutn\u00ED m\u011Bs\u00ED\u010Dn\u00ED objem brandov\u00E9ho vyhled\u00E1v\u00E1n\u00ED v \u010CR ukazuje skute\u010Dnou velikost popt\u00E1vky po ka\u017Ed\u00E9 zna\u010Dce.',
+        null,
+        buildFindings2()
+    );
+
+    // DOG 1
+    main.innerHTML += '<div style="text-align:center;margin:8px 0 0">' +
+        '<img src="https://placedog.net/300/200?random" alt="Pes" style="max-width:200px;display:block;margin:24px auto 8px;border-radius:0">' +
+        '<p class="dog-caption">N\u00E1\u0161 maskot dohl\u00ED\u017E\u00ED na data.</p></div>';
+
+    // 4. CHART 3: SoS organic traffic %
+    main.innerHTML += buildChartSection('chart3',
+        'Share of Search \u2014 organick\u00FD traffic (odhad Ahrefs)',
+        null,
+        'Organick\u00FD traffic ukazuje, jak \u00FAsp\u011B\u0161n\u011B zna\u010Dka p\u0159em\u011B\u0148uje brandovou popt\u00E1vku a generick\u00E9 vyhled\u00E1v\u00E1n\u00ED na skute\u010Dn\u00E9 n\u00E1v\u0161t\u011Bvy webu.',
+        'Pozn.: Pro mezin\u00E1rodn\u00ED dom\u00E9ny (shein.com, sinsay.com, mohito.com, reserved.com) historick\u00E1 data na \u00FArovni \u010CR nejsou k dispozici.',
+        buildFindings3()
+    );
+
+    // 5. CHART 4: Organic traffic absolute
+    main.innerHTML += buildChartSection('chart4',
+        'Organick\u00FD traffic \u2014 absolutn\u00ED \u010D\u00EDsla (\u010CR)',
+        null,
+        'Absolutn\u00ED \u010D\u00EDsla organick\u00E9ho trafficu (m\u011Bs\u00ED\u010Dn\u00ED odhad Ahrefs) ukazuj\u00ED re\u00E1ln\u00E9 objemy n\u00E1v\u0161t\u011Bv.',
+        null,
+        buildFindings4()
+    );
+
+    // 6. GSC CHART
+    main.innerHTML += buildGSCSection();
+
+    // 7. Brand Associations
+    main.innerHTML += buildAssociationsSection();
+
+    // 8. Snapshot Table
+    main.innerHTML += buildSnapshotSection();
+
+    // 9. Methodology
+    main.innerHTML += buildMethodologyCard();
+
+    // Init charts
+    initCharts();
+}
+
+// ========== INTRO CARD ==========
+function buildIntroCard() {
+    return '<div class="card">' +
+        '<div class="card-title">Co je Share of Search?</div>' +
+        '<p class="card-subtitle">Share of Search je metrika vyvinut\u00E1 Lesem Binetem (IPA, 2020), kter\u00E1 m\u011B\u0159\u00ED pod\u00EDl zna\u010Dky na celkov\u00E9m brandov\u00E9m vyhled\u00E1v\u00E1n\u00ED v dan\u00E9 kategorii. V\u00FDzkum ukazuje, \u017Ee Share of Search vysv\u011Btluje 83 % variability tr\u017En\u00EDho pod\u00EDlu (James Hankins, IPA).</p>' +
+        '<div class="quotes-grid">' +
+            '<div class="quote-block">' +
+                '&ldquo;Share of Search has enormous potential and predictive power to track brands and advertising going forward.&rdquo;' +
+                '<span class="quote-author">\u2014 Les Binet, IPA EffWorks 2020</span>' +
+            '</div>' +
+            '<div class="quote-block">' +
+                '&ldquo;Share of search is a simple and elegant alternative to share of voice \u2014 it measures real consumer demand, not just media spend.&rdquo;' +
+                '<span class="quote-author">\u2014 Mark Ritson, Marketing Week</span>' +
+            '</div>' +
+            '<div class="quote-block">' +
+                '&ldquo;When Share of Search exceeds market share, brand growth typically follows within 6-12 months.&rdquo;' +
+                '<span class="quote-author">\u2014 James Hankins, IPA Think Tank</span>' +
+            '</div>' +
+        '</div>' +
+    '</div>';
+}
+
+// ========== METHODOLOGY DETAILS ==========
+function buildMethodologyDetails() {
+    return '<details>' +
+        '<summary>Metodologie a zdroj dat</summary>' +
+        '<div class="details-content">' +
+            '<p>Data poch\u00E1z\u00ED z Ahrefs Keywords Explorer (region: \u010Cesk\u00E1 republika). Pro ka\u017Edou zna\u010Dku s\u010D\u00EDt\u00E1me m\u011Bs\u00ED\u010Dn\u00ED objem vyhled\u00E1v\u00E1n\u00ED v\u0161ech brandov\u00FDch variant (nap\u0159. &quot;erikafashion&quot;, &quot;erika fashion&quot;, &quot;erikafashion.cz&quot; atd.).</p>' +
+            '<p><strong>Sledovan\u00E9 v\u00FDrazy pro erikafashion.cz:</strong> erikafashion (15 000/m\u011Bs.), erika fashion (3 400), erikafashion.cz (450), erika fashion recenze (350), erikafashion \u0161aty (350), erikafashion recenze (350), erika fashion cz (90), erikafashion praha (100) a dal\u0161\u00ED.</p>' +
+            '<p><strong>V\u00FDpo\u010Det pod\u00EDlu:</strong> hledanost zna\u010Dky / sou\u010Det hledanost\u00ED v\u0161ech zna\u010Dek v setu &times; 100</p>' +
+        '</div>' +
+    '</details>';
+}
+
+// ========== CHART SECTION BUILDER ==========
+function buildChartSection(id, title, extraBefore, explanation, note, findings) {
+    var html = '<div class="card">';
+    html += '<div class="card-title">' + title + '</div>';
+    if (extraBefore) html += extraBefore;
+    html += '<div class="info-box">' + explanation + '</div>';
+    if (note) html += '<div class="info-box note">' + note + '</div>';
+    html += '<div class="chart-wrap"><canvas id="' + id + '"></canvas></div>';
+    html += findings;
+    html += '</div>';
+    return html;
+}
+
+// ========== GSC SECTION ==========
+function buildGSCSection() {
+    return '<div class="card">' +
+        '<div class="card-title">Google Search Console \u2014 re\u00E1ln\u00E1 data erikafashion.cz</div>' +
+        '<div class="info-box">Na rozd\u00EDl od odhad\u016F Ahrefs, Google Search Console ukazuje skute\u010Dn\u00E9 kliky a imprese z Google vyhled\u00E1v\u00E1n\u00ED.</div>' +
+        '<div class="info-box note">Data: Google Search Console propojen\u00E1 p\u0159es Ahrefs projekt. \u00DAnor 2026 obsahuje pouze \u010D\u00E1ste\u010Dn\u00E1 data a je z grafu vylou\u010Den.</div>' +
+        '<div class="chart-wrap"><canvas id="chartGSC"></canvas></div>' +
+        buildFindingsGSC() +
+    '</div>';
+}
+
+// ========== FINDINGS ==========
+function buildFindings1() {
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED</div><ol>' +
+        '<li>Sinsay a Shein dominuj\u00ED s kombinovan\u00FDm pod\u00EDlem p\u0159es 40 % \u2014 masivn\u00ED brandov\u00E1 popt\u00E1vka ta\u017Een\u00E1 agresivn\u00EDm marketingem a soci\u00E1ln\u00EDmi s\u00EDt\u011Bmi.</li>' +
+        '<li>About You zaznamenal pokles z 25 % na 17 % \u2014 v\u00FDrazn\u00E1 ztr\u00E1ta brandov\u00E9 dynamiky za posledn\u00EDch 18 m\u011Bs\u00EDc\u016F.</li>' +
+        '<li>erikafashion.cz dr\u017E\u00ED stabiln\u00ED pod\u00EDl kolem 2 % celkov\u00E9ho brandov\u00E9ho hled\u00E1n\u00ED, co\u017E je siln\u011Bj\u0161\u00ED ne\u017E n\u011Bkter\u00E9 etablovan\u00E9 zna\u010Dky (Glami, Buga).</li>' +
+        '<li>Bonprix trvale kles\u00E1 (z 15 % na 9 %) \u2014 signalizuje klesaj\u00EDc\u00ED z\u00E1jem o zna\u010Dku u \u010Desk\u00FDch spot\u0159ebitel\u016F.</li>' +
+        '<li>Orsay propadl z 2 % na 0,9 % \u2014 varovn\u00FD sign\u00E1l mo\u017En\u00E9ho odchodu zna\u010Dky z trhu.</li>' +
+        '<li>Sez\u00F3nn\u00ED vzorce jsou patrn\u00E9 u v\u0161ech zna\u010Dek \u2014 \u0161pi\u010Dky v Q4 (V\u00E1noce), propad v Q3 (l\u00E9to).</li>' +
+        '<li>Lelosi si dr\u017E\u00ED stabiln\u00ED pod\u00EDl kolem 2,5 % bez v\u00FDrazn\u00FDch v\u00FDkyv\u016F \u2014 konzistentn\u00ED zna\u010Dkov\u00E1 popt\u00E1vka.</li>' +
+    '</ol></div>';
+}
+
+function buildFindings2() {
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED</div><ol>' +
+        '<li>erikafashion.cz se dr\u017E\u00ED v p\u00E1smu 15\u201324 tis\u00EDc hled\u00E1n\u00ED m\u011Bs\u00ED\u010Dn\u011B s peak v lednu \u2014 sez\u00F3nn\u00ED vzorec v\u00E1zan\u00FD na novoro\u010Dn\u00ED n\u00E1kupy.</li>' +
+        '<li>Shein klesl z 262 tis\u00EDc (\u010Derven 2024) na 187 tis\u00EDc \u2014 pokles o 29 %, mo\u017En\u00FD dopad regulac\u00ED a zm\u011Bny vn\u00EDm\u00E1n\u00ED zna\u010Dky.</li>' +
+        '<li>Sinsay roste od Q1 2025 ze 157 tis\u00EDc na 230 tis\u00EDc \u2014 nejsiln\u011Bj\u0161\u00ED r\u016Fstov\u00FD trend mezi velk\u00FDmi hr\u00E1\u010Di.</li>' +
+        '<li>About You propadl z 235 tis\u00EDc (duben 2024) na 150 tis\u00EDc \u2014 pokles o 36 %, ztr\u00E1ta pozice na \u010Desk\u00E9m trhu.</li>' +
+        '<li>Bonprix klesl ze 144 tis\u00EDc na 85 tis\u00EDc \u2014 pokles o 41 %, nejsiln\u011Bj\u0161\u00ED propad v cel\u00E9m setu.</li>' +
+        '<li>Mohito z\u016Fst\u00E1v\u00E1 stabiln\u00ED kolem 40\u201350 tis\u00EDc hled\u00E1n\u00ED m\u011Bs\u00ED\u010Dn\u011B bez v\u00FDrazn\u00E9ho trendu.</li>' +
+        '<li>Celkov\u00E1 popt\u00E1vka v kategorii stagnuje \u2014 r\u016Fst jedn\u00E9 zna\u010Dky jde typicky na \u00FAkor jin\u00E9.</li>' +
+    '</ol></div>';
+}
+
+function buildFindings3() {
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED</div><ol>' +
+        '<li>erikafashion.cz zaznamenala nejsiln\u011Bj\u0161\u00ED r\u016Fst v cel\u00E9m setu \u2014 z 3 % na 9 % pod\u00EDlu, t\u00E9m\u011B\u0159 ztrojn\u00E1soben\u00ED za 2 roky.</li>' +
+        '<li>Zalando.cz dominuje s 43 % pod\u00EDlu organick\u00E9ho trafficu, ale v absolutn\u00EDch \u010D\u00EDslech kles\u00E1.</li>' +
+        '<li>Glami.cz zaznamenalo dramatick\u00FD propad z 25 % na 15 % pod\u00EDlu \u2014 ztr\u00E1ta organick\u00E9 viditelnosti o 61 %.</li>' +
+        '<li>About You klesl z 21 % na 16 % \u2014 v absolutn\u00EDch \u010D\u00EDslech propad o polovinu.</li>' +
+        '<li>Bonprix.cz je relativn\u011B stabiln\u00ED: kol\u00EDs\u00E1 mezi 78\u2013163 tis\u00EDc n\u00E1v\u0161t\u011Bv bez jasn\u00E9ho trendu.</li>' +
+        '<li>erikafashion.cz vykazuje jasn\u011B nejsiln\u011Bj\u0161\u00ED r\u016Fstov\u00FD trend \u2014 jde o jedin\u00FD web v setu s konzistentn\u00EDm meziro\u010Dn\u00EDm r\u016Fstem.</li>' +
+        '<li>Londonclub.cz kles\u00E1 z 17 tis\u00EDc na 7 tis\u00EDc (pokles o 59 %) \u2014 signalizuje ztr\u00E1cen\u00ED pozice v organiku.</li>' +
+    '</ol></div>';
+}
+
+function buildFindings4() {
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED</div><ol>' +
+        '<li>erikafashion.cz vzrostla ze 47 tis\u00EDc na 89 tis\u00EDc m\u011Bs\u00ED\u010Dn\u00EDch n\u00E1v\u0161t\u011Bv \u2014 n\u00E1r\u016Fst o 88 % za 2 roky.</li>' +
+        '<li>Zalando.cz kleslo z 562 tis\u00EDc na 429 tis\u00EDc \u2014 i p\u0159es pokles z\u016Fst\u00E1v\u00E1 absolutn\u00EDm l\u00EDdrem.</li>' +
+        '<li>Glami.cz zaznamenalo nejv\u011Bt\u0161\u00ED absolutn\u00ED propad: z 372 tis\u00EDc na 146 tis\u00EDc (\u221261 %). Agreg\u00E1torn\u00ED model ztr\u00E1c\u00ED na relevanci.</li>' +
+        '<li>About You propadl z 308 tis\u00EDc na 155 tis\u00EDc \u2014 polovi\u010Dn\u00ED traffic za 2 roky.</li>' +
+        '<li>erikafashion.cz v kv\u011Btnu 2025 dos\u00E1hla sv\u00E9ho maxima 123 tis\u00EDc n\u00E1v\u0161t\u011Bv \u2014 sez\u00F3nn\u00ED peak jarn\u00ED kolekce.</li>' +
+        '<li>miadresses.cz m\u011Bla jednor\u00E1zov\u00FD spike v lednu 2025 (23 tis\u00EDc), jinak stabiln\u011B kolem 10\u201314 tis\u00EDc.</li>' +
+        '<li>Pom\u011Br brandov\u00E9ho hled\u00E1n\u00ED ku org. trafficu: erikafashion 18K:89K = 1:5, Zalando 60K:429K = 1:7. Vy\u0161\u0161\u00ED pom\u011Br = lep\u0161\u00ED SEO na nebrandov\u00E9 dotazy.</li>' +
+    '</ol></div>';
+}
+
+function buildFindingsGSC() {
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED</div><ol>' +
+        '<li>Leden 2026 byl rekordn\u00ED m\u011Bs\u00EDc: 49 975 klik\u016F z 1,95 milionu impres\u00ED \u2014 nejvy\u0161\u0161\u00ED n\u00E1v\u0161t\u011Bvnost v historii.</li>' +
+        '<li>Pr\u016Fm\u011Brn\u00E9 CTR se dr\u017E\u00ED kolem 2,0\u20132,7 % \u2014 typick\u00E1 hodnota pro fashion e-shop s \u0161irok\u00FDm portfoliem.</li>' +
+        '<li>Pr\u016Fm\u011Brn\u00E1 pozice se zlep\u0161ila z 10,2 (b\u0159ezen 2025) na 6,5 (leden 2026) \u2014 posun o 4 pozice nahoru.</li>' +
+        '<li>Imprese rostou: z 861 tis\u00EDc (z\u00E1\u0159\u00ED 2024) na 1,95 milionu (leden 2026) \u2014 v\u00EDce ne\u017E zdvojn\u00E1soben\u00ED viditelnosti.</li>' +
+        '<li>Sez\u00F3nn\u00ED vzorec odpov\u00EDd\u00E1 brandov\u00E9mu hled\u00E1n\u00ED \u2014 peak v lednu (novoro\u010Dn\u00ED n\u00E1kupy), propad v l\u00E9t\u011B.</li>' +
+        '<li>Ahrefs odhaduje ~89 tis\u00EDc n\u00E1v\u0161t\u011Bv, GSC ukazuje ~50 tis\u00EDc klik\u016F \u2014 Ahrefs nadhodnocuje zhruba 1,8\u00D7.</li>' +
+        '<li>CTR trend je m\u00EDrn\u011B klesaj\u00EDc\u00ED (z 2,7 % na 2,5 %) \u2014 mo\u017En\u00FD vliv zv\u00FD\u0161en\u00FDch impres\u00ED na ni\u017E\u0161\u00EDch pozic\u00EDch.</li>' +
+    '</ol></div>';
+}
+
+// ========== ASSOCIATIONS ==========
+function buildAssociationsSection() {
+    var html = '<div class="card">';
+    html += '<div class="card-title">Brandov\u00E9 asociace \u2014 s \u010D\u00EDm lid\u00E9 hledaj\u00ED jednotliv\u00E9 zna\u010Dky</div>';
+    html += '<p class="card-subtitle">Ukazuje, jak\u00E9 v\u00FDrazy lid\u00E9 nej\u010Dast\u011Bji kombinuj\u00ED s n\u00E1zvem zna\u010Dky. Odhaluje, co z\u00E1kazn\u00EDky zaj\u00EDm\u00E1 \u2014 recenze, slevy, \u0161aty, konkr\u00E9tn\u00ED e-shop.</p>';
+    html += '<div class="assoc-grid" id="assocGrid"></div>';
+
+    // Brand terms
+    html += '<div style="margin-top:32px">';
+    html += '<div class="card-title">Brandov\u00E9 vyhled\u00E1vac\u00ED v\u00FDrazy pro erikafashion.cz</div>';
+    html += '<p class="card-subtitle" style="margin-bottom:12px">Kompletn\u00ED seznam brandov\u00FDch vyhled\u00E1vac\u00EDch v\u00FDraz\u016F pou\u017Eit\u00FDch pro m\u011B\u0159en\u00ED Share of Search.</p>';
+    html += '<table class="brand-terms-table" id="brandTermsTable"><thead><tr><th>V\u00FDraz</th><th>Objem / m\u011Bs.</th></tr></thead><tbody></tbody></table>';
+    html += '</div>';
+
+    html += '</div>';
+    return html;
+}
+
+function renderAssociations() {
+    var grid = document.getElementById('assocGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    var noDataBrands = ['buga','evona','miadresses','blankastraka','londonclub','coolboutique','bestmoda'];
+
+    DATA.brands.forEach(function(b) {
+        var assoc = DATA.brandAssociations[b.id];
+        var card = document.createElement('div');
+        card.className = 'assoc-card';
+        var inner = '<div class="assoc-card-title">' + b.label + '</div>';
+        if (noDataBrands.indexOf(b.id) !== -1 || !assoc || assoc.length === 0) {
+            inner += '<span class="no-data">Data nejsou k dispozici.</span>';
+        } else {
+            inner += '<table>';
+            assoc.forEach(function(a) {
+                inner += '<tr><td>' + a.kw + '</td><td>' + fmtNum(a.vol) + '</td></tr>';
+            });
+            inner += '</table>';
+        }
+        card.innerHTML = inner;
+        grid.appendChild(card);
+    });
+
+    // Brand terms table
+    var tbody = document.querySelector('#brandTermsTable tbody');
+    if (tbody && DATA.brandTerms && DATA.brandTerms.erikafashion) {
+        tbody.innerHTML = '';
+        DATA.brandTerms.erikafashion.forEach(function(t) {
+            tbody.innerHTML += '<tr><td>' + t.kw + '</td><td>' + fmtNum(t.vol) + '</td></tr>';
+        });
+    }
+}
+
+// ========== SNAPSHOT TABLE ==========
+function buildSnapshotSection() {
+    return '<div class="card">' +
+        '<div class="card-title">Aktu\u00E1ln\u00ED stav \u2014 duben 2026</div>' +
+        '<div style="overflow-x:auto">' +
+        '<table class="data-table" id="snapshotTable">' +
+        '<thead><tr>' +
+            '<th data-col="rank">#</th>' +
+            '<th data-col="label">Zna\u010Dka</th>' +
+            '<th data-col="brandSearch">Brand search / m\u011Bs.</th>' +
+            '<th data-col="orgTraffic">Org. traffic \u010CR</th>' +
+            '<th data-col="orgKw">Org. KW</th>' +
+            '<th data-col="kwTop3">KW v top 3</th>' +
+        '</tr></thead>' +
+        '<tbody></tbody>' +
+        '</table>' +
+        '</div></div>';
+}
+
+function renderSnapshotTable() {
+    var tbody = document.querySelector('#snapshotTable tbody');
+    if (!tbody) return;
+
+    var lastIdx = DATA.dates.length - 1;
+    var rows = DATA.brands.map(function(b) {
+        var bs = DATA.brandSearch[b.id] ? DATA.brandSearch[b.id][lastIdx] : 0;
+        var snap = DATA.snapshot[b.id] || {};
+        return {
+            id: b.id,
+            label: b.label,
+            isTarget: b.isTarget,
+            brandSearch: bs,
+            orgTraffic: snap.orgTraffic || 0,
+            orgKw: snap.orgKeywords || 0,
+            kwTop3: snap.orgKeywords1_3
+        };
+    });
+
+    // Sort by brand search desc
+    rows.sort(function(a, b) { return b.brandSearch - a.brandSearch; });
+
+    tbody.innerHTML = '';
+    rows.forEach(function(r, i) {
+        var cls = r.isTarget ? ' class="target-row"' : '';
+        tbody.innerHTML += '<tr' + cls + '>' +
+            '<td>' + (i + 1) + '</td>' +
+            '<td>' + r.label + '</td>' +
+            '<td>' + fmtNum(r.brandSearch) + '</td>' +
+            '<td>' + fmtNum(r.orgTraffic) + '</td>' +
+            '<td>' + fmtNum(r.orgKw) + '</td>' +
+            '<td>' + (r.kwTop3 != null ? fmtNum(r.kwTop3) : '\u2013') + '</td>' +
+        '</tr>';
+    });
+
+    // Sortable headers
+    initTableSort();
+}
+
+function initTableSort() {
+    var table = document.getElementById('snapshotTable');
+    if (!table) return;
+    var headers = table.querySelectorAll('th');
+    var tbody = table.querySelector('tbody');
+    var currentSort = { col: -1, asc: false };
+
+    headers.forEach(function(th, idx) {
+        th.addEventListener('click', function() {
+            var rows = Array.from(tbody.querySelectorAll('tr'));
+            var asc = currentSort.col === idx ? !currentSort.asc : false;
+            currentSort = { col: idx, asc: asc };
+
+            rows.sort(function(a, b) {
+                var cellA = a.cells[idx].textContent.replace(/[\s\u00A0]/g, '').replace(',', '.').replace('\u2013', '-1');
+                var cellB = b.cells[idx].textContent.replace(/[\s\u00A0]/g, '').replace(',', '.').replace('\u2013', '-1');
+                var numA = parseFloat(cellA);
+                var numB = parseFloat(cellB);
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return asc ? numA - numB : numB - numA;
+                }
+                return asc ? cellA.localeCompare(cellB, 'cs') : cellB.localeCompare(cellA, 'cs');
+            });
+            rows.forEach(function(r) { tbody.appendChild(r); });
+
+            // Update rank column
+            Array.from(tbody.querySelectorAll('tr')).forEach(function(r, i) {
+                r.cells[0].textContent = i + 1;
+            });
+        });
+    });
+}
+
+// ========== METHODOLOGY ==========
+function buildMethodologyCard() {
+    return '<div class="card">' +
+        '<div class="card-title">Metodika a zdroje</div>' +
+        '<img src="https://placedog.net/200/150?random" alt="Pes" style="max-width:120px;float:right;margin:0 0 12px 16px;border-radius:0">' +
+        '<p class="card-subtitle">Share of Search (SoS) m\u011B\u0159\u00ED pod\u00EDl brandov\u00E9ho vyhled\u00E1v\u00E1n\u00ED ka\u017Ed\u00E9 zna\u010Dky na celkov\u00E9m objemu brandov\u00FDch dotaz\u016F v dan\u00E9 kategorii. Koncept vyvinul Les Binet v roce 2020 jako levnou a rychlou alternativu ke Share of Voice.</p>' +
+        '<div class="method-grid">' +
+            '<div class="method-item"><strong>Datov\u00FD zdroj</strong><span>Ahrefs API (Keywords Explorer pro brandov\u00E1 data, Site Explorer pro organick\u00E9 metriky) + Google Search Console</span></div>' +
+            '<div class="method-item"><strong>Region</strong><span>\u010Cesk\u00E1 republika</span></div>' +
+            '<div class="method-item"><strong>Obdob\u00ED</strong><span>Duben 2024 \u2013 duben 2026 (25 m\u011Bs\u00EDc\u016F)</span></div>' +
+            '<div class="method-item"><strong>Brandov\u00E9 hled\u00E1n\u00ED</strong><span>Sou\u010Det objemu hlavn\u00EDch brandov\u00FDch variant (nap\u0159. &quot;erikafashion&quot; + &quot;erika fashion&quot; + &quot;erikafashion.cz&quot;)</span></div>' +
+            '<div class="method-item"><strong>Organick\u00FD traffic</strong><span>M\u011Bs\u00ED\u010Dn\u00ED odhad Ahrefs na z\u00E1klad\u011B pozic v SERPu a CTR modelu</span></div>' +
+            '<div class="method-item"><strong>Aktualizace</strong><span>M\u011Bs\u00ED\u010Dn\u011B, automaticky p\u0159es GitHub Actions</span></div>' +
+            '<div class="method-item"><strong>Datab\u00E1ze</strong><span>Historick\u00E1 data ukl\u00E1d\u00E1na v data/history.json, ka\u017Ed\u00FD m\u011Bs\u00EDc se p\u0159id\u00E1vaj\u00ED \u010Derstv\u00E1 data</span></div>' +
+            '<div class="method-item"><strong>Limitace</strong><span>Pro mezin\u00E1rodn\u00ED dom\u00E9ny historick\u00E1 \u010CR data nejsou k dispozici na Ahrefs Standard pl\u00E1nu</span></div>' +
+        '</div>' +
+    '</div>';
+}
+
+// ========== CHARTS ==========
+function initCharts() {
+    renderChart1();
+    renderChart2();
+    renderChart3();
+    renderChart4();
+    renderChartGSC();
+    renderSnapshotTable();
+    renderAssociations();
+}
+
+function updateCharts() {
+    renderChart1();
+    renderChart2();
+    renderChart3();
+    renderChart4();
+}
+
+function destroyChart(id) {
+    if (chartInstances[id]) {
+        chartInstances[id].destroy();
+        delete chartInstances[id];
+    }
+}
+
+// CHART 1: SoS brand search %
+function renderChart1() {
+    destroyChart('chart1');
+    var labels = DATA.dates.map(dateLabel);
+    var shares = calcShares(DATA.brandSearch, DATA.dates);
+    var visible = getVisibleBrands();
+    var datasets = buildDatasets(shares, visible);
+
+    var opts = chartDefaults();
+    opts.plugins.tooltip.callbacks.label = function(ctx) {
+        return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1).replace('.', ',') + ' %';
+    };
+    opts.scales.y.ticks.callback = function(v) { return v + ' %'; };
+
+    chartInstances['chart1'] = new Chart(document.getElementById('chart1'), {
+        type: 'line',
+        data: { labels: labels, datasets: datasets },
+        options: opts
+    });
+}
+
+// CHART 2: Brand search absolute
+function renderChart2() {
+    destroyChart('chart2');
+    var labels = DATA.dates.map(dateLabel);
+    var visible = getVisibleBrands();
+    var datasets = visible.map(function(b) {
+        var isTarget = b.isTarget;
+        return {
+            label: b.label,
+            data: DATA.brandSearch[b.id] || [],
+            borderColor: b.color,
+            backgroundColor: b.color + '18',
+            borderWidth: isTarget ? 3 : 1.5,
+            pointRadius: isTarget ? 3 : 0,
+            pointHoverRadius: 5,
+            tension: 0.3,
+            order: isTarget ? 0 : 1
+        };
+    });
+
+    var opts = chartDefaults();
+    opts.plugins.tooltip.callbacks.label = function(ctx) {
+        return ctx.dataset.label + ': ' + fmtNum(Math.round(ctx.parsed.y));
+    };
+    opts.scales.y.ticks.callback = function(v) { return fmtK(v); };
+
+    chartInstances['chart2'] = new Chart(document.getElementById('chart2'), {
+        type: 'line',
+        data: { labels: labels, datasets: datasets },
+        options: opts
+    });
+}
+
+// CHART 3: SoS organic traffic %
+function renderChart3() {
+    destroyChart('chart3');
+    var labels = DATA.dates.map(dateLabel);
+    var shares = calcShares(DATA.organicTraffic, DATA.dates);
+    var orgIds = Object.keys(DATA.organicTraffic);
+    var visible = getVisibleBrands().filter(function(b) {
+        return orgIds.indexOf(b.id) !== -1;
+    });
+    var datasets = buildDatasets(shares, visible);
+
+    var opts = chartDefaults();
+    opts.plugins.tooltip.callbacks.label = function(ctx) {
+        return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1).replace('.', ',') + ' %';
+    };
+    opts.scales.y.ticks.callback = function(v) { return v + ' %'; };
+
+    chartInstances['chart3'] = new Chart(document.getElementById('chart3'), {
+        type: 'line',
+        data: { labels: labels, datasets: datasets },
+        options: opts
+    });
+}
+
+// CHART 4: Organic traffic absolute
+function renderChart4() {
+    destroyChart('chart4');
+    var labels = DATA.dates.map(dateLabel);
+    var orgIds = Object.keys(DATA.organicTraffic);
+    var visible = getVisibleBrands().filter(function(b) {
+        return orgIds.indexOf(b.id) !== -1;
+    });
+    var datasets = visible.map(function(b) {
+        var isTarget = b.isTarget;
+        return {
+            label: b.label,
+            data: DATA.organicTraffic[b.id] || [],
+            borderColor: b.color,
+            backgroundColor: b.color + '18',
+            borderWidth: isTarget ? 3 : 1.5,
+            pointRadius: isTarget ? 3 : 0,
+            pointHoverRadius: 5,
+            tension: 0.3,
+            order: isTarget ? 0 : 1
+        };
+    });
+
+    var opts = chartDefaults();
+    opts.plugins.tooltip.callbacks.label = function(ctx) {
+        return ctx.dataset.label + ': ' + fmtNum(Math.round(ctx.parsed.y));
+    };
+    opts.scales.y.ticks.callback = function(v) { return fmtK(v); };
+
+    chartInstances['chart4'] = new Chart(document.getElementById('chart4'), {
+        type: 'line',
+        data: { labels: labels, datasets: datasets },
+        options: opts
+    });
+}
+
+// GSC CHART
+function renderChartGSC() {
+    destroyChart('chartGSC');
+    var gsc = DATA.gsc;
+    // GSC data ends at Jan 2026 (17 entries). Feb 2026 partial is excluded (not in the data).
+    var labels = gsc.dates.map(dateLabel);
+    var clicksData = gsc.clicks.slice();
+    var impressionsK = gsc.impressions.map(function(v) { return v / 1000; });
+    var ctrData = gsc.ctr.slice();
+
+    var opts = chartDefaults();
+    opts.scales.y = {
+        type: 'linear',
+        position: 'left',
+        grid: { color: '#e2e5ed', drawBorder: false },
+        ticks: { font: { family: 'Inter', size: 11 }, color: '#9ca3af' },
+        beginAtZero: true,
+        title: { display: true, text: 'Kliky / Imprese (tis.)', font: { family: 'Inter', size: 11 }, color: '#9ca3af' }
+    };
+    opts.scales.y1 = {
+        type: 'linear',
+        position: 'right',
+        grid: { drawOnChartArea: false },
+        ticks: {
+            font: { family: 'Inter', size: 11 },
+            color: '#9ca3af',
+            callback: function(v) { return v.toFixed(1) + ' %'; }
+        },
+        beginAtZero: true,
+        title: { display: true, text: 'CTR (%)', font: { family: 'Inter', size: 11 }, color: '#9ca3af' }
+    };
+    opts.plugins.tooltip.callbacks.label = function(ctx) {
+        if (ctx.dataset.yAxisID === 'y1') return 'CTR: ' + ctx.parsed.y.toFixed(2).replace('.', ',') + ' %';
+        if (ctx.dataset.type === 'bar') return 'Kliky: ' + fmtNum(Math.round(ctx.parsed.y));
+        return 'Imprese: ' + fmtK(Math.round(ctx.parsed.y * 1000));
+    };
+
+    chartInstances['chartGSC'] = new Chart(document.getElementById('chartGSC'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Kliky',
+                    type: 'bar',
+                    data: clicksData,
+                    backgroundColor: 'rgba(255,107,53,0.6)',
+                    borderColor: '#FF6B35',
+                    borderWidth: 1,
+                    yAxisID: 'y',
+                    order: 2
+                },
+                {
+                    label: 'Imprese (tis.)',
+                    type: 'line',
+                    data: impressionsK,
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37,99,235,0.08)',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    tension: 0.3,
+                    yAxisID: 'y',
+                    order: 1
+                },
+                {
+                    label: 'CTR (%)',
+                    type: 'line',
+                    data: ctrData,
+                    borderColor: '#10b981',
+                    borderDash: [6, 3],
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    tension: 0.3,
+                    yAxisID: 'y1',
+                    order: 0
+                }
+            ]
+        },
+        options: opts
+    });
+}
 </script>
 </body>
 </html>
