@@ -146,6 +146,13 @@ body {
     background: var(--border);
     margin: 0 4px;
 }
+#brandChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+    margin-top: 4px;
+}
 .brand-chip {
     font-family: inherit;
     font-size: 12px;
@@ -160,6 +167,7 @@ body {
     transition: all 0.15s;
     white-space: nowrap;
 }
+.brand-chip:hover { border-color: var(--accent); color: var(--accent); }
 .brand-chip.active {
     background: var(--bg);
     color: var(--text);
@@ -240,6 +248,31 @@ details .details-content {
 }
 details .details-content p { margin-bottom: 10px; }
 details .details-content p:last-child { margin-bottom: 0; }
+.variants-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 12px;
+}
+.variants-table th {
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+}
+.variants-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-sec);
+    vertical-align: top;
+}
+.variants-table td:first-child { white-space: nowrap; width: 160px; }
+.variants-table tr:last-child td { border-bottom: 0; }
 
 /* TABLE */
 .data-table {
@@ -408,9 +441,107 @@ details .details-content p:last-child { margin-bottom: 0; }
     .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
     .chart-wrap { height: 300px; }
 }
+
+/* LOGIN OVERLAY */
+.login-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #f5f6fa;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+.login-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+.login-logo {
+    height: 48px;
+    margin-bottom: 32px;
+}
+.login-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+.login-subtitle {
+    font-size: 14px;
+    color: var(--text-sec);
+    margin-bottom: 24px;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.login-form input {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+}
+.login-form input:focus {
+    border-color: var(--accent);
+    background: #fff;
+}
+.login-form button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.login-form button:hover { background: #e85a24; }
+.login-error {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #d32f2f;
+}
+.login-footer {
+    margin-top: 32px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+.login-footer a { color: var(--accent); text-decoration: none; }
+.login-footer a:hover { text-decoration: underline; }
+body.locked { overflow: hidden; }
+body.locked > *:not(#loginOverlay):not(script) { display: none !important; }
 </style>
 </head>
 <body>
+
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay" class="login-overlay">
+    <div class="login-card">
+        <img src="https://www.erikafashion.cz/user/logos/logo-erikafashion.svg" alt="Erika Fashion" class="login-logo">
+        <h2 class="login-title">Share of Search Dashboard</h2>
+        <p class="login-subtitle">Pro vstup zadejte p&#345;&#237;stupov&#233; heslo</p>
+        <form id="loginForm" class="login-form">
+            <input type="password" id="loginPassword" placeholder="Heslo" autocomplete="current-password" autofocus>
+            <button type="submit">Vstoupit</button>
+        </form>
+        <p class="login-error" id="loginError" style="display:none">Nespr&#225;vn&#233; heslo. Zkuste to znovu.</p>
+        <p class="login-footer">Dashboard vytvo&#345;il Patrik Pilous &middot; <a href="https://patrikpilous.cz" target="_blank" rel="noopener">patrikpilous.cz</a></p>
+    </div>
+</div>
 
 <!-- HEADER -->
 <header class="header">
@@ -421,7 +552,7 @@ details .details-content p:last-child { margin-bottom: 0; }
             <h1>Share of Search Dashboard</h1>
             <p>Kompetitivn&#237; anal&#253;za &#269;esk&#233;ho fashion trhu</p>
         </div>
-        <span class="header-badge" id="headerBadge">Posledn&#237; aktualizace: duben 2026 | Data: Ahrefs API + Google Search Console</span>
+        <span class="header-badge" id="headerBadge">Posledn&#237; aktualizace: duben 2026 | Data: Ahrefs API + Google Search Console + dal&#353;&#237; obohacen&#237; dat</span>
     </div>
 </div>
 </header>
@@ -563,7 +694,48 @@ function chartDefaults() {
     };
 }
 
+// ========== LOGIN GATE ==========
+// Hash of the access password. To change it, replace with a new hash.
+// Password is checked client-side — this is access control for non-sensitive data, not real security.
+// Default password: erikafashion2026 (change hash below to change password)
+var ACCESS_HASH = '6111a688487564a10ba2d7e59ccde6988ed189aea47f09e3e9212fd87ed7379d';
+
+async function sha256(str) {
+    var buf = new TextEncoder().encode(str);
+    var hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
+}
+
+function unlock() {
+    document.body.classList.remove('locked');
+    document.getElementById('loginOverlay').style.display = 'none';
+    loadDashboard();
+}
+
+function initLogin() {
+    document.body.classList.add('locked');
+    if (sessionStorage.getItem('sos-unlocked') === '1') {
+        return unlock();
+    }
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var input = document.getElementById('loginPassword').value;
+        var hash = await sha256(input);
+        if (hash === ACCESS_HASH) {
+            sessionStorage.setItem('sos-unlocked', '1');
+            unlock();
+        } else {
+            document.getElementById('loginError').style.display = 'block';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginPassword').focus();
+        }
+    });
+}
+
+initLogin();
+
 // ========== INIT ==========
+function loadDashboard() {
 fetch('data/history.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -574,6 +746,7 @@ fetch('data/history.json')
     .catch(function(e) {
         document.getElementById('loading').textContent = 'Chyba p\u0159i na\u010D\u00EDt\u00E1n\u00ED dat: ' + e.message;
     });
+} // end loadDashboard
 
 function initPage() {
     // Init active brands (all ON)
@@ -588,7 +761,7 @@ function initPage() {
 
     // Footer
     document.getElementById('footerText').textContent =
-        'Data: Ahrefs API + Google Search Console | Metodika: Share of Search (Les Binet, IPA 2020) | Generov\u00E1no: ' + DATA.lastUpdated;
+        'Data: Ahrefs API + Google Search Console + dal\u0161\u00ED obohacen\u00ED dat | Metodika: Share of Search (Les Binet, IPA 2020) | Generov\u00E1no: ' + DATA.lastUpdated;
 }
 
 // ========== FILTER CHIPS ==========
@@ -656,6 +829,15 @@ function renderAll() {
         buildFindings1()
     );
 
+    // 2b. CHART 1CZ: SoS — pouze \u010CR dom\u00E9ny
+    main.innerHTML += buildChartSection('chart1cz',
+        'Share of Search \u2014 jen \u010Desk\u00E9 dom\u00E9ny',
+        null,
+        'Alternativn\u00ED pohled bez mezin\u00E1rodn\u00EDch obr\u016F (Shein, Sinsay, Reserved, Mohito). Zobrazuje konkuren\u010Dn\u00ED prost\u0159ed\u00ED mezi zna\u010Dkami, kter\u00E9 maj\u00ED \u010Desk\u00FD e-shop a cíl\u00ED p\u0159ev\u00E1\u017En\u011B na \u010Desk\u00E9ho z\u00E1kazn\u00EDka. Ukazuje re\u00E1lnou pozici erikafashion.cz v jej\u00ED skute\u010Dn\u00E9 konkuren\u010Dn\u00ED skupin\u011B.',
+        'Pozn.: Vynech\u00E1ny jsou dom\u00E9ny shein.com, sinsay.com, reserved.com a mohito.com. Zahrnuty jsou pouze zna\u010Dky s .cz TLD.',
+        buildFindings1CZ()
+    );
+
     // 3. CHART 2: Brand search absolute
     main.innerHTML += buildChartSection('chart2',
         'Brandov\u00E9 hled\u00E1n\u00ED \u2014 absolutn\u00ED objem',
@@ -668,7 +850,7 @@ function renderAll() {
     // DOG 1
     main.innerHTML += '<div style="text-align:center;margin:8px 0 0">' +
         '<img src="https://placedog.net/300/200?random" alt="Pes" style="max-width:200px;display:block;margin:24px auto 8px;border-radius:0">' +
-        '<p class="dog-caption">N\u00E1\u0161 maskot dohl\u00ED\u017E\u00ED na data.</p></div>';
+        '<p class="dog-caption">Jen tu dohl\u00ED\u017E\u00EDm na data, tak ne\u010Dum.</p></div>';
 
     // 4. CHART 3: SoS organic traffic %
     main.innerHTML += buildChartSection('chart3',
@@ -728,12 +910,40 @@ function buildIntroCard() {
 
 // ========== METHODOLOGY DETAILS ==========
 function buildMethodologyDetails() {
+    var variants = [
+        {brand:'Erika Fashion', items:[['erikafashion',15000],['erika fashion',3400],['erikafashion.cz',450],['erikafashion recenze',350],['erikafashion \u0161aty',350],['erika fashion recenze',350],['erika italy fashion',150],['erikafashion praha',100],['erika fashion fotky',100],['erika fashion cz',90],['erika fashion \u0161aty',80],['erikafashion obchod',80]]},
+        {brand:'Sinsay', items:[['sinsay',195000]]},
+        {brand:'Shein', items:[['shein',182000]]},
+        {brand:'About You', items:[['about you',160000],['aboutyou',10000]]},
+        {brand:'Reserved', items:[['reserved',115000]]},
+        {brand:'Bonprix', items:[['bonprix',82000]]},
+        {brand:'Zalando', items:[['zalando',60000]]},
+        {brand:'Mohito', items:[['mohito',44000]]},
+        {brand:'Lelosi', items:[['lelosi',24000]]},
+        {brand:'Glami', items:[['glami',14000]]},
+        {brand:'Orsay', items:[['orsay',12000]]},
+        {brand:'Buga', items:[['buga',10000]]},
+        {brand:'Evona', items:[['evona',1700]]},
+        {brand:'MiaDresses', items:[['miadresses',1700]]},
+        {brand:'London Club', items:[['london club',600],['londonclub',70]]},
+        {brand:'CoolBoutique', items:[['coolboutique',600]]},
+        {brand:'BestModa', items:[['bestmoda',150]]},
+        {brand:'Blanka Straka', items:[['blankastraka',100]]}
+    ];
+    var rows = variants.map(function(v) {
+        var parts = v.items.map(function(it) { return it[0] + ' (' + fmtNum(it[1]) + ')'; }).join(', ');
+        return '<tr><td><strong>' + v.brand + '</strong></td><td>' + parts + '</td></tr>';
+    }).join('');
     return '<details>' +
         '<summary>Metodologie a zdroj dat</summary>' +
         '<div class="details-content">' +
-            '<p>Data poch\u00E1z\u00ED z Ahrefs Keywords Explorer (region: \u010Cesk\u00E1 republika). Pro ka\u017Edou zna\u010Dku s\u010D\u00EDt\u00E1me m\u011Bs\u00ED\u010Dn\u00ED objem vyhled\u00E1v\u00E1n\u00ED v\u0161ech brandov\u00FDch variant (nap\u0159. &quot;erikafashion&quot;, &quot;erika fashion&quot;, &quot;erikafashion.cz&quot; atd.).</p>' +
-            '<p><strong>Sledovan\u00E9 v\u00FDrazy pro erikafashion.cz:</strong> erikafashion (15 000/m\u011Bs.), erika fashion (3 400), erikafashion.cz (450), erika fashion recenze (350), erikafashion \u0161aty (350), erikafashion recenze (350), erika fashion cz (90), erikafashion praha (100) a dal\u0161\u00ED.</p>' +
+            '<p>Data poch\u00E1z\u00ED z Ahrefs Keywords Explorer (region: \u010Cesk\u00E1 republika). Pro ka\u017Edou zna\u010Dku s\u010D\u00EDt\u00E1me m\u011Bs\u00ED\u010Dn\u00ED objem vyhled\u00E1v\u00E1n\u00ED v\u0161ech brandov\u00FDch variant.</p>' +
             '<p><strong>V\u00FDpo\u010Det pod\u00EDlu:</strong> hledanost zna\u010Dky / sou\u010Det hledanost\u00ED v\u0161ech zna\u010Dek v setu &times; 100</p>' +
+            '<p><strong>Sledovan\u00E9 brandov\u00E9 varianty pro v\u0161echny konkurenty (m\u011Bs\u00ED\u010Dn\u00ED volume):</strong></p>' +
+            '<table class="variants-table">' +
+                '<thead><tr><th>Zna\u010Dka</th><th>Varianty a objem</th></tr></thead>' +
+                '<tbody>' + rows + '</tbody>' +
+            '</table>' +
         '</div>' +
     '</details>';
 }
@@ -767,11 +977,23 @@ function buildFindings1() {
     return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED</div><ol>' +
         '<li>Sinsay a Shein dominuj\u00ED s kombinovan\u00FDm pod\u00EDlem p\u0159es 40 % \u2014 masivn\u00ED brandov\u00E1 popt\u00E1vka ta\u017Een\u00E1 agresivn\u00EDm marketingem a soci\u00E1ln\u00EDmi s\u00EDt\u011Bmi.</li>' +
         '<li>About You zaznamenal pokles z 25 % na 17 % \u2014 v\u00FDrazn\u00E1 ztr\u00E1ta brandov\u00E9 dynamiky za posledn\u00EDch 18 m\u011Bs\u00EDc\u016F.</li>' +
-        '<li>erikafashion.cz dr\u017E\u00ED stabiln\u00ED pod\u00EDl kolem 2 % celkov\u00E9ho brandov\u00E9ho hled\u00E1n\u00ED, co\u017E je siln\u011Bj\u0161\u00ED ne\u017E n\u011Bkter\u00E9 etablovan\u00E9 zna\u010Dky (Glami, Buga).</li>' +
+        '<li>Erika Fashion dr\u017E\u00ED stabiln\u00ED pod\u00EDl kolem 2 % celkov\u00E9ho brandov\u00E9ho hled\u00E1n\u00ED, co\u017E je siln\u011Bj\u0161\u00ED ne\u017E n\u011Bkter\u00E9 etablovan\u00E9 zna\u010Dky (Glami, Buga).</li>' +
         '<li>Bonprix trvale kles\u00E1 (z 15 % na 9 %) \u2014 signalizuje klesaj\u00EDc\u00ED z\u00E1jem o zna\u010Dku u \u010Desk\u00FDch spot\u0159ebitel\u016F.</li>' +
         '<li>Orsay propadl z 2 % na 0,9 % \u2014 varovn\u00FD sign\u00E1l mo\u017En\u00E9ho odchodu zna\u010Dky z trhu.</li>' +
         '<li>Sez\u00F3nn\u00ED vzorce jsou patrn\u00E9 u v\u0161ech zna\u010Dek \u2014 \u0161pi\u010Dky v Q4 (V\u00E1noce), propad v Q3 (l\u00E9to).</li>' +
         '<li>Lelosi si dr\u017E\u00ED stabiln\u00ED pod\u00EDl kolem 2,5 % bez v\u00FDrazn\u00FDch v\u00FDkyv\u016F \u2014 konzistentn\u00ED zna\u010Dkov\u00E1 popt\u00E1vka.</li>' +
+    '</ol></div>';
+}
+
+function buildFindings1CZ() {
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED \u2014 \u010Cesk\u00E9 dom\u00E9ny</div><ol>' +
+        '<li>Bez mezin\u00E1rodn\u00EDch obr\u016F je About You absolutn\u00EDm l\u00EDdrem s 42 % pod\u00EDlu, ale kles\u00E1 z p\u016Fvodn\u00EDch 45 %.</li>' +
+        '<li>Erika Fashion je 5. nejv\u011Bt\u0161\u00ED zna\u010Dkou v \u010Desk\u00E9 konkuren\u010Dn\u00ED skupin\u011B s pod\u00EDlem 4,8 % \u2014 m\u00EDrn\u00FD r\u016Fst z 4,0 % p\u0159ed 2 lety.</li>' +
+        '<li>Bonprix klesl z 26 % na 22 % \u2014 ztrat\u00EDl p\u0159es 4 procentn\u00ED body, coz odpov\u00EDd\u00E1 ztr\u00E1t\u011B ~60 tis\u00EDc hled\u00E1n\u00ED m\u011Bs\u00ED\u010Dn\u011B.</li>' +
+        '<li>Zalando.cz roste z 12 % na 16 % \u2014 jedin\u00FD v\u00FDznamn\u00FD r\u016Fst v top 3 hr\u00E1\u010D\u016F \u010Desk\u00E9 skupiny.</li>' +
+        '<li>Erika Fashion p\u0159edstihla Glami, Orsay i Buga v brandov\u00E9m hled\u00E1n\u00ED \u2014 pro zna\u010Dku bez agresivn\u00ED reklamy siln\u00FD v\u00FDsledek.</li>' +
+        '<li>Orsay kles\u00E1 z 3,3 % na 2,2 % \u2014 nejv\u00FDrazn\u011Bj\u0161\u00ED relativn\u00ED propad mezi etablovan\u00FDmi \u010Desk\u00FDmi zna\u010Dkami.</li>' +
+        '<li>Celkov\u00E1 \u010Desk\u00E1 konkuren\u010Dn\u00ED skupina se zmen\u0161uje \u2014 suma brandov\u00FDch hled\u00E1n\u00ED kles\u00E1 z 560 tis\u00EDc (2024) na 385 tis\u00EDc (2026), pravd\u011Bpodobn\u011B p\u0159esun popt\u00E1vky sm\u011Brem k Sinsay/Shein.</li>' +
     '</ol></div>';
 }
 
@@ -988,6 +1210,7 @@ function buildMethodologyCard() {
 // ========== CHARTS ==========
 function initCharts() {
     renderChart1();
+    renderChart1CZ();
     renderChart2();
     renderChart3();
     renderChart4();
@@ -998,9 +1221,40 @@ function initCharts() {
 
 function updateCharts() {
     renderChart1();
+    renderChart1CZ();
     renderChart2();
     renderChart3();
     renderChart4();
+}
+
+// CHART 1CZ: SoS jen \u010Cesk\u00E9 dom\u00E9ny
+function renderChart1CZ() {
+    destroyChart('chart1cz');
+    var labels = DATA.dates.map(dateLabel);
+    var czIds = DATA.brands.filter(function(b) {
+        return b.id === 'erikafashion' || (b.domain && b.domain.endsWith('.cz'));
+    }).map(function(b) { return b.id; });
+    var czBrandSearch = {};
+    czIds.forEach(function(id) {
+        if (DATA.brandSearch[id]) czBrandSearch[id] = DATA.brandSearch[id];
+    });
+    var shares = calcShares(czBrandSearch, DATA.dates);
+    var visible = getVisibleBrands().filter(function(b) {
+        return czIds.indexOf(b.id) !== -1;
+    });
+    var datasets = buildDatasets(shares, visible);
+
+    var opts = chartDefaults();
+    opts.plugins.tooltip.callbacks.label = function(ctx) {
+        return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1).replace('.', ',') + ' %';
+    };
+    opts.scales.y.ticks.callback = function(v) { return v + ' %'; };
+
+    chartInstances['chart1cz'] = new Chart(document.getElementById('chart1cz'), {
+        type: 'line',
+        data: { labels: labels, datasets: datasets },
+        options: opts
+    });
 }
 
 function destroyChart(id) {
