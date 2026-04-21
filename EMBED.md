@@ -49,19 +49,20 @@ Iframe se automaticky přizpůsobí na výšku obsahu po každé změně (login 
 3. **Container width:** nastav na "Full Width" aby iframe zabral celou šířku
 4. **Padding:** odstran horní/dolní padding z Elementor containeru, aby dashboard začínal hned
 
-## Heslo pro vstup
+## Přihlašovací údaje
 
-`erikafashion2026`
+- **Uživatelské jméno:** `EF`
+- **Heslo:** `erikafashion2026`
 
-Můžeš ho změnit v `index.html` — najdi `ACCESS_HASH` a nahrad hash nového hesla (SHA-256).
+Můžeš je změnit v `index.html` — najdi `ACCESS_USER` a `ACCESS_HASH`. Hash je SHA-256 z formátu `USERNAME:password`.
 
 Na Linux/Mac vygeneruješ hash takto:
 ```bash
-echo -n "nove-heslo" | sha256sum
+echo -n "EF:nove-heslo" | sha256sum
 ```
 
 Na Windows PowerShell:
 ```powershell
 $h = [System.Security.Cryptography.SHA256]::Create()
-[System.BitConverter]::ToString($h.ComputeHash([Text.Encoding]::UTF8.GetBytes("nove-heslo"))).Replace("-","").ToLower()
+[System.BitConverter]::ToString($h.ComputeHash([Text.Encoding]::UTF8.GetBytes("EF:nove-heslo"))).Replace("-","").ToLower()
 ```

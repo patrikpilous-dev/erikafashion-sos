@@ -467,21 +467,21 @@ details .details-content p:last-child { margin-bottom: 0; }
 .login-brand {
     display: block;
     text-decoration: none;
-    margin-bottom: 28px;
-    padding-bottom: 24px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
     border-bottom: 1px solid var(--border);
 }
 .login-brand:hover .login-brand-text { color: #AE821F; }
 .login-logo {
-    height: 56px;
+    height: 36px;
     display: block;
-    margin: 0 auto 10px;
+    margin: 0 auto 6px;
 }
 .login-brand-text {
     display: block;
-    font-size: 12px;
+    font-size: 10px;
     color: var(--text-muted);
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
     transition: color 0.15s;
 }
 .login-title {
@@ -556,10 +556,11 @@ body.locked > *:not(#loginOverlay):not(script) { display: none !important; }
         <h2 class="login-title">Share of Search Dashboard</h2>
         <p class="login-subtitle">Pro vstup zadejte p&#345;&#237;stupov&#233; heslo</p>
         <form id="loginForm" class="login-form">
-            <input type="password" id="loginPassword" placeholder="Heslo" autocomplete="current-password" autofocus>
+            <input type="text" id="loginUser" placeholder="P&#345;ihla&#353;ovac&#237; jm&#233;no" autocomplete="username" autocapitalize="none" autofocus>
+            <input type="password" id="loginPassword" placeholder="Heslo" autocomplete="current-password">
             <button type="submit">Vstoupit</button>
         </form>
-        <p class="login-error" id="loginError" style="display:none">Nespr&#225;vn&#233; heslo. Zkuste to znovu.</p>
+        <p class="login-error" id="loginError" style="display:none">Nespr&#225;vn&#233; p&#345;ihla&#353;ovac&#237; &#250;daje. Zkuste to znovu.</p>
     </div>
 </div>
 
@@ -572,7 +573,7 @@ body.locked > *:not(#loginOverlay):not(script) { display: none !important; }
             <h1>Share of Search Dashboard</h1>
             <p>Kompetitivn&#237; anal&#253;za &#269;esk&#233;ho fashion trhu</p>
         </div>
-        <span class="header-badge" id="headerBadge">Posledn&#237; aktualizace: duben 2026 | Data: Ahrefs API + Google Search Console + dal&#353;&#237; obohacen&#237; dat</span>
+        <span class="header-badge" id="headerBadge">Posledn&#237; aktualizace: duben 2026 | Data: Ahrefs API + Google Search Console + Google Trends + dal&#353;&#237; obohacen&#237; dat</span>
     </div>
 </div>
 </header>
@@ -715,10 +716,12 @@ function chartDefaults() {
 }
 
 // ========== LOGIN GATE ==========
-// Hash of the access password. To change it, replace with a new hash.
-// Password is checked client-side — this is access control for non-sensitive data, not real security.
-// Default password: erikafashion2026 (change hash below to change password)
-var ACCESS_HASH = '6111a688487564a10ba2d7e59ccde6988ed189aea47f09e3e9212fd87ed7379d';
+// Access control for non-sensitive data (client-side, not real security).
+// Default credentials: user "EF", password "erikafashion2026"
+// To change password: replace ACCESS_HASH with SHA-256 of "USERNAME:password"
+// Tip: echo -n "EF:erikafashion2026" | sha256sum
+var ACCESS_USER = 'EF';
+var ACCESS_HASH = 'b6e4bb47f6541f338efd8ceb313603a10b36832fbd7f188427ef044d7e4bfe64';
 
 async function sha256(str) {
     var buf = new TextEncoder().encode(str);
@@ -739,15 +742,16 @@ function initLogin() {
     }
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        var input = document.getElementById('loginPassword').value;
-        var hash = await sha256(input);
-        if (hash === ACCESS_HASH) {
+        var user = document.getElementById('loginUser').value.trim();
+        var pass = document.getElementById('loginPassword').value;
+        var hash = await sha256(user + ':' + pass);
+        if (user === ACCESS_USER && hash === ACCESS_HASH) {
             sessionStorage.setItem('sos-unlocked', '1');
             unlock();
         } else {
             document.getElementById('loginError').style.display = 'block';
             document.getElementById('loginPassword').value = '';
-            document.getElementById('loginPassword').focus();
+            document.getElementById('loginUser').focus();
         }
     });
 }
@@ -799,7 +803,7 @@ function initPage() {
 
     // Footer
     document.getElementById('footerText').textContent =
-        'Data: Ahrefs API + Google Search Console + dal\u0161\u00ED obohacen\u00ED dat | Metodika: Share of Search (Les Binet, IPA 2020) | Generov\u00E1no: ' + DATA.lastUpdated;
+        'Data: Ahrefs API + Google Search Console + Google Trends + dal\u0161\u00ED obohacen\u00ED dat | Metodika: Share of Search (Les Binet, IPA 2020) | Generov\u00E1no: ' + DATA.lastUpdated;
 }
 
 // ========== FILTER CHIPS ==========
@@ -867,12 +871,12 @@ function renderAll() {
         buildFindings1()
     );
 
-    // 2b. CHART 1CZ: SoS — pouze \u010CR dom\u00E9ny
+    // 2b. CHART 1CZ: SoS — u\u017E\u0161\u00ED \u010Desk\u00E1 skupina
     main.innerHTML += buildChartSection('chart1cz',
-        'Share of Search \u2014 jen \u010Desk\u00E9 dom\u00E9ny',
+        'Share of Search \u2014 u\u017E\u0161\u00ED \u010Desk\u00E1 konkuren\u010Dn\u00ED skupina',
         null,
-        'Alternativn\u00ED pohled bez mezin\u00E1rodn\u00EDch obr\u016F (Shein, Sinsay, Reserved, Mohito). Zobrazuje konkuren\u010Dn\u00ED prost\u0159ed\u00ED mezi zna\u010Dkami, kter\u00E9 maj\u00ED \u010Desk\u00FD e-shop a cíl\u00ED p\u0159ev\u00E1\u017En\u011B na \u010Desk\u00E9ho z\u00E1kazn\u00EDka. Ukazuje re\u00E1lnou pozici erikafashion.cz v jej\u00ED skute\u010Dn\u00E9 konkuren\u010Dn\u00ED skupin\u011B.',
-        'Pozn.: Vynech\u00E1ny jsou dom\u00E9ny shein.com, sinsay.com, reserved.com a mohito.com. Zahrnuty jsou pouze zna\u010Dky s .cz TLD.',
+        'Alternativn\u00ED pohled bez mezin\u00E1rodn\u00EDch obr\u016F (Shein, Sinsay, Reserved, Mohito) a bez t\u0159\u00ED nejsiln\u011Bj\u0161\u00EDch \u010Desk\u00FDch hr\u00E1\u010D\u016F (Bonprix, About You, Zalando). Zobrazuje skute\u010Dn\u00E9 konkuren\u010Dn\u00ED prost\u0159ed\u00ED Erika Fashion \u2014 st\u0159edn\u011B velk\u00E9 \u010Desk\u00E9 zna\u010Dky specializovan\u00E9 na \u0161aty a d\u00E1msk\u00E9 obl\u00E9\u010Den\u00ED.',
+        'Pozn.: Vynech\u00E1ny jsou shein.com, sinsay.com, reserved.com, mohito.com (mezin\u00E1rodn\u00ED) a bonprix.cz, aboutyou.cz, zalando.cz (t\u0159i nejsiln\u011Bj\u0161\u00ED \u010Desk\u00E9 dom\u00E9ny).',
         buildFindings1CZ()
     );
 
@@ -1002,7 +1006,7 @@ function buildGoogleTrendsSection() {
 
 function buildFindingsGT() {
     return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED \u2014 Google Trends</div><ol>' +
-        '<li>Shein a Sinsay dominuj\u00ED z\u00E1jem s absolutn\u011B nejvy\u0161\u0161\u00EDmi hodnotami \u2014 skute\u010Dn\u00FD brand interest v \u010CR, nez\u00E1visl\u00FD na SEO vlivu.</li>' +
+        '<li>Shein a Sinsay dominuj\u00ED z\u00E1jem s absolutn\u011B nejvy\u0161\u0161\u00EDmi hodnotami \u2014 skute\u010Dn\u00FD brand interest v \u010CR.</li>' +
         '<li>Erika Fashion m\u00E1 v Google Trends stabiln\u011B n\u00EDzkou hodnotu (0\u20132 bodu) \u2014 typick\u00E9 pro st\u0159edn\u011B velkou \u010Deskou zna\u010Dku v\u016F\u010Di mezin\u00E1rodn\u00EDm obr\u016Fm.</li>' +
         '<li>Zalando dlouhodob\u011B klesaj\u00EDc\u00ED z\u00E1jem \u2014 potvrzuje trend z Ahrefs dat o odlivu popt\u00E1vky.</li>' +
         '<li>Reserved a Bonprix maj\u00ED vzorec siln\u00FDch Q4 \u0161pi\u010Dek \u2014 sezonn\u00ED prodejny z\u00E1visl\u00E9 na V\u00E1no\u010Dn\u00EDch n\u00E1kupech.</li>' +
@@ -1036,14 +1040,14 @@ function buildFindings1() {
 }
 
 function buildFindings1CZ() {
-    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED \u2014 \u010Cesk\u00E9 dom\u00E9ny</div><ol>' +
-        '<li>Bez mezin\u00E1rodn\u00EDch obr\u016F je About You absolutn\u00EDm l\u00EDdrem s 42 % pod\u00EDlu, ale kles\u00E1 z p\u016Fvodn\u00EDch 45 %.</li>' +
-        '<li>Erika Fashion je 5. nejv\u011Bt\u0161\u00ED zna\u010Dkou v \u010Desk\u00E9 konkuren\u010Dn\u00ED skupin\u011B s pod\u00EDlem 4,8 % \u2014 m\u00EDrn\u00FD r\u016Fst z 4,0 % p\u0159ed 2 lety.</li>' +
-        '<li>Bonprix klesl z 26 % na 22 % \u2014 ztrat\u00EDl p\u0159es 4 procentn\u00ED body, coz odpov\u00EDd\u00E1 ztr\u00E1t\u011B ~60 tis\u00EDc hled\u00E1n\u00ED m\u011Bs\u00ED\u010Dn\u011B.</li>' +
-        '<li>Zalando.cz roste z 12 % na 16 % \u2014 jedin\u00FD v\u00FDznamn\u00FD r\u016Fst v top 3 hr\u00E1\u010D\u016F \u010Desk\u00E9 skupiny.</li>' +
-        '<li>Erika Fashion p\u0159edstihla Glami, Orsay i Buga v brandov\u00E9m hled\u00E1n\u00ED \u2014 pro zna\u010Dku bez agresivn\u00ED reklamy siln\u00FD v\u00FDsledek.</li>' +
-        '<li>Orsay kles\u00E1 z 3,3 % na 2,2 % \u2014 nejv\u00FDrazn\u011Bj\u0161\u00ED relativn\u00ED propad mezi etablovan\u00FDmi \u010Desk\u00FDmi zna\u010Dkami.</li>' +
-        '<li>Celkov\u00E1 \u010Desk\u00E1 konkuren\u010Dn\u00ED skupina se zmen\u0161uje \u2014 suma brandov\u00FDch hled\u00E1n\u00ED kles\u00E1 z 560 tis\u00EDc (2024) na 385 tis\u00EDc (2026), pravd\u011Bpodobn\u011B p\u0159esun popt\u00E1vky sm\u011Brem k Sinsay/Shein.</li>' +
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED \u2014 u\u017E\u0161\u00ED \u010Desk\u00E1 konkuren\u010Dn\u00ED skupina</div><ol>' +
+        '<li>Po vylou\u010Den\u00ED t\u0159\u00ED nejsiln\u011Bj\u0161\u00EDch (About You, Bonprix, Zalando) je Lelosi absolutn\u00EDm l\u00EDdrem s t\u00E9m\u011B\u0159 30 % pod\u00EDlu \u2014 dominance v re\u00E1ln\u00E9 konkuren\u010Dn\u00ED skupin\u011B Erika Fashion.</li>' +
+        '<li>Erika Fashion je stabiln\u011B 2. nejv\u011Bt\u0161\u00ED zna\u010Dkou s pod\u00EDlem 22 % \u2014 siln\u00E1 druh\u00E1 pozice, t\u011Bsn\u011B za Lelosi.</li>' +
+        '<li>Orsay propadl z 18,7 % na 11,3 % \u2014 ztr\u00E1ta 7,4 procentn\u00EDch bod\u016F za 2 roky, nejv\u00FDrazn\u011Bj\u0161\u00ED pokles v setu.</li>' +
+        '<li>Buga roste z 10,3 % na 13,3 % \u2014 stabiln\u00ED r\u016Fst \u010Desk\u00E9 zna\u010Dky s hand-made m\u00F3dou, p\u0159edstihla Orsay.</li>' +
+        '<li>Glami si dr\u017E\u00ED stabiln\u00ED pozici kolem 13\u201317 % \u2014 agreg\u00E1torn\u00ED model z\u016Fst\u00E1v\u00E1 relevantn\u00ED v u\u017E\u0161\u00ED \u010Desk\u00E9 konkuren\u010Dn\u00ED skupin\u011B.</li>' +
+        '<li>Erika Fashion v prosinci 2025 m\u011Bla 18 % a v dubnu 2026 u\u017E 22 % \u2014 m\u00EDrn\u00FD r\u016Fst na \u00FAkor Orsay.</li>' +
+        '<li>T\u0159i nejmen\u0161\u00ED zna\u010Dky (BestModa, Blanka Straka, CoolBoutique) dohromady tvo\u0159\u00ED m\u00E9n\u011B ne\u017E 2 % \u2014 pod\u00EDly prakticky zanedbateln\u00E9, ale trend zaslou\u017E\u00ED sledov\u00E1n\u00ED.</li>' +
     '</ol></div>';
 }
 
@@ -1335,7 +1339,10 @@ function updateCharts() {
 function renderChart1CZ() {
     destroyChart('chart1cz');
     var labels = DATA.dates.map(dateLabel);
+    // CZ competitive set: .cz domains MINUS the 3 biggest (bonprix, aboutyou, zalando)
+    var excludeFromCZ = ['bonprix', 'aboutyou', 'zalando'];
     var czIds = DATA.brands.filter(function(b) {
+        if (excludeFromCZ.indexOf(b.id) !== -1) return false;
         return b.id === 'erikafashion' || (b.domain && b.domain.endsWith('.cz'));
     }).map(function(b) { return b.id; });
     var czBrandSearch = {};
