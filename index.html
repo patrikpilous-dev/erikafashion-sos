@@ -16,8 +16,8 @@
     --text: #1a1a2e;
     --text-sec: #4a5568;
     --text-muted: #9ca3af;
-    --accent: #FF6B35;
-    --accent-dim: rgba(255,107,53,0.08);
+    --accent: #AE821F;
+    --accent-dim: rgba(174,130,31,0.08);
     --blue: #2563eb;
     --blue-dim: rgba(37,99,235,0.08);
     --shadow: 0 1px 3px rgba(0,0,0,0.08);
@@ -55,7 +55,10 @@ body {
     border: 1px solid var(--border);
     padding: 6px 14px;
     border-radius: 0;
-    white-space: nowrap;
+    line-height: 1.5;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* CARDS */
@@ -409,6 +412,15 @@ details .details-content p:last-child { margin-bottom: 0; }
     font-size: 12px;
     color: var(--text-muted);
 }
+.footer-line { margin-bottom: 8px; }
+.footer-line:last-child { margin-bottom: 0; }
+.footer-author { font-size: 13px; color: var(--text-sec); }
+.footer-author a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+.footer-author a:hover { text-decoration: underline; }
 
 /* DOG */
 .dog-caption {
@@ -424,7 +436,8 @@ details .details-content p:last-child { margin-bottom: 0; }
     .container { padding: 0 16px; }
     .card { padding: 20px; }
     .quotes-grid { grid-template-columns: 1fr; }
-    .header-inner { flex-direction: column; align-items: flex-start; }
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .header-badge { font-size: 11px; padding: 8px 12px; width: 100%; }
     .filter-inner { gap: 8px; }
     .brand-chip { font-size: 11px; padding: 3px 8px; }
     .chart-wrap { height: 300px; }
@@ -527,7 +540,7 @@ details .details-content p:last-child { margin-bottom: 0; }
     cursor: pointer;
     transition: background 0.15s;
 }
-.login-form button:hover { background: #e85a24; }
+.login-form button:hover { background: #8c6818; }
 .login-error {
     margin-top: 14px;
     font-size: 13px;
@@ -584,8 +597,8 @@ body.locked > *:not(#loginOverlay):not(script) { display: none !important; }
     <div class="filter-inner" id="filterBar">
         <span class="filter-label">Tier:</span>
         <button class="tier-btn active" data-tier="all">V&#353;ichni</button>
-        <button class="tier-btn" data-tier="12">Tier 1+2</button>
-        <button class="tier-btn" data-tier="1">Jen velc&#237; (Tier 1)</button>
+        <button class="tier-btn" data-tier="12">Velc&#237; + 3</button>
+        <button class="tier-btn" data-tier="1">Jen velc&#237;</button>
         <div class="filter-sep"></div>
         <span class="filter-label">Zna&#269;ky:</span>
         <div id="brandChips"></div>
@@ -802,8 +815,9 @@ function initPage() {
     renderAll();
 
     // Footer
-    document.getElementById('footerText').textContent =
-        'Data: Ahrefs API + Google Search Console + Google Trends + dal\u0161\u00ED obohacen\u00ED dat | Metodika: Share of Search (Les Binet, IPA 2020) | Generov\u00E1no: ' + DATA.lastUpdated;
+    document.getElementById('footerText').innerHTML =
+        '<div class="footer-line">Data: Ahrefs API + Google Search Console + Google Trends + dal\u0161\u00ED obohacen\u00ED dat | Metodika: Share of Search (Les Binet, IPA 2020) | Generov\u00E1no: ' + DATA.lastUpdated + '</div>' +
+        '<div class="footer-line footer-author">Vytvo\u0159il <a href="https://patrikpilous.cz" target="_blank" rel="noopener">Patrik Pilous</a> \u2014 Marketingov\u00FD strat\u00E9g a SEO konzultant</div>';
 }
 
 // ========== FILTER CHIPS ==========
@@ -1535,8 +1549,8 @@ function renderChartGSC() {
                     label: 'Kliky',
                     type: 'bar',
                     data: clicksData,
-                    backgroundColor: 'rgba(255,107,53,0.6)',
-                    borderColor: '#FF6B35',
+                    backgroundColor: 'rgba(174,130,31,0.6)',
+                    borderColor: '#AE821F',
                     borderWidth: 1,
                     yAxisID: 'y',
                     order: 2
