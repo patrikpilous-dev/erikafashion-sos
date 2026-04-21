@@ -449,22 +449,40 @@ details .details-content p:last-child { margin-bottom: 0; }
     background: #f5f6fa;
     z-index: 9999;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: 24px;
+    padding: 48px 24px;
+    overflow-y: auto;
 }
 .login-card {
     background: #fff;
     border: 1px solid var(--border);
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    padding: 48px 40px;
+    padding: 40px 36px;
     width: 100%;
     max-width: 420px;
     text-align: center;
+    margin: auto 0;
 }
+.login-brand {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+.login-brand:hover .login-brand-text { color: #AE821F; }
 .login-logo {
-    height: 48px;
-    margin-bottom: 32px;
+    height: 56px;
+    display: block;
+    margin: 0 auto 10px;
+}
+.login-brand-text {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    transition: color 0.15s;
 }
 .login-title {
     font-size: 18px;
@@ -531,7 +549,10 @@ body.locked > *:not(#loginOverlay):not(script) { display: none !important; }
 <!-- LOGIN OVERLAY -->
 <div id="loginOverlay" class="login-overlay">
     <div class="login-card">
-        <img src="https://www.erikafashion.cz/user/logos/logo-erikafashion.svg" alt="Erika Fashion" class="login-logo">
+        <a href="https://patrikpilous.cz" target="_blank" rel="noopener" class="login-brand">
+            <img src="https://patrikpilous.cz/wp-content/uploads/2021/05/PP212-e1676225077530.png" alt="Patrik Pilous" class="login-logo">
+            <span class="login-brand-text">Patrik Pilous &middot; Marketingov&#253; strat&#233;g a SEO konzultant</span>
+        </a>
         <h2 class="login-title">Share of Search Dashboard</h2>
         <p class="login-subtitle">Pro vstup zadejte p&#345;&#237;stupov&#233; heslo</p>
         <form id="loginForm" class="login-form">
@@ -539,7 +560,6 @@ body.locked > *:not(#loginOverlay):not(script) { display: none !important; }
             <button type="submit">Vstoupit</button>
         </form>
         <p class="login-error" id="loginError" style="display:none">Nespr&#225;vn&#233; heslo. Zkuste to znovu.</p>
-        <p class="login-footer">Dashboard vytvo&#345;il Patrik Pilous &middot; <a href="https://patrikpilous.cz" target="_blank" rel="noopener">patrikpilous.cz</a></p>
     </div>
 </div>
 
@@ -734,6 +754,24 @@ function initLogin() {
 
 initLogin();
 
+// ========== IFRAME AUTORESIZE ==========
+// Notify parent of our height so the parent can resize the iframe.
+// Works with iframe-resizer library or custom listeners on parent side.
+function notifyParentHeight() {
+    if (window.parent === window) return;
+    try {
+        var h = document.documentElement.scrollHeight;
+        window.parent.postMessage({ type: 'sos-resize', height: h }, '*');
+    } catch (e) { /* cross-origin blocked, ignore */ }
+}
+var resizeObserver;
+if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(function() { notifyParentHeight(); });
+    resizeObserver.observe(document.documentElement);
+}
+window.addEventListener('load', notifyParentHeight);
+window.addEventListener('resize', notifyParentHeight);
+
 // ========== INIT ==========
 function loadDashboard() {
 fetch('data/history.json')
@@ -870,7 +908,12 @@ function renderAll() {
         buildFindings4()
     );
 
-    // 6. GSC CHART
+    // 6. GOOGLE TRENDS CHART
+    if (DATA.googleTrends && DATA.googleTrends.brands) {
+        main.innerHTML += buildGoogleTrendsSection();
+    }
+
+    // 7. GSC CHART
     main.innerHTML += buildGSCSection();
 
     // 7. Brand Associations
@@ -910,30 +953,15 @@ function buildIntroCard() {
 
 // ========== METHODOLOGY DETAILS ==========
 function buildMethodologyDetails() {
-    var variants = [
-        {brand:'Erika Fashion', items:[['erikafashion',15000],['erika fashion',3400],['erikafashion.cz',450],['erikafashion recenze',350],['erikafashion \u0161aty',350],['erika fashion recenze',350],['erika italy fashion',150],['erikafashion praha',100],['erika fashion fotky',100],['erika fashion cz',90],['erika fashion \u0161aty',80],['erikafashion obchod',80]]},
-        {brand:'Sinsay', items:[['sinsay',195000]]},
-        {brand:'Shein', items:[['shein',182000]]},
-        {brand:'About You', items:[['about you',160000],['aboutyou',10000]]},
-        {brand:'Reserved', items:[['reserved',115000]]},
-        {brand:'Bonprix', items:[['bonprix',82000]]},
-        {brand:'Zalando', items:[['zalando',60000]]},
-        {brand:'Mohito', items:[['mohito',44000]]},
-        {brand:'Lelosi', items:[['lelosi',24000]]},
-        {brand:'Glami', items:[['glami',14000]]},
-        {brand:'Orsay', items:[['orsay',12000]]},
-        {brand:'Buga', items:[['buga',10000]]},
-        {brand:'Evona', items:[['evona',1700]]},
-        {brand:'MiaDresses', items:[['miadresses',1700]]},
-        {brand:'London Club', items:[['london club',600],['londonclub',70]]},
-        {brand:'CoolBoutique', items:[['coolboutique',600]]},
-        {brand:'BestModa', items:[['bestmoda',150]]},
-        {brand:'Blanka Straka', items:[['blankastraka',100]]}
-    ];
-    var rows = variants.map(function(v) {
-        var parts = v.items.map(function(it) { return it[0] + ' (' + fmtNum(it[1]) + ')'; }).join(', ');
-        return '<tr><td><strong>' + v.brand + '</strong></td><td>' + parts + '</td></tr>';
-    }).join('');
+    var brandMap = {};
+    DATA.brands.forEach(function(b) { brandMap[b.id] = b.label; });
+    var rows = '';
+    DATA.brands.forEach(function(b) {
+        var variants = (DATA.brandVariants && DATA.brandVariants[b.id]) || [];
+        if (variants.length === 0) return;
+        var parts = variants.map(function(v) { return v.kw + ' (' + fmtNum(v.vol) + ')'; }).join(', ');
+        rows += '<tr><td><strong>' + b.label + '</strong></td><td>' + parts + '</td></tr>';
+    });
     return '<details>' +
         '<summary>Metodologie a zdroj dat</summary>' +
         '<div class="details-content">' +
@@ -962,6 +990,28 @@ function buildChartSection(id, title, extraBefore, explanation, note, findings) 
 }
 
 // ========== GSC SECTION ==========
+function buildGoogleTrendsSection() {
+    return '<div class="card">' +
+        '<div class="card-title">Google Trends \u2014 z\u00E1jem o zna\u010Dku (CZ)</div>' +
+        '<div class="info-box">Google Trends ukazuje relativn\u00ED z\u00E1jem o zna\u010Dky na 100-bodov\u00E9 stupnici. Hodnota 100 odpov\u00ED\u0161 t\u00FDdnu s nejvy\u0161\u0161\u00EDm z\u00E1jmem v m\u011B\u0159en\u00E9 skupin\u011B. Jde o klasickou definici Share of Search podle Lese Bineta, postavenou p\u0159\u00EDmo na Google d\u00E1vkov\u00FDch datech (ne odhadech).</div>' +
+        '<div class="info-box note">Data: Google Trends, region \u010CR, t\u00FDdenn\u00ED vzorkov\u00E1n\u00ED. Zna\u010Dky jsou normalizov\u00E1ny pomoc\u00ED ukotven\u00ED na Shein pro mezin\u00E1rodn\u00ED porovnatelnost. Zobrazeno top 12 zna\u010Dek.</div>' +
+        '<div class="chart-wrap"><canvas id="chartGT"></canvas></div>' +
+        buildFindingsGT() +
+    '</div>';
+}
+
+function buildFindingsGT() {
+    return '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED \u2014 Google Trends</div><ol>' +
+        '<li>Shein a Sinsay dominuj\u00ED z\u00E1jem s absolutn\u011B nejvy\u0161\u0161\u00EDmi hodnotami \u2014 skute\u010Dn\u00FD brand interest v \u010CR, nez\u00E1visl\u00FD na SEO vlivu.</li>' +
+        '<li>Erika Fashion m\u00E1 v Google Trends stabiln\u011B n\u00EDzkou hodnotu (0\u20132 bodu) \u2014 typick\u00E9 pro st\u0159edn\u011B velkou \u010Deskou zna\u010Dku v\u016F\u010Di mezin\u00E1rodn\u00EDm obr\u016Fm.</li>' +
+        '<li>Zalando dlouhodob\u011B klesaj\u00EDc\u00ED z\u00E1jem \u2014 potvrzuje trend z Ahrefs dat o odlivu popt\u00E1vky.</li>' +
+        '<li>Reserved a Bonprix maj\u00ED vzorec siln\u00FDch Q4 \u0161pi\u010Dek \u2014 sezonn\u00ED prodejny z\u00E1visl\u00E9 na V\u00E1no\u010Dn\u00EDch n\u00E1kupech.</li>' +
+        '<li>Lelosi zaznamen\u00E1v\u00E1 nejen\u0161\u00ED pom\u011Br k Ahrefs hodnot\u011B \u2014 pom\u011Brn\u011B vy\u0161\u0161\u00ED z\u00E1jem, ne\u017E by naznacovala Ahrefs data.</li>' +
+        '<li>Glami m\u00E1 minim\u00E1ln\u00ED Google Trends sign\u00E1l \u2014 aggreg\u00E1torn\u00ED model se t\u0159\u00EDb\u00ED v brandov\u00E9m vyhled\u00E1v\u00E1n\u00ED, lidi ho nehledaj\u00ED explicitn\u011B jm\u00E9nem.</li>' +
+        '<li>Les Binet: \u201EShare of Search je predikt. 83 % variability tr\u017En\u00EDho pod\u00EDlu\u201D \u2014 Google Trends data jsou origin\u00E1ln\u00ED zdroj t\u00E9to metodiky.</li>' +
+    '</ol></div>';
+}
+
 function buildGSCSection() {
     return '<div class="card">' +
         '<div class="card-title">Google Search Console \u2014 re\u00E1ln\u00E1 data erikafashion.cz</div>' +
@@ -1214,9 +1264,63 @@ function initCharts() {
     renderChart2();
     renderChart3();
     renderChart4();
+    if (DATA.googleTrends && DATA.googleTrends.brands) renderChartGT();
     renderChartGSC();
     renderSnapshotTable();
     renderAssociations();
+}
+
+// CHART GT: Google Trends
+function renderChartGT() {
+    destroyChart('chartGT');
+    var gt = DATA.googleTrends;
+    if (!gt || !gt.brands) return;
+
+    // Use weekly labels converted to month strings for readability
+    var labels = gt.dates.map(function(d) {
+        var parts = d.split('-');
+        var months = ['','leden','unor','brezen','duben','kveten','cerven','cervenec','srpen','zari','rijen','listopad','prosinec'];
+        var m = parseInt(parts[1], 10);
+        return months[m].substr(0,3) + ' ' + parts[0].substr(2,2);
+    });
+
+    // Show only every 4th label to avoid clutter
+    var sparseLabels = labels.map(function(l, i) { return i % 4 === 0 ? l : ''; });
+
+    var visible = getVisibleBrands().filter(function(b) {
+        return gt.brands[b.id];
+    });
+
+    var datasets = visible.map(function(b) {
+        return {
+            label: b.label,
+            data: gt.brands[b.id] || [],
+            borderColor: b.color,
+            backgroundColor: b.color + '18',
+            borderWidth: b.isTarget ? 3 : 1.5,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            tension: 0.3,
+            order: b.isTarget ? 0 : 1
+        };
+    });
+
+    var opts = chartDefaults();
+    opts.plugins.tooltip.callbacks.label = function(ctx) {
+        return ctx.dataset.label + ': ' + ctx.parsed.y;
+    };
+    opts.plugins.tooltip.callbacks.title = function(ctx) {
+        return labels[ctx[0].dataIndex];
+    };
+    opts.scales.y.ticks.callback = function(v) { return v; };
+    opts.scales.y.max = 100;
+    opts.scales.y.min = 0;
+
+    chartInstances['chartGT'] = new Chart(document.getElementById('chartGT'), {
+        type: 'line',
+        data: { labels: sparseLabels, datasets: datasets },
+        options: opts
+    });
 }
 
 function updateCharts() {
