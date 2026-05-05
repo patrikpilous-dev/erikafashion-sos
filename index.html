@@ -748,9 +748,15 @@ function unlock() {
     loadDashboard();
 }
 
+// Sdílený storage key — pokud je uživatel přihlášený přes hub nebo orders dashboard,
+// tato hodnota tu už bude (origin patrikpilous-dev.github.io je společný).
+var SHARED_STORAGE_KEY = 'ef-auth-v1';
+
 function initLogin() {
     document.body.classList.add('locked');
-    if (sessionStorage.getItem('sos-unlocked') === '1') {
+    // Single sign-on: pokud má sdílený hash v localStorage, projde rovnou.
+    if (localStorage.getItem(SHARED_STORAGE_KEY) === ACCESS_HASH ||
+        sessionStorage.getItem('sos-unlocked') === '1') {
         return unlock();
     }
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
@@ -759,7 +765,8 @@ function initLogin() {
         var pass = document.getElementById('loginPassword').value;
         var hash = await sha256(user + ':' + pass);
         if (user === ACCESS_USER && hash === ACCESS_HASH) {
-            sessionStorage.setItem('sos-unlocked', '1');
+            localStorage.setItem(SHARED_STORAGE_KEY, hash);   // sdílený přes všechny dashboardy
+            sessionStorage.setItem('sos-unlocked', '1');      // backwards compat
             unlock();
         } else {
             document.getElementById('loginError').style.display = 'block';
