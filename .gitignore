@@ -1,0 +1,73 @@
+﻿# Ĺ ablona .gitignore pro klientskĂ© projekty
+# Zdroj: C:\Users\patri\.claude\gitignore-projekt.txt
+
+# --- TajemstvĂ­: nikdy do gitu ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+id_rsa*
+*credential*
+*credentials*
+*secret*
+*service-account*.json
+*client_secret*.json
+.mcp.json
+
+# --- KlientskĂˇ osobnĂ­ data: nikdy do gitu ---
+# Git nenĂ­ ĹˇifrovanĂ˝ a repo se jednou bude zĂˇlohovat. OsobnĂ­ Ăşdaje tam nepatĹ™Ă­.
+**/customer-care/
+**/emails.jsonl
+**/emails_*.jsonl
+**/*objednavky*.csv
+**/*orders*.csv
+**/*zakaznici*.csv
+**/*customers*.csv
+**/*kontakty*.csv
+**/*_pii_*
+**/nahravky/
+**/recordings/
+
+# --- ZĂˇvislosti a build ---
+node_modules/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+dist/
+build/
+.next/
+.nuxt/
+.vercel/
+.turbo/
+*.egg-info/
+
+# --- VelkĂ© binĂˇrky a mĂ©dia ---
+*.zip
+*.7z
+*.rar
+*.mp3
+*.mp4
+*.wav
+*.m4a
+*.mov
+*.iso
+
+# --- Logy a doÄŤasnĂ© soubory ---
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# --- OS ---
+Thumbs.db
+desktop.ini
+.DS_Store
+
