@@ -1604,59 +1604,93 @@
   "erikafashion": [
    {
     "kw": "erikafashion",
-    "vol": 15000
+    "vol": 15000,
+    "prev": 15000
    },
    {
     "kw": "erika fashion",
-    "vol": 2400
+    "vol": 2400,
+    "prev": 3400
    },
    {
     "kw": "erika fashion recenze",
-    "vol": 450
+    "vol": 450,
+    "prev": 350
    },
    {
     "kw": "erikafashion šaty",
-    "vol": 400
+    "vol": 400,
+    "prev": 350
    },
    {
     "kw": "erikafashion recenze",
-    "vol": 400
+    "vol": 400,
+    "prev": 350
    },
    {
     "kw": "erika fashion šaty",
-    "vol": 400
+    "vol": 400,
+    "prev": null
+   },
+   {
+    "kw": "erikafashion.cz",
+    "vol": 200,
+    "prev": 450
    },
    {
     "kw": "erikafashion obchod",
-    "vol": 150
+    "vol": 150,
+    "prev": 80
    },
    {
     "kw": "erikafashion vrácení zboží",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "erika fashion vraceni",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "erika italy fashion",
-    "vol": 150
+    "vol": 150,
+    "prev": 150
    },
    {
     "kw": "erikafashion praha",
-    "vol": 150
+    "vol": 150,
+    "prev": 100
    },
    {
     "kw": "erika fashion fotky",
-    "vol": 150
+    "vol": 150,
+    "prev": 100
    },
    {
     "kw": "erika fashion cz",
-    "vol": 100
+    "vol": 100,
+    "prev": 90
    },
    {
     "kw": "erika fashion slevovy kod",
-    "vol": 100
+    "vol": 100,
+    "prev": null
+   },
+   {
+    "kw": "erika fashion saty",
+    "vol": 100,
+    "prev": 80
+   },
+   {
+    "kw": "fashion erika",
+    "vol": 50,
+    "prev": 50
+   },
+   {
+    "kw": "erikafashion.cz recenze",
+    "vol": 20,
+    "prev": 60
    }
   ]
  },
@@ -1664,437 +1698,694 @@
   "erikafashion": [
    {
     "kw": "erika fashion recenze",
-    "vol": 450
+    "vol": 450,
+    "prev": 350
    },
    {
     "kw": "erikafashion šaty",
-    "vol": 400
+    "vol": 400,
+    "prev": 350
    },
    {
     "kw": "erikafashion recenze",
-    "vol": 400
+    "vol": 400,
+    "prev": 350
    },
    {
     "kw": "erika fashion šaty",
-    "vol": 400
+    "vol": 400,
+    "prev": null
    },
    {
     "kw": "erikafashion obchod",
-    "vol": 150
+    "vol": 150,
+    "prev": 80
    },
    {
     "kw": "erikafashion vrácení zboží",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "erika fashion vraceni",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "erika italy fashion",
-    "vol": 150
+    "vol": 150,
+    "prev": 150
+   },
+   {
+    "kw": "erika fashion fotky",
+    "vol": 150,
+    "prev": 100
+   },
+   {
+    "kw": "erikafashion praha",
+    "vol": 150,
+    "prev": 100
+   },
+   {
+    "kw": "erika fashion saty",
+    "vol": 100,
+    "prev": 80
    }
   ],
   "sinsay": [
    {
     "kw": "sinsay cz",
-    "vol": 15000
+    "vol": 15000,
+    "prev": 15000
    },
    {
     "kw": "sinsay brno",
-    "vol": 2900
+    "vol": 2900,
+    "prev": null
    },
    {
     "kw": "sinsay eshop cz",
-    "vol": 2500
+    "vol": 2500,
+    "prev": null
    },
    {
     "kw": "sinsay praha",
-    "vol": 2200
+    "vol": 2200,
+    "prev": 2200
    },
    {
     "kw": "sinsay prodejny",
-    "vol": 2000
+    "vol": 2000,
+    "prev": null
    },
    {
     "kw": "sinsay plzeň",
-    "vol": 1700
+    "vol": 1700,
+    "prev": null
    },
    {
     "kw": "sinsay ostrava",
-    "vol": 1500
+    "vol": 1500,
+    "prev": null
    },
    {
     "kw": "sinsay pardubice",
-    "vol": 1500
+    "vol": 1500,
+    "prev": null
+   },
+   {
+    "kw": "sinsay recenze",
+    "vol": 700,
+    "prev": 600
+   },
+   {
+    "kw": "sinsay eshop",
+    "vol": 600,
+    "prev": 600
+   },
+   {
+    "kw": "sinsay saty",
+    "vol": 400,
+    "prev": 400
+   },
+   {
+    "kw": "sinsay sleva",
+    "vol": 350,
+    "prev": 450
    }
   ],
   "shein": [
    {
+    "kw": "shein cz",
+    "vol": 23000,
+    "prev": 27000
+   },
+   {
     "kw": "e-shop shein",
-    "vol": 1400
+    "vol": 1400,
+    "prev": null
    },
    {
     "kw": "shein kupon",
-    "vol": 900
+    "vol": 900,
+    "prev": 600
    },
    {
     "kw": "shein šaty",
-    "vol": 900
+    "vol": 900,
+    "prev": null
    },
    {
     "kw": "shein recenze",
-    "vol": 700
+    "vol": 700,
+    "prev": 1100
    },
    {
     "kw": "shein clo",
-    "vol": 600
+    "vol": 600,
+    "prev": null
    },
    {
     "kw": "shein slevové kódy",
-    "vol": 600
+    "vol": 600,
+    "prev": null
    },
    {
     "kw": "shein shop",
-    "vol": 500
+    "vol": 500,
+    "prev": null
+   },
+   {
+    "kw": "shein sleva",
+    "vol": 200,
+    "prev": 150
+   },
+   {
+    "kw": "shein saty",
+    "vol": 100,
+    "prev": 150
+   },
+   {
+    "kw": "shein doprava",
+    "vol": 50,
+    "prev": 80
    }
   ],
   "aboutyou": [
    {
     "kw": "about you slevový kod",
-    "vol": 3700
+    "vol": 3700,
+    "prev": null
    },
    {
     "kw": "about you sleva",
-    "vol": 3500
+    "vol": 3500,
+    "prev": 3800
    },
    {
     "kw": "about you outlet",
-    "vol": 1400
+    "vol": 1400,
+    "prev": null
    },
    {
     "kw": "slevovy kod aboutyou",
-    "vol": 1300
+    "vol": 1300,
+    "prev": null
    },
    {
     "kw": "about you slevovy kod",
-    "vol": 1100
+    "vol": 1100,
+    "prev": null
    },
    {
     "kw": "slevový kupon about you",
-    "vol": 900
+    "vol": 900,
+    "prev": null
+   },
+   {
+    "kw": "about you recenze",
+    "vol": 600,
+    "prev": 600
+   },
+   {
+    "kw": "about you kupon",
+    "vol": 400,
+    "prev": 450
+   },
+   {
+    "kw": "aboutyou sleva",
+    "vol": 350,
+    "prev": 500
+   },
+   {
+    "kw": "about you vraceni",
+    "vol": 80,
+    "prev": 300
    }
   ],
   "bonprix": [
    {
     "kw": "bonprix cz",
-    "vol": 4700
+    "vol": 4700,
+    "prev": null
    },
    {
     "kw": "bonprix sleva",
-    "vol": 2800
+    "vol": 2800,
+    "prev": 2900
    },
    {
     "kw": "www bonprix cz",
-    "vol": 2300
+    "vol": 2300,
+    "prev": null
    },
    {
     "kw": "bonprix doprava zdarma",
-    "vol": 2100
+    "vol": 2100,
+    "prev": null
    },
    {
     "kw": "bonprix online shop",
-    "vol": 1600
+    "vol": 1600,
+    "prev": null
    },
    {
     "kw": "bonprix šaty",
-    "vol": 1600
+    "vol": 1600,
+    "prev": null
    },
    {
     "kw": "bonprix eshop",
-    "vol": 1200
+    "vol": 1200,
+    "prev": null
    },
    {
     "kw": "bonprix slevový kod",
-    "vol": 900
+    "vol": 900,
+    "prev": null
+   },
+   {
+    "kw": "bonprix katalog",
+    "vol": 450,
+    "prev": 500
+   },
+   {
+    "kw": "bonprix saty",
+    "vol": 350,
+    "prev": 350
+   },
+   {
+    "kw": "bonprix recenze",
+    "vol": 350,
+    "prev": 300
+   },
+   {
+    "kw": "bonprix kupon",
+    "vol": 80,
+    "prev": 80
    }
   ],
   "zalando": [
    {
     "kw": "zalando lounge",
-    "vol": 38000
+    "vol": 38000,
+    "prev": null
    },
    {
     "kw": "zalando slevový kod",
-    "vol": 4500
+    "vol": 4500,
+    "prev": null
    },
    {
     "kw": "zalando lounge slevový kód",
-    "vol": 3500
+    "vol": 3500,
+    "prev": null
    },
    {
     "kw": "zalando slevovy kod",
-    "vol": 2700
+    "vol": 2700,
+    "prev": null
    },
    {
     "kw": "zalando sleva",
-    "vol": 1900
+    "vol": 1900,
+    "prev": 2500
    },
    {
     "kw": "zalando lounge doprava zdarma",
-    "vol": 1800
+    "vol": 1800,
+    "prev": null
    },
    {
     "kw": "zalando slevový kód 20",
-    "vol": 1600
+    "vol": 1600,
+    "prev": null
    },
    {
     "kw": "slevové kódy zalando",
-    "vol": 1400
+    "vol": 1400,
+    "prev": null
+   },
+   {
+    "kw": "zalando recenze",
+    "vol": 1000,
+    "prev": 1000
+   },
+   {
+    "kw": "zalando cz",
+    "vol": 800,
+    "prev": 500
+   },
+   {
+    "kw": "zalando kupon",
+    "vol": 500,
+    "prev": 500
+   },
+   {
+    "kw": "zalando vraceni",
+    "vol": 300,
+    "prev": 400
    }
   ],
   "mohito": [
    {
     "kw": "mohito cz",
-    "vol": 6300
+    "vol": 6300,
+    "prev": 5300
    },
    {
     "kw": "mohito šaty",
-    "vol": 2900
+    "vol": 2900,
+    "prev": null
    },
    {
     "kw": "mohito eshop",
-    "vol": 700
+    "vol": 700,
+    "prev": 1100
    },
    {
     "kw": "mohito praha",
-    "vol": 700
+    "vol": 700,
+    "prev": null
    },
    {
     "kw": "mohito saty",
-    "vol": 600
+    "vol": 600,
+    "prev": 600
    },
    {
     "kw": "mohito brno",
-    "vol": 500
+    "vol": 500,
+    "prev": null
    },
    {
     "kw": "mohito kabelky",
-    "vol": 400
+    "vol": 400,
+    "prev": null
    },
    {
     "kw": "mohito výprodej",
-    "vol": 400
+    "vol": 400,
+    "prev": null
+   },
+   {
+    "kw": "mohito sleva",
+    "vol": 150,
+    "prev": 250
+   },
+   {
+    "kw": "mohito recenze",
+    "vol": 90,
+    "prev": 150
    }
   ],
   "lelosi": [
    {
     "kw": "lelosi cz",
-    "vol": 2100
+    "vol": 2100,
+    "prev": null
    },
    {
     "kw": "lelosi vrácení zboží",
-    "vol": 1200
+    "vol": 1200,
+    "prev": null
    },
    {
     "kw": "lelosi sleva",
-    "vol": 450
+    "vol": 450,
+    "prev": 600
    },
    {
     "kw": "lelosi akce 2+1",
-    "vol": 300
+    "vol": 300,
+    "prev": null
    },
    {
     "kw": "lelosi akce",
-    "vol": 300
+    "vol": 300,
+    "prev": null
    },
    {
     "kw": "lelosi recenze",
-    "vol": 200
+    "vol": 200,
+    "prev": 250
    },
    {
     "kw": "lelosi leginy",
-    "vol": 200
+    "vol": 200,
+    "prev": null
    },
    {
     "kw": "lelosi slevovy kod",
-    "vol": 150
+    "vol": 150,
+    "prev": null
+   },
+   {
+    "kw": "lelosi eshop",
+    "vol": 10,
+    "prev": 20
    }
   ],
   "reserved": [
    {
     "kw": "reserved eshop",
-    "vol": 6600
+    "vol": 6600,
+    "prev": 5900
    },
    {
     "kw": "reserved šaty",
-    "vol": 2700
+    "vol": 2700,
+    "prev": null
    },
    {
     "kw": "reserved praha",
-    "vol": 2000
+    "vol": 2000,
+    "prev": 2000
    },
    {
     "kw": "reserved brno",
-    "vol": 1200
+    "vol": 1200,
+    "prev": null
    },
    {
     "kw": "reserved sleva",
-    "vol": 900
+    "vol": 900,
+    "prev": 1000
    },
    {
     "kw": "reserved vrácení zboží",
-    "vol": 900
+    "vol": 900,
+    "prev": null
    },
    {
     "kw": "reserved prodejny",
-    "vol": 900
+    "vol": 900,
+    "prev": null
    },
    {
     "kw": "reserved cz",
-    "vol": 800
+    "vol": 800,
+    "prev": 800
+   },
+   {
+    "kw": "reserved saty",
+    "vol": 450,
+    "prev": 450
+   },
+   {
+    "kw": "reserved recenze",
+    "vol": 100,
+    "prev": 100
    }
   ],
   "glami": [
    {
     "kw": "glami cz",
-    "vol": 700
+    "vol": 700,
+    "prev": null
    },
    {
     "kw": "glami recenze",
-    "vol": 250
+    "vol": 250,
+    "prev": 350
    },
    {
     "kw": "glami obuv",
-    "vol": 200
+    "vol": 200,
+    "prev": null
    },
    {
     "kw": "glami kabelky",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "glami boty",
-    "vol": 150
+    "vol": 150,
+    "prev": 150
    },
    {
     "kw": "glami eshop",
-    "vol": 100
+    "vol": 100,
+    "prev": null
    },
    {
     "kw": "glami plavky",
-    "vol": 70
+    "vol": 70,
+    "prev": null
    },
    {
     "kw": "glami cz slevy",
-    "vol": 50
+    "vol": 50,
+    "prev": null
+   },
+   {
+    "kw": "glami saty",
+    "vol": 30,
+    "prev": 20
    }
   ],
   "orsay": [
    {
     "kw": "orsay šaty",
-    "vol": 1600
+    "vol": 1600,
+    "prev": null
    },
    {
     "kw": "orsay eshop",
-    "vol": 1600
+    "vol": 1600,
+    "prev": 1700
    },
    {
     "kw": "orsay cz",
-    "vol": 800
+    "vol": 800,
+    "prev": null
    },
    {
     "kw": "orsay prodejny",
-    "vol": 350
+    "vol": 350,
+    "prev": null
    },
    {
     "kw": "orsay saty",
-    "vol": 250
+    "vol": 250,
+    "prev": 300
    },
    {
     "kw": "orsay online",
-    "vol": 250
+    "vol": 250,
+    "prev": null
    },
    {
     "kw": "orsay ostrava",
-    "vol": 250
+    "vol": 250,
+    "prev": null
    },
    {
     "kw": "muzeum orsay",
-    "vol": 200
+    "vol": 200,
+    "prev": null
+   },
+   {
+    "kw": "orsay sleva",
+    "vol": 100,
+    "prev": 50
+   },
+   {
+    "kw": "orsay recenze",
+    "vol": 40,
+    "prev": 40
    }
   ],
   "modivo": [
    {
     "kw": "modivo cz",
-    "vol": 1600
+    "vol": 1600,
+    "prev": null
    },
    {
     "kw": "modivo club",
-    "vol": 1400
+    "vol": 1400,
+    "prev": null
    },
    {
     "kw": "modivo recenze",
-    "vol": 1100
+    "vol": 1100,
+    "prev": null
    },
    {
     "kw": "modivo slevový kód",
-    "vol": 1000
+    "vol": 1000,
+    "prev": null
    },
    {
     "kw": "black friday modivo",
-    "vol": 250
+    "vol": 250,
+    "prev": null
    },
    {
     "kw": "modivo club gold",
-    "vol": 200
+    "vol": 200,
+    "prev": null
    },
    {
     "kw": "modivo sleva",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "modivo promo code",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    }
   ],
   "sqvele": [
    {
     "kw": "sqvele recenze",
-    "vol": 70
+    "vol": 70,
+    "prev": null
    },
    {
     "kw": "sqvele saty recenze",
-    "vol": 30
+    "vol": 30,
+    "prev": null
    }
   ],
   "miadresses": [
    {
     "kw": "mia dresses recenze",
-    "vol": 200
+    "vol": 200,
+    "prev": null
    },
    {
     "kw": "miadresses cz",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "miadresses recenze",
-    "vol": 150
+    "vol": 150,
+    "prev": null
    },
    {
     "kw": "mia dresses cz",
-    "vol": 90
+    "vol": 90,
+    "prev": null
    },
    {
     "kw": "miadresses vrácení zboží",
-    "vol": 40
+    "vol": 40,
+    "prev": null
    },
    {
     "kw": "miadresses slevový kód",
-    "vol": 40
+    "vol": 40,
+    "prev": null
    },
    {
     "kw": "mia dresses slevový kod",
-    "vol": 30
+    "vol": 30,
+    "prev": null
    }
   ]
  },
@@ -4456,6 +4747,8 @@
    }
   ],
   "snapshotColumns": true,
+  "snapshotNote": "Pod každým číslem je změna proti dubnovému měření. Hledání je průměr 12 měsíců do dubna 2026, přepočítaný stejným způsobem, aby šel srovnat. Stav domén je snímek z 19. 4. proti 30. 10., návštěvnost je proto ovlivněná sezónou a změnou modelu Ahrefs.",
+  "assocNote": "Hledanost za měsíc podle Ahrefs, duben proti dnešku. Pomlčka znamená, že dotaz v dubnovém výběru nebyl, ne že ho nikdo nehledal. Objemy jsou zaokrouhlené, malé změny neberte vážně.",
   "czSet": [
    "erikafashion",
    "lelosi",
@@ -4472,6 +4765,7 @@
   ],
   "snapshotFindings": [
    "Erika Fashion má 5 999 klíčových slov v ČR proti 4 473 v dubnu a 3 157 v top 3 proti 2 023. To je +56 % za půl roku.",
+   "Erika je v hledání na 10. místě, stejně jako v dubnu. Modivo si prohodilo pozici s Lelosi a About You předběhl Shein.",
    "Doménová autorita Eriky je 43, u přímých konkurentů v šatech 11 (MiaDresses), 13 (Blanka Straka), 15 (Lelosi) a 18 (Sqvele)."
   ],
   "method": [
@@ -4632,7 +4926,8 @@
     "prev": 19.14,
     "yoy": 5.7,
     "gtYoy": 12.8,
-    "avg": 208270
+    "avg": 208270,
+    "apr": 20.32
    },
    {
     "id": "aboutyou",
@@ -4640,7 +4935,8 @@
     "prev": 17.58,
     "yoy": 8.1,
     "gtYoy": 6.1,
-    "avg": 195540
+    "avg": 195540,
+    "apr": 18.86
    },
    {
     "id": "shein",
@@ -4648,7 +4944,8 @@
     "prev": 22.6,
     "yoy": -27.4,
     "gtYoy": -28.1,
-    "avg": 168740
+    "avg": 168740,
+    "apr": 19.86
    },
    {
     "id": "reserved",
@@ -4656,7 +4953,8 @@
     "prev": 11.04,
     "yoy": 5.4,
     "gtYoy": 7.0,
-    "avg": 119737
+    "avg": 119737,
+    "apr": 11.79
    },
    {
     "id": "bonprix",
@@ -4664,7 +4962,8 @@
     "prev": 8.71,
     "yoy": -4.4,
     "gtYoy": 14.6,
-    "avg": 85695
+    "avg": 85695,
+    "apr": 8.49
    },
    {
     "id": "zalando",
@@ -4672,7 +4971,8 @@
     "prev": 6.2,
     "yoy": -3.0,
     "gtYoy": -2.7,
-    "avg": 61899
+    "avg": 61899,
+    "apr": 6.29
    },
    {
     "id": "mohito",
@@ -4680,7 +4980,8 @@
     "prev": 4.21,
     "yoy": -10.5,
     "gtYoy": -5.2,
-    "avg": 38728
+    "avg": 38728,
+    "apr": 3.99
    },
    {
     "id": "modivo",
@@ -4688,7 +4989,8 @@
     "prev": 1.82,
     "yoy": 24.1,
     "gtYoy": 44.0,
-    "avg": 23304
+    "avg": 23304,
+    "apr": 2.22
    },
    {
     "id": "lelosi",
@@ -4696,7 +4998,8 @@
     "prev": 2.46,
     "yoy": -13.5,
     "gtYoy": -9.0,
-    "avg": 21928
+    "avg": 21928,
+    "apr": 2.36
    },
    {
     "id": "erikafashion",
@@ -4704,7 +5007,8 @@
     "prev": 2.13,
     "yoy": -10.4,
     "gtYoy": 39.1,
-    "avg": 19641
+    "avg": 19641,
+    "apr": 2.05
    },
    {
     "id": "orsay",
@@ -4712,7 +5016,8 @@
     "prev": 1.33,
     "yoy": -9.3,
     "gtYoy": -13.2,
-    "avg": 12447
+    "avg": 12447,
+    "apr": 1.22
    },
    {
     "id": "buga",
@@ -4720,7 +5025,8 @@
     "prev": 1.05,
     "yoy": 4.3,
     "gtYoy": 3.3,
-    "avg": 11252
+    "avg": 11252,
+    "apr": 1.1
    },
    {
     "id": "glami",
@@ -4728,7 +5034,8 @@
     "prev": 0.88,
     "yoy": -40.1,
     "gtYoy": -37.3,
-    "avg": 5400
+    "avg": 5400,
+    "apr": 0.68
    },
    {
     "id": "miadresses",
@@ -4736,7 +5043,8 @@
     "prev": 0.38,
     "yoy": -25.3,
     "gtYoy": null,
-    "avg": 2919
+    "avg": 2919,
+    "apr": 0.31
    },
    {
     "id": "evona",
@@ -4744,7 +5052,8 @@
     "prev": 0.15,
     "yoy": 7.3,
     "gtYoy": null,
-    "avg": 1616
+    "avg": 1616,
+    "apr": 0.16
    },
    {
     "id": "sqvele",
@@ -4752,7 +5061,8 @@
     "prev": 0.14,
     "yoy": -11.8,
     "gtYoy": null,
-    "avg": 1293
+    "avg": 1293,
+    "apr": 0.13
    },
    {
     "id": "coolboutique",
@@ -4760,7 +5070,8 @@
     "prev": 0.06,
     "yoy": 9.6,
     "gtYoy": null,
-    "avg": 664
+    "avg": 664,
+    "apr": 0.05
    },
    {
     "id": "londonclub",
@@ -4768,7 +5079,8 @@
     "prev": 0.06,
     "yoy": -4.5,
     "gtYoy": null,
-    "avg": 607
+    "avg": 607,
+    "apr": 0.06
    },
    {
     "id": "blankastraka",
@@ -4776,7 +5088,8 @@
     "prev": 0.03,
     "yoy": -1.4,
     "gtYoy": null,
-    "avg": 316
+    "avg": 316,
+    "apr": 0.03
    },
    {
     "id": "bestmoda",
@@ -4784,7 +5097,8 @@
     "prev": 0.02,
     "yoy": 0.5,
     "gtYoy": null,
-    "avg": 177
+    "avg": 177,
+    "apr": 0.02
    }
   ],
   "triFindings": [
@@ -4847,6 +5161,15 @@
     "effort": "Malá"
    },
    {
+    "prio": "Střední",
+    "area": "AI viditelnost",
+    "title": "Dostat Eriku do odpovědí ChatGPT",
+    "why": "V citacích AI má Erika 9,5 % proti 2,0 % v hledání a v AI Overviews je 2. ze 20. V ChatGPT ale jen 11 citací a 11. místo, od dubna pokles ze 75. Vedou tam Zalando, Shein a About You. Vzorek Ahrefs se mění, proto to berte jako signál k ověření.",
+    "what": "Spustit 76 připravených promptů v Marketing Mineru, ať je vidět podíl hlasu i bez odkazu. Podívat se, které zdroje ChatGPT u dotazů na šaty cituje, a na ty se dostat přes články, srovnání a PR. Texty, které citují AI Overviews, nerozbíjet.",
+    "measure": "Podíl na citacích v ChatGPT a viditelnost v promptech po 3 měsících měření, záložka AI odpovědi.",
+    "effort": "Střední"
+   },
+   {
     "prio": "Sledovat",
     "area": "Konkurence",
     "title": "Hlídat Modivo a jeho věrnostní program",
@@ -4887,6 +5210,781 @@
     "label": "Marketing Week, 83 % podílu na trhu",
     "url": "https://www.marketingweek.com/share-of-search-market-share/"
    }
+  ],
+  "sinceApril": [
+   {
+    "m": "Průměrné hledání značky za měsíc (12 měsíců, Ahrefs)",
+    "a": "20 523",
+    "n": "19 641",
+    "d": "−4 %"
+   },
+   {
+    "m": "Podíl na hledání, všechny značky (12 měsíců)",
+    "a": "2,05 %",
+    "n": "2,00 %",
+    "d": "−0,05 p. b."
+   },
+   {
+    "m": "Podíl na hledání, užší česká skupina (12 měsíců)",
+    "a": "25,1 %",
+    "n": "25,1 %",
+    "d": "0,0 p. b."
+   },
+   {
+    "m": "Kliky z Google za 12 měsíců (Search Console)",
+    "a": "413 108",
+    "n": "466 400",
+    "d": "+13 %"
+   },
+   {
+    "m": "Odhad organické návštěvnosti ČR (Ahrefs, sezónní)",
+    "a": "91 468",
+    "n": "134 217",
+    "d": "+47 %"
+   },
+   {
+    "m": "Klíčová slova v ČR (Ahrefs)",
+    "a": "4 473",
+    "n": "5 999",
+    "d": "+34 %"
+   },
+   {
+    "m": "Klíčová slova v top 3 (Ahrefs)",
+    "a": "2 023",
+    "n": "3 157",
+    "d": "+56 %"
+   },
+   {
+    "m": "Podíl na citacích v AI odpovědích (Ahrefs)",
+    "a": "11,5 %",
+    "n": "9,5 %",
+    "d": "−2,1 p. b."
+   }
+  ],
+  "brandGsc": {
+   "months": [
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09"
+   ],
+   "clicks": [
+    3341,
+    2973,
+    3299,
+    3027,
+    4100,
+    3499,
+    5221,
+    4038,
+    3639,
+    3195,
+    4980,
+    5626,
+    5264,
+    4534,
+    3645
+   ],
+   "impressions": [
+    56863,
+    50796,
+    58933,
+    52465,
+    55477,
+    49110,
+    83353,
+    55056,
+    54996,
+    52128,
+    76111,
+    79689,
+    69856,
+    62646,
+    55234
+   ],
+   "ctr": [
+    5.88,
+    5.85,
+    5.6,
+    5.77,
+    7.39,
+    7.12,
+    6.26,
+    7.33,
+    6.62,
+    6.13,
+    6.54,
+    7.06,
+    7.54,
+    7.24,
+    6.6
+   ],
+   "position": [
+    2.1,
+    2.12,
+    2.29,
+    2.17,
+    1.91,
+    2.11,
+    1.78,
+    1.83,
+    1.97,
+    1.93,
+    1.79,
+    1.68,
+    1.78,
+    1.82,
+    1.88
+   ]
+  },
+  "brandFindings": [
+   "Za červenec až září 2026 přišlo z brandových dotazů 13 443 kliků proti 9 613 o rok dřív (+40 %). Zobrazení vyrostla z 166 592 na 187 736 (+13 %).",
+   "Kliky rostou rychleji než zobrazení, protože proklikovost se zvedla z 5,8 % na 7,2 %. Část zobrazení z léta 2025 je ale nafouknutá starým měřením, Google omezil zobrazení na nízkých pozicích až v září 2025.",
+   "Nejsilnější měsíc byl červen 2026 s 5 626 kliky a 79 689 zobrazeními. Brandové dotazy tvoří 11,6 % všech kliků z Google.",
+   "Jde jen o organické výsledky, kliky na placenou reklamu tu nejsou. Započítané jsou všechny dotazy se slovem erika, tedy i vrácení zboží, recenze a jméno zakladatelky. Search Console drží data jen 16 měsíců, proto graf začíná červencem 2025."
+  ]
+ },
+ "aprCompare": {
+  "erikafashion": {
+   "avgApr": 20523,
+   "shareApr": 2.05,
+   "rankApr": 10,
+   "snap": {
+    "orgTraffic": 91468,
+    "orgKeywords": 4473,
+    "orgKeywords1_3": 2023
+   }
+  },
+  "sinsay": {
+   "avgApr": 203040,
+   "shareApr": 20.32,
+   "rankApr": 1,
+   "snap": {
+    "orgTraffic": 295313,
+    "orgKeywords": 3192,
+    "orgKeywords1_3": 839
+   }
+  },
+  "shein": {
+   "avgApr": 198502,
+   "shareApr": 19.86,
+   "rankApr": 2,
+   "snap": {
+    "orgTraffic": 220588,
+    "orgKeywords": 350,
+    "orgKeywords1_3": 246
+   }
+  },
+  "aboutyou": {
+   "avgApr": 188538,
+   "shareApr": 18.86,
+   "rankApr": 3,
+   "snap": {
+    "orgTraffic": 155576,
+    "orgKeywords": 12111,
+    "orgKeywords1_3": null
+   }
+  },
+  "reserved": {
+   "avgApr": 117796,
+   "shareApr": 11.79,
+   "rankApr": 4,
+   "snap": {
+    "orgTraffic": 174926,
+    "orgKeywords": 3114,
+    "orgKeywords1_3": 833
+   }
+  },
+  "bonprix": {
+   "avgApr": 84815,
+   "shareApr": 8.49,
+   "rankApr": 5,
+   "snap": {
+    "orgTraffic": 123867,
+    "orgKeywords": 2656,
+    "orgKeywords1_3": null
+   }
+  },
+  "zalando": {
+   "avgApr": 62892,
+   "shareApr": 6.29,
+   "rankApr": 6,
+   "snap": {
+    "orgTraffic": 460920,
+    "orgKeywords": 29703,
+    "orgKeywords1_3": 12673
+   }
+  },
+  "mohito": {
+   "avgApr": 39902,
+   "shareApr": 3.99,
+   "rankApr": 7,
+   "snap": {
+    "orgTraffic": 89853,
+    "orgKeywords": 2027,
+    "orgKeywords1_3": 474
+   }
+  },
+  "lelosi": {
+   "avgApr": 23564,
+   "shareApr": 2.36,
+   "rankApr": 8,
+   "snap": {
+    "orgTraffic": 29678,
+    "orgKeywords": 316,
+    "orgKeywords1_3": 129
+   }
+  },
+  "glami": {
+   "avgApr": 6747,
+   "shareApr": 0.68,
+   "rankApr": 13,
+   "snap": {
+    "orgTraffic": 142386,
+    "orgKeywords": 28487,
+    "orgKeywords1_3": null
+   }
+  },
+  "orsay": {
+   "avgApr": 12198,
+   "shareApr": 1.22,
+   "rankApr": 11,
+   "snap": {
+    "orgTraffic": 36711,
+    "orgKeywords": 1616,
+    "orgKeywords1_3": null
+   }
+  },
+  "buga": {
+   "avgApr": 11039,
+   "shareApr": 1.1,
+   "rankApr": 12,
+   "snap": {
+    "orgTraffic": 18454,
+    "orgKeywords": 238,
+    "orgKeywords1_3": 82
+   }
+  },
+  "evona": {
+   "avgApr": 1571,
+   "shareApr": 0.16,
+   "rankApr": 15,
+   "snap": {
+    "orgTraffic": 30686,
+    "orgKeywords": 1303,
+    "orgKeywords1_3": 523
+   }
+  },
+  "miadresses": {
+   "avgApr": 3100,
+   "shareApr": 0.31,
+   "rankApr": 14,
+   "snap": {
+    "orgTraffic": 9772,
+    "orgKeywords": 792,
+    "orgKeywords1_3": null
+   }
+  },
+  "londonclub": {
+   "avgApr": 616,
+   "shareApr": 0.06,
+   "rankApr": 17,
+   "snap": {
+    "orgTraffic": 6933,
+    "orgKeywords": 1631,
+    "orgKeywords1_3": null
+   }
+  },
+  "coolboutique": {
+   "avgApr": 527,
+   "shareApr": 0.05,
+   "rankApr": 18,
+   "snap": {
+    "orgTraffic": 6287,
+    "orgKeywords": 371,
+    "orgKeywords1_3": 151
+   }
+  },
+  "bestmoda": {
+   "avgApr": 174,
+   "shareApr": 0.02,
+   "rankApr": 20,
+   "snap": {
+    "orgTraffic": 5186,
+    "orgKeywords": 363,
+    "orgKeywords1_3": 75
+   }
+  },
+  "blankastraka": {
+   "avgApr": 317,
+   "shareApr": 0.03,
+   "rankApr": 19,
+   "snap": {
+    "orgTraffic": 9771,
+    "orgKeywords": 557,
+    "orgKeywords1_3": 183
+   }
+  },
+  "modivo": {
+   "avgApr": 22230,
+   "shareApr": 2.22,
+   "rankApr": 9,
+   "snap": null
+  },
+  "sqvele": {
+   "avgApr": 1320,
+   "shareApr": 0.13,
+   "rankApr": 16,
+   "snap": null
+  }
+ },
+ "ai": {
+  "lead": "Erika Fashion má 9,5 % citací v AI odpovědích mezi 20 sledovanými značkami a je 5. v pořadí. V hledání má přitom 2,0 %, odpovědi AI ji tedy odkazují 4,7krát častěji, než odpovídá jejímu podílu na hledání. Silná je v AI Overviews, v ChatGPT skoro chybí.",
+  "kpis": [
+   {
+    "label": "Podíl na citacích",
+    "value": "9,5 %",
+    "delta": "−2,1 p. b. od dubna",
+    "note": "v dubnu 11,5 %, 5. místo z 20"
+   },
+   {
+    "label": "Citace celkem",
+    "value": "472",
+    "delta": "−21 % od dubna",
+    "note": "v dubnu 599, šest platforem"
+   },
+   {
+    "label": "AI Overviews",
+    "value": "194",
+    "delta": "2. místo ze 20",
+    "note": "v dubnu 138, podíl 15,7 %"
+   },
+   {
+    "label": "ChatGPT",
+    "value": "11",
+    "delta": "11. místo ze 20",
+    "note": "v dubnu 75, podíl 2,2 %"
+   }
+  ],
+  "brands": [
+   {
+    "id": "glami",
+    "now": 835,
+    "apr": 1002,
+    "shareNow": 16.75,
+    "shareApr": 19.29,
+    "sos": 0.55,
+    "platforms": {
+     "chatgpt": 35,
+     "google_ai_overviews": 109,
+     "google_ai_mode": 44,
+     "gemini": 30,
+     "perplexity": 254,
+     "copilot": 363
+    }
+   },
+   {
+    "id": "modivo",
+    "now": 833,
+    "apr": 855,
+    "shareNow": 16.71,
+    "shareApr": 16.46,
+    "sos": 2.38,
+    "platforms": {
+     "chatgpt": 40,
+     "google_ai_overviews": 199,
+     "google_ai_mode": 77,
+     "gemini": 19,
+     "perplexity": 303,
+     "copilot": 195
+    }
+   },
+   {
+    "id": "aboutyou",
+    "now": 613,
+    "apr": 576,
+    "shareNow": 12.29,
+    "shareApr": 11.09,
+    "sos": 19.95,
+    "platforms": {
+     "chatgpt": 68,
+     "google_ai_overviews": 165,
+     "google_ai_mode": 76,
+     "gemini": 38,
+     "perplexity": 232,
+     "copilot": 34
+    }
+   },
+   {
+    "id": "zalando",
+    "now": 480,
+    "apr": 632,
+    "shareNow": 9.63,
+    "shareApr": 12.17,
+    "sos": 6.32,
+    "platforms": {
+     "chatgpt": 85,
+     "google_ai_overviews": 138,
+     "google_ai_mode": 86,
+     "gemini": 5,
+     "perplexity": 120,
+     "copilot": 46
+    }
+   },
+   {
+    "id": "erikafashion",
+    "now": 472,
+    "apr": 599,
+    "shareNow": 9.47,
+    "shareApr": 11.53,
+    "sos": 2.0,
+    "platforms": {
+     "chatgpt": 11,
+     "google_ai_overviews": 194,
+     "google_ai_mode": 68,
+     "gemini": 5,
+     "perplexity": 107,
+     "copilot": 87
+    }
+   },
+   {
+    "id": "bonprix",
+    "now": 290,
+    "apr": 176,
+    "shareNow": 5.82,
+    "shareApr": 3.39,
+    "sos": 8.74,
+    "platforms": {
+     "chatgpt": 30,
+     "google_ai_overviews": 46,
+     "google_ai_mode": 33,
+     "gemini": 19,
+     "perplexity": 46,
+     "copilot": 116
+    }
+   },
+   {
+    "id": "sinsay",
+    "now": 250,
+    "apr": 196,
+    "shareNow": 5.01,
+    "shareApr": 3.77,
+    "sos": 21.25,
+    "platforms": {
+     "chatgpt": 43,
+     "google_ai_overviews": 63,
+     "google_ai_mode": 33,
+     "gemini": 5,
+     "perplexity": 47,
+     "copilot": 59
+    }
+   },
+   {
+    "id": "reserved",
+    "now": 222,
+    "apr": 113,
+    "shareNow": 4.45,
+    "shareApr": 2.18,
+    "sos": 12.22,
+    "platforms": {
+     "chatgpt": 42,
+     "google_ai_overviews": 51,
+     "google_ai_mode": 36,
+     "gemini": 12,
+     "perplexity": 46,
+     "copilot": 35
+    }
+   },
+   {
+    "id": "shein",
+    "now": 192,
+    "apr": 62,
+    "shareNow": 3.85,
+    "shareApr": 1.19,
+    "sos": 17.22,
+    "platforms": {
+     "chatgpt": 75,
+     "google_ai_overviews": 19,
+     "google_ai_mode": 16,
+     "gemini": 5,
+     "perplexity": 19,
+     "copilot": 58
+    }
+   },
+   {
+    "id": "londonclub",
+    "now": 161,
+    "apr": 200,
+    "shareNow": 3.23,
+    "shareApr": 3.85,
+    "sos": 0.06,
+    "platforms": {
+     "chatgpt": 2,
+     "google_ai_overviews": 40,
+     "google_ai_mode": 11,
+     "gemini": 5,
+     "perplexity": 36,
+     "copilot": 67
+    }
+   },
+   {
+    "id": "blankastraka",
+    "now": 141,
+    "apr": 50,
+    "shareNow": 2.83,
+    "shareApr": 0.96,
+    "sos": 0.03,
+    "platforms": {
+     "chatgpt": 20,
+     "google_ai_overviews": 46,
+     "google_ai_mode": 21,
+     "gemini": 1,
+     "perplexity": 26,
+     "copilot": 27
+    }
+   },
+   {
+    "id": "miadresses",
+    "now": 117,
+    "apr": 203,
+    "shareNow": 2.35,
+    "shareApr": 3.91,
+    "sos": 0.3,
+    "platforms": {
+     "chatgpt": 3,
+     "google_ai_overviews": 37,
+     "google_ai_mode": 27,
+     "gemini": 3,
+     "perplexity": 28,
+     "copilot": 19
+    }
+   },
+   {
+    "id": "mohito",
+    "now": 95,
+    "apr": 115,
+    "shareNow": 1.91,
+    "shareApr": 2.21,
+    "sos": 3.95,
+    "platforms": {
+     "chatgpt": 20,
+     "google_ai_overviews": 27,
+     "google_ai_mode": 15,
+     "gemini": 4,
+     "perplexity": 15,
+     "copilot": 14
+    }
+   },
+   {
+    "id": "evona",
+    "now": 82,
+    "apr": 155,
+    "shareNow": 1.64,
+    "shareApr": 2.98,
+    "sos": 0.16,
+    "platforms": {
+     "chatgpt": 7,
+     "google_ai_overviews": 42,
+     "google_ai_mode": 10,
+     "gemini": 2,
+     "perplexity": 12,
+     "copilot": 9
+    }
+   },
+   {
+    "id": "bestmoda",
+    "now": 77,
+    "apr": 73,
+    "shareNow": 1.54,
+    "shareApr": 1.41,
+    "sos": 0.02,
+    "platforms": {
+     "chatgpt": 6,
+     "google_ai_overviews": 28,
+     "google_ai_mode": 15,
+     "gemini": 2,
+     "perplexity": 16,
+     "copilot": 10
+    }
+   },
+   {
+    "id": "lelosi",
+    "now": 64,
+    "apr": 77,
+    "shareNow": 1.28,
+    "shareApr": 1.48,
+    "sos": 2.24,
+    "platforms": {
+     "chatgpt": 9,
+     "google_ai_overviews": 13,
+     "google_ai_mode": 11,
+     "gemini": 8,
+     "perplexity": 7,
+     "copilot": 16
+    }
+   },
+   {
+    "id": "orsay",
+    "now": 30,
+    "apr": 33,
+    "shareNow": 0.6,
+    "shareApr": 0.64,
+    "sos": 1.27,
+    "platforms": {
+     "chatgpt": 7,
+     "google_ai_overviews": 6,
+     "google_ai_mode": 6,
+     "gemini": 3,
+     "perplexity": 4,
+     "copilot": 4
+    }
+   },
+   {
+    "id": "buga",
+    "now": 23,
+    "apr": 26,
+    "shareNow": 0.46,
+    "shareApr": 0.5,
+    "sos": 1.15,
+    "platforms": {
+     "chatgpt": 3,
+     "google_ai_overviews": 7,
+     "google_ai_mode": 4,
+     "gemini": 3,
+     "perplexity": 2,
+     "copilot": 4
+    }
+   },
+   {
+    "id": "coolboutique",
+    "now": 5,
+    "apr": 42,
+    "shareNow": 0.1,
+    "shareApr": 0.81,
+    "sos": 0.07,
+    "platforms": {
+     "chatgpt": 0,
+     "google_ai_overviews": 2,
+     "google_ai_mode": 0,
+     "gemini": 0,
+     "perplexity": 3,
+     "copilot": 0
+    }
+   },
+   {
+    "id": "sqvele",
+    "now": 4,
+    "apr": 9,
+    "shareNow": 0.08,
+    "shareApr": 0.17,
+    "sos": 0.13,
+    "platforms": {
+     "chatgpt": 0,
+     "google_ai_overviews": 2,
+     "google_ai_mode": 0,
+     "gemini": 1,
+     "perplexity": 1,
+     "copilot": 0
+    }
+   }
+  ],
+  "platforms": [
+   {
+    "p": "chatgpt",
+    "label": "ChatGPT",
+    "now": 11,
+    "apr": 75,
+    "totNow": 506,
+    "totApr": 1089,
+    "shareNow": 2.2,
+    "shareApr": 6.9
+   },
+   {
+    "p": "google_ai_overviews",
+    "label": "AI Overviews",
+    "now": 194,
+    "apr": 138,
+    "totNow": 1234,
+    "totApr": 875,
+    "shareNow": 15.7,
+    "shareApr": 15.8
+   },
+   {
+    "p": "google_ai_mode",
+    "label": "AI Mode",
+    "now": 68,
+    "apr": 179,
+    "totNow": 589,
+    "totApr": 1359,
+    "shareNow": 11.5,
+    "shareApr": 13.2
+   },
+   {
+    "p": "perplexity",
+    "label": "Perplexity",
+    "now": 107,
+    "apr": 171,
+    "totNow": 1324,
+    "totApr": 1394,
+    "shareNow": 8.1,
+    "shareApr": 12.3
+   },
+   {
+    "p": "copilot",
+    "label": "Copilot",
+    "now": 87,
+    "apr": 35,
+    "totNow": 1163,
+    "totApr": 468,
+    "shareNow": 7.5,
+    "shareApr": 7.5
+   },
+   {
+    "p": "gemini",
+    "label": "Gemini",
+    "now": 5,
+    "apr": 1,
+    "totNow": 170,
+    "totApr": 9,
+    "shareNow": 2.9,
+    "shareApr": 11.1
+   }
+  ],
+  "findings": [
+   "Citací ubylo z 599 na 472. Propad je v ChatGPT (75 na 11), AI Mode (179 na 68) a Perplexity (171 na 107), růst v AI Overviews (138 na 194) a Copilotu (35 na 87).",
+   "V AI Overviews je Erika 2. těsně za Modivem (199 citací). Tady má největší dosah, protože AI Overviews se ukazují přímo ve vyhledávání Googlu.",
+   "V ChatGPT má Erika jen 11 citací, 2,2 % sledované skupiny. Vedou Zalando (85), Shein (75) a About You (68).",
+   "V užší české skupině má Erika 23,5 % citací, druhá po Glami (41,5 %). Lelosi, jednička české skupiny v hledání, má jen 3,2 %.",
+   "Největší vzestup mají Shein (1,2 % na 3,9 %) a Reserved (2,2 % na 4,5 %). Glami ztrácí nejvíc (19,3 % na 16,8 %), hlavně kvůli ChatGPT."
+  ],
+  "caveats": [
+   [
+    "Měříme citace, ne zmínky.",
+    "Počítá se, kolikrát odpověď AI odkáže na web značky. Značka zmíněná bez odkazu tu není, skutečný podíl hlasu by dalo až měření vlastních promptů."
+   ],
+   [
+    "Vzorek se mění.",
+    "Ahrefs testuje vlastní sadu dotazů pro ČR a ta se hýbe. Součet za ChatGPT klesl z 1 089 na 506, u Gemini vzrostl z 9 na 170. Proto sledujeme podíly, ne absolutní čísla, a posun o bod nebo dva neberte jako trend."
+   ],
+   [
+    "Citace nejsou návštěvy.",
+    "Citace ukazují dosah, ne návštěvnost ani tržby. Kolik lidí z odpovědí AI opravdu přijde na web, tahle data neříkají."
+   ],
+   [
+    "Co tu chybí.",
+    "Grok v součtu není, v říjnu u Eriky Ahrefs nevrací žádná data (v dubnu 149). 76 připravených promptů v Marketing Mineru zatím do dashboardu nevstupuje."
+   ]
   ]
  }
 }

@@ -24,6 +24,9 @@ Kompetitivní analýza českého fashion trhu pro erikafashion.cz.
 5. **Veřejné repo:** `data/*.json` jde stáhnout i bez hesla. Žádné tržby ani Kč z Ads, jen poměry.
 6. Postup této edice je v `nastroje/` (`vytahni_ze_session.py`, `analyza_2026_10.py`, `sestav_edici_2026_10.py`).
 
+7. **Srovnání s minulou edicí:** hledání porovnávat přes stejný výpis (12 měsíců do data minulé edice), ne proti tehdy zveřejněnému číslu. Stav domén a asociace přímo proti minulé edici (`aprCompare`, `brandAssociations[].prev`). U asociací nutné dotáhnout dnešní objem i pro dotazy z minulého výběru.
+8. **Záložka AI odpovědi:** `site-explorer-ai-responses-count`, `country=CZ`, `mode=subdomains`, parametr `date` jde i zpětně. Součet šesti platforem bez Groku (u Eriky v 10/2026 prázdný), srovnávat podíly, ne absolutní čísla. Brand Radar na plánu není. Skutečný podíl hlasu by dal AI tracker Marketing Mineru přes Chrome, potřebuje přihlášení (76 promptů v `projects\erikafashion\prompty-ai-mereni.md`).
+
 Co zjistila edice 10/2026 o zdrojích:
 - GSC v Ahrefs (projekt 7274954) končí červencem 2026, novější data z Marketing Mineru (`https://www.erikafashion.cz/`), překryv sedí na klik.
 - `site-explorer-metrics-history` s `country=CZ` jde jen dva roky zpět, proto mezinárodní domény od 11/2024.

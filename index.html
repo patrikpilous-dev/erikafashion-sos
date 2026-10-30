@@ -373,10 +373,13 @@ details .details-content p:last-child { margin-bottom: 0; }
 }
 .data-table td:first-child { font-weight: 500; }
 
+.delta { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); white-space: nowrap; margin-top: 1px; }
+.data-table tr.target-row .delta { color: var(--text-sec); }
+
 /* BRAND ASSOCIATIONS */
 .assoc-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 20px;
 }
 .assoc-card {
@@ -406,6 +409,10 @@ details .details-content p:last-child { margin-bottom: 0; }
     font-weight: 600;
     color: var(--text);
 }
+.assoc-card td.muted, .brand-terms-table td.muted { font-weight: 400; color: var(--text-sec); text-align: right; white-space: nowrap; }
+.assoc-card td:not(:first-child) { text-align: right; white-space: nowrap; }
+.assoc-card tr.assoc-head td { font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: right; }
+.assoc-card tr.assoc-head td:first-child { text-align: left; }
 .assoc-card .no-data {
     font-size: 12px;
     color: var(--text-muted);
@@ -417,7 +424,7 @@ details .details-content p:last-child { margin-bottom: 0; }
     width: 100%;
     font-size: 13px;
     border-collapse: collapse;
-    max-width: 500px;
+    max-width: 640px;
 }
 .brand-terms-table th {
     text-align: left;
@@ -433,11 +440,12 @@ details .details-content p:last-child { margin-bottom: 0; }
     border-bottom: 1px solid var(--border);
     color: var(--text-sec);
 }
-.brand-terms-table td:last-child {
+.brand-terms-table td:not(:first-child) {
     text-align: right;
     font-weight: 600;
     color: var(--text);
 }
+.brand-terms-table th:not(:first-child) { text-align: right; }
 
 /* METHODOLOGY GRID */
 .method-grid {
@@ -941,6 +949,8 @@ function openTab(id, byClick) {
             document.querySelectorAll('.tier-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.tier === 'all'); });
             renderFilterChips();
             renderAll();
+        } else if (tab.kind === 'ai') {
+            renderAI();
         } else {
             renderSummary();
         }
@@ -1098,7 +1108,13 @@ function renderSummary() {
         }).join('') + '</div>' +
     '</div>';
 
-    html += '<div class="card"><div class="card-title">Doporučení seřazená podle dopadu</div>' +
+    html += '<div class="card"><div class="card-title">Erika Fashion, duben proti \u0159\u00EDjnu</div>' +
+        '<div style="overflow-x:auto"><table class="data-table" id="aprilTable"><thead><tr><th>Metrika</th><th>Duben 2026</th><th>\u0158\u00EDjen 2026</th><th>Zm\u011Bna</th></tr></thead><tbody>' +
+        S.sinceApril.map(function(r) {
+            return '<tr><td>' + r.m + '</td><td>' + r.a + '</td><td>' + r.n + '</td><td>' + r.d + '</td></tr>';
+        }).join('') + '</tbody></table></div></div>';
+
+    html += '<div class="card"><div class="card-title">Doporu\u010Den\u00ED se\u0159azen\u00E1 podle dopadu</div>' +
         S.recs.map(function(r, i) {
             return '<div class="rec">' +
                 '<div class="rec-head"><span class="rec-no">' + (i + 1) + '</span>' +
@@ -1116,15 +1132,25 @@ function renderSummary() {
         '<div class="chart-wrap"><canvas id="chartTri"></canvas></div>' +
         '<div class="findings"><ol>' + S.triFindings.map(function(t) { return '<li>' + t + '</li>'; }).join('') + '</ol></div></div>';
 
-    html += '<div class="card"><div class="card-title">Kam se přelévá podíl</div>' +
+    html += '<div class="card"><div class="card-title">Brandov\u00E9 dotazy v Search Console</div>' +
+        '<div class="info-box">Zobrazen\u00ED a kliky na dotazy obsahuj\u00EDc\u00ED slovo erika, skute\u010Dn\u00E1 data z Googlu. Ka\u017Ed\u00E1 metrika m\u00E1 vlastn\u00ED graf a osu, m\u011Bs\u00EDce pod sebou sed\u00ED.</div>' +
+        '<div class="chart-label">Zobrazen\u00ED na brandov\u00E9 dotazy za m\u011Bs\u00EDc</div><div class="chart-wrap small"><canvas id="chartBrandImp"></canvas></div>' +
+        '<div class="chart-label">Prokliky z brandov\u00FDch dotaz\u016F za m\u011Bs\u00EDc</div><div class="chart-wrap small"><canvas id="chartBrandClicks"></canvas></div>' +
+        '<details><summary>Tabulka po m\u011Bs\u00EDc\u00EDch</summary><div class="details-content" style="overflow-x:auto"><table class="variants-table"><thead><tr><th>M\u011Bs\u00EDc</th><th>Zobrazen\u00ED</th><th>Kliky</th><th>CTR</th><th>Pozice</th></tr></thead><tbody>' +
+        S.brandGsc.months.map(function(m, i) {
+            return '<tr><td>' + dateLabel(m) + '</td><td>' + fmtNum(S.brandGsc.impressions[i]) + '</td><td>' + fmtNum(S.brandGsc.clicks[i]) + '</td><td>' + fmtPct(S.brandGsc.ctr[i], 1) + '</td><td>' + S.brandGsc.position[i].toFixed(1).replace('.', ',') + '</td></tr>';
+        }).join('') + '</tbody></table></div></details>' +
+        '<div class="findings"><ol>' + S.brandFindings.map(function(t) { return '<li>' + t + '</li>'; }).join('') + '</ol></div></div>';
+
+    html += '<div class="card"><div class="card-title">Kam se p\u0159el\u00E9v\u00E1 pod\u00EDl</div>' +
         '<div class="info-box">Změna podílu na brandovém hledání, 12 měsíců do září 2026 proti předchozím 12, v procentních bodech. Zdroj Ahrefs. Tabulka jde řadit kliknutím na záhlaví.</div>' +
         '<div class="chart-wrap tall"><canvas id="chartMoves"></canvas></div>' +
         '<div style="overflow-x:auto;margin-top:20px"><table class="data-table" id="movesTable"><thead><tr>' +
-            '<th>Značka</th><th>Podíl nyní</th><th>Podíl předtím</th><th>Změna p. b.</th><th>Hledání / měs.</th><th>Hledání, změna</th><th>Trends, změna</th>' +
+            '<th>Zna\u010Dka</th><th>Pod\u00EDl nyn\u00ED</th><th>V dubnu</th><th>Rok p\u0159edt\u00EDm</th><th>Zm\u011Bna za rok, p. b.</th><th>Hledání / měs.</th><th>Hledání, změna</th><th>Trends, změna</th>' +
         '</tr></thead><tbody>' + S.moves.map(function(m) {
             var b = brandById(m.id);
             var d = m.now - m.prev;
-            return '<tr' + (b.isTarget ? ' class="target-row"' : '') + '><td>' + b.label + '</td><td>' + fmtPct(m.now, 2) + '</td><td>' + fmtPct(m.prev, 2) + '</td><td>' + fmtSigned(d, 2) + '</td><td>' + fmtNum(m.avg) + '</td><td>' + fmtSigned(m.yoy, 0) + ' %</td><td>' + (m.gtYoy == null ? '–' : fmtSigned(m.gtYoy, 0) + ' %') + '</td></tr>';
+            return '<tr' + (b.isTarget ? ' class="target-row"' : '') + '><td>' + b.label + '</td><td>' + fmtPct(m.now, 2) + '</td><td>' + fmtPct(m.apr, 2) + '</td><td>' + fmtPct(m.prev, 2) + '</td><td>' + fmtSigned(d, 2) + '</td><td>' + fmtNum(m.avg) + '</td><td>' + fmtSigned(m.yoy, 0) + ' %</td><td>' + (m.gtYoy == null ? '–' : fmtSigned(m.gtYoy, 0) + ' %') + '</td></tr>';
         }).join('') + '</tbody></table></div></div>';
 
     html += '<div class="card"><div class="card-title">Erika má jiný kalendář než trh</div>' +
@@ -1139,6 +1165,7 @@ function renderSummary() {
 
     document.getElementById('mainContent').innerHTML = html;
     renderChartTri();
+    renderChartBrand();
     renderChartMoves();
     renderChartSeason();
     initTableSort('movesTable', false);
@@ -1148,8 +1175,9 @@ function brandById(id) {
     return DATA.brands.filter(function(b) { return b.id === id; })[0];
 }
 function fmtSigned(n, dec) {
-    var s = Math.abs(n).toFixed(dec).replace('.', ',');
-    return (n >= 0 ? '+' : '−') + s;
+    var s = Math.abs(n).toFixed(dec);
+    if (parseFloat(s) === 0) return s.replace('.', ',');
+    return (n >= 0 ? '+' : '−') + s.replace('.', ',');
 }
 
 var endLabelPlugin = {
@@ -1190,6 +1218,97 @@ function renderChartTri() {
         options: opts,
         plugins: small ? [] : [endLabelPlugin]
     });
+}
+
+function renderChartBrand() {
+    var b = DATA.summary.brandGsc;
+    var labels = b.months.map(dateLabel);
+    var mk = function(title) {
+        var o = chartDefaults();
+        o.plugins.legend.display = false;
+        o.scales.y.title = { display: true, text: title, font: { family: 'Inter', size: 11 }, color: '#4a5568' };
+        o.scales.y.ticks.callback = function(v) { return fmtK(v); };
+        return o;
+    };
+    var oi = mk('Zobrazen\u00ED');
+    oi.plugins.tooltip.callbacks.label = function(ctx) { return 'Zobrazen\u00ED: ' + fmtNum(ctx.parsed.y); };
+    chartInstances['chartBrandImp'] = new Chart(document.getElementById('chartBrandImp'), {
+        type: 'line',
+        data: { labels: labels, datasets: [{ data: b.impressions, borderColor: '#2563EB', backgroundColor: '#2563EB', borderWidth: 2, pointRadius: 3, pointHoverRadius: 5, tension: 0.3 }] },
+        options: oi
+    });
+    var oc = mk('Kliky');
+    oc.scales.x.grid = { display: false };
+    oc.plugins.tooltip.callbacks.label = function(ctx) { return 'Kliky: ' + fmtNum(ctx.parsed.y); };
+    chartInstances['chartBrandClicks'] = new Chart(document.getElementById('chartBrandClicks'), {
+        type: 'bar',
+        data: { labels: labels, datasets: [{ data: b.clicks, backgroundColor: '#AE821F', borderRadius: 4, barPercentage: 0.6 }] },
+        options: oc
+    });
+}
+
+// ========== ZÁLOŽKA AI ==========
+function renderAI() {
+    var A = DATA.ai;
+    var html = '<div class="card"><div class="card-title">Pod\u00EDl v AI odpov\u011Bdech</div>' +
+        '<p class="card-subtitle">' + A.lead + '</p>' +
+        '<div class="kpi-grid">' + A.kpis.map(function(k) {
+            return '<div class="kpi"><div class="kpi-label">' + k.label + '</div><div class="kpi-value">' + k.value + '</div><div class="kpi-delta">' + k.delta + '</div><div class="kpi-note">' + k.note + '.</div></div>';
+        }).join('') + '</div></div>';
+
+    html += '<div class="card"><div class="card-title">Pod\u00EDl na citac\u00EDch podle zna\u010Dek, duben proti \u0159\u00EDjnu</div>' +
+        '<div class="info-box">Pod\u00EDl mezi 20 sledovan\u00FDmi zna\u010Dkami, sou\u010Det \u0161esti platforem, \u010Cesk\u00E1 republika. Zdroj Ahrefs. V grafu je 12 nejvy\u0161\u0161\u00EDch, v\u0161echny zna\u010Dky jsou v tabulce.</div>' +
+        '<div class="chart-wrap tall"><canvas id="chartAIShare"></canvas></div>' +
+        '<div class="findings"><div class="findings-title">Kl\u00ED\u010Dov\u00E1 zji\u0161t\u011Bn\u00ED</div><ol>' + A.findings.map(function(t) { return '<li>' + t + '</li>'; }).join('') + '</ol></div></div>';
+
+    html += '<div class="card"><div class="card-title">Erika Fashion podle platforem</div>' +
+        '<div class="chart-wrap small"><canvas id="chartAIPlat"></canvas></div>' +
+        '<div style="overflow-x:auto"><table class="data-table" id="aiPlatTable"><thead><tr><th>Platforma</th><th>Citace \u0159\u00EDjen</th><th>Citace duben</th><th>Pod\u00EDl \u0159\u00EDjen</th><th>Pod\u00EDl duben</th><th>Skupina \u0159\u00EDjen</th><th>Skupina duben</th></tr></thead><tbody>' +
+        A.platforms.map(function(p) {
+            return '<tr><td>' + p.label + '</td><td>' + p.now + '</td><td>' + p.apr + '</td><td>' + fmtPct(p.shareNow, 1) + '</td><td>' + fmtPct(p.shareApr, 1) + '</td><td>' + fmtNum(p.totNow) + '</td><td>' + fmtNum(p.totApr) + '</td></tr>';
+        }).join('') + '</tbody></table></div></div>';
+
+    html += '<div class="card"><div class="card-title">V\u0161echny zna\u010Dky</div><div style="overflow-x:auto"><table class="data-table" id="aiTable"><thead><tr>' +
+        '<th>Zna\u010Dka</th><th>Pod\u00EDl \u0159\u00EDjen</th><th>Pod\u00EDl duben</th><th>Zm\u011Bna p. b.</th><th>Citace \u0159\u00EDjen</th><th>Citace duben</th><th>Pod\u00EDl na hled\u00E1n\u00ED</th><th>ChatGPT</th><th>AI Overviews</th><th>AI Mode</th><th>Perplexity</th><th>Copilot</th><th>Gemini</th>' +
+        '</tr></thead><tbody>' + A.brands.map(function(r) {
+            var b = brandById(r.id), p = r.platforms;
+            return '<tr' + (b.isTarget ? ' class="target-row"' : '') + '><td>' + b.label + '</td><td>' + fmtPct(r.shareNow, 1) + '</td><td>' + fmtPct(r.shareApr, 1) + '</td><td>' + fmtSigned(r.shareNow - r.shareApr, 1) + '</td><td>' + fmtNum(r.now) + '</td><td>' + fmtNum(r.apr) + '</td><td>' + fmtPct(r.sos, 1) + '</td><td>' + p.chatgpt + '</td><td>' + p.google_ai_overviews + '</td><td>' + p.google_ai_mode + '</td><td>' + p.perplexity + '</td><td>' + p.copilot + '</td><td>' + p.gemini + '</td></tr>';
+        }).join('') + '</tbody></table></div></div>';
+
+    html += '<div class="card"><div class="card-title">Jak tahle \u010D\u00EDsla \u010D\u00EDst</div><div class="reading">' +
+        A.caveats.map(function(r) { return '<div class="reading-item"><strong>' + r[0] + '</strong><span>' + r[1] + '</span></div>'; }).join('') + '</div></div>';
+
+    document.getElementById('mainContent').innerHTML = html;
+
+    var top = A.brands.slice().sort(function(a, b) { return b.shareNow - a.shareNow; }).slice(0, 12);
+    var bars = function(id, labels, now, apr, fmt, horizontal) {
+        var o = chartDefaults();
+        o.plugins.legend.display = true;
+        if (horizontal) {
+            o.indexAxis = 'y';
+            o.interaction = { mode: 'nearest', axis: 'y', intersect: false };
+            o.scales.y.grid = { display: false };
+            o.scales.x.ticks.callback = function(v) { return v + fmt; };
+        } else {
+            o.scales.x.grid = { display: false };
+        }
+        o.plugins.tooltip.callbacks.label = function(ctx) {
+            var v = horizontal ? ctx.parsed.x : ctx.parsed.y;
+            return ctx.dataset.label + ': ' + String(v).replace('.', ',') + fmt;
+        };
+        chartInstances[id] = new Chart(document.getElementById(id), {
+            type: 'bar',
+            data: { labels: labels, datasets: [
+                { label: '\u0158\u00EDjen 2026', data: now, backgroundColor: '#AE821F', borderRadius: 4, barPercentage: 0.8, categoryPercentage: 0.7 },
+                { label: 'Duben 2026', data: apr, backgroundColor: '#9CB3D9', borderRadius: 4, barPercentage: 0.8, categoryPercentage: 0.7 }
+            ] },
+            options: o
+        });
+    };
+    bars('chartAIShare', top.map(function(r) { return brandById(r.id).label; }), top.map(function(r) { return r.shareNow; }), top.map(function(r) { return r.shareApr; }), ' %', true);
+    bars('chartAIPlat', A.platforms.map(function(p) { return p.label; }), A.platforms.map(function(p) { return p.now; }), A.platforms.map(function(p) { return p.apr; }), '', false);
+    initTableSort('aiTable', false);
+    initTableSort('aiPlatTable', false);
 }
 
 function renderChartMoves() {
@@ -1234,13 +1353,14 @@ function buildAssociationsSection() {
     var html = '<div class="card">';
     html += '<div class="card-title">Brandov\u00E9 asociace \u2014 s \u010D\u00EDm lid\u00E9 hledaj\u00ED jednotliv\u00E9 zna\u010Dky</div>';
     html += '<p class="card-subtitle">Ukazuje, jak\u00E9 v\u00FDrazy lid\u00E9 nej\u010Dast\u011Bji kombinuj\u00ED s n\u00E1zvem zna\u010Dky. Odhaluje, co z\u00E1kazn\u00EDky zaj\u00EDm\u00E1 \u2014 recenze, slevy, \u0161aty, konkr\u00E9tn\u00ED e-shop.</p>';
+    if (DATA.content.assocNote) html += '<div class="info-box">' + DATA.content.assocNote + '</div>';
     html += '<div class="assoc-grid" id="assocGrid"></div>';
 
     // Brand terms
     html += '<div style="margin-top:32px">';
     html += '<div class="card-title">Brandov\u00E9 vyhled\u00E1vac\u00ED v\u00FDrazy pro erikafashion.cz</div>';
     html += '<p class="card-subtitle" style="margin-bottom:12px">Kompletn\u00ED seznam brandov\u00FDch vyhled\u00E1vac\u00EDch v\u00FDraz\u016F pou\u017Eit\u00FDch pro m\u011B\u0159en\u00ED Share of Search.</p>';
-    html += '<table class="brand-terms-table" id="brandTermsTable"><thead><tr><th>V\u00FDraz</th><th>Objem / m\u011Bs.</th></tr></thead><tbody></tbody></table>';
+    html += '<table class="brand-terms-table" id="brandTermsTable"><thead><tr><th>V\u00FDraz</th>' + (DATA.content.assocNote ? '<th>Duben</th><th>Te\u010F</th><th>Zm\u011Bna</th>' : '<th>Objem / m\u011Bs.</th>') + '</tr></thead><tbody></tbody></table>';
     html += '</div>';
 
     html += '</div>';
@@ -1264,8 +1384,12 @@ function renderAssociations() {
             inner += '<span class="no-data">Data nejsou k dispozici.</span>';
         } else {
             inner += '<table>';
+            var hasPrev = assoc.some(function(a) { return a.prev !== undefined; });
+            if (hasPrev) inner += '<tr class="assoc-head"><td>Dotaz</td><td>Duben</td><td>Te\u010F</td><td>Zm\u011Bna</td></tr>';
             assoc.forEach(function(a) {
-                inner += '<tr><td>' + a.kw + '</td><td>' + fmtNum(a.vol) + '</td></tr>';
+                inner += hasPrev
+                    ? '<tr><td>' + a.kw + '</td><td class="muted">' + (a.prev != null ? fmtNum(a.prev) : '\u2013') + '</td><td>' + fmtNum(a.vol) + '</td><td class="muted">' + (deltaPct(a.vol, a.prev) || '\u2013') + '</td></tr>'
+                    : '<tr><td>' + a.kw + '</td><td>' + fmtNum(a.vol) + '</td></tr>';
             });
             inner += '</table>';
         }
@@ -1278,7 +1402,9 @@ function renderAssociations() {
     if (tbody && DATA.brandTerms && DATA.brandTerms.erikafashion) {
         tbody.innerHTML = '';
         DATA.brandTerms.erikafashion.forEach(function(t) {
-            tbody.innerHTML += '<tr><td>' + t.kw + '</td><td>' + fmtNum(t.vol) + '</td></tr>';
+            tbody.innerHTML += t.prev !== undefined
+                ? '<tr><td>' + t.kw + '</td><td class="muted">' + (t.prev != null ? fmtNum(t.prev) : '\u2013') + '</td><td>' + fmtNum(t.vol) + '</td><td class="muted">' + (deltaPct(t.vol, t.prev) || '\u2013') + '</td></tr>'
+                : '<tr><td>' + t.kw + '</td><td>' + fmtNum(t.vol) + '</td></tr>';
         });
     }
 }
@@ -1289,12 +1415,13 @@ function buildSnapshotSection() {
     var extra = c.snapshotColumns;
     return '<div class="card">' +
         '<div class="card-title">' + c.snapshotTitle + '</div>' +
+        (c.snapshotNote ? '<div class="info-box">' + c.snapshotNote + '</div>' : '') +
         '<div style="overflow-x:auto">' +
         '<table class="data-table" id="snapshotTable">' +
         '<thead><tr>' +
             '<th data-col="rank">#</th>' +
             '<th data-col="label">Značka</th>' +
-            (extra ? '<th>Hledání / měs., 12 m.</th><th>Změna za rok</th>' : '<th data-col="brandSearch">Brand search / měs.</th>') +
+            (extra ? '<th>Hledání / měs., 12 m.</th>' : '<th data-col="brandSearch">Brand search / měs.</th>') +
             '<th data-col="orgTraffic">Org. traffic ČR</th>' +
             '<th data-col="orgKw">Org. KW</th>' +
             '<th data-col="kwTop3">KW v top 3</th>' +
@@ -1307,10 +1434,19 @@ function buildSnapshotSection() {
         '</div>';
 }
 
+function deltaPct(now, prev) {
+    if (prev == null || !prev || now == null) return '';
+    return fmtSigned((now - prev) / prev * 100, 0) + ' %';
+}
+function cmpCell(v, sub) {
+    return '<td data-v="' + (v == null ? -1 : v) + '">' + (v != null ? fmtNum(v) : '–') + (sub ? '<span class="delta">' + sub + '</span>' : '') + '</td>';
+}
+
 function renderSnapshotTable() {
     var tbody = document.querySelector('#snapshotTable tbody');
     if (!tbody) return;
     var extra = DATA.content.snapshotColumns;
+    var cmp = DATA.aprCompare || {};
     var lastIdx = DATA.dates.length - 1;
     var sum = function(arr, a, b) { return arr.slice(a, b).reduce(function(s, v) { return s + (v || 0); }, 0); };
     var rows = DATA.brands.map(function(b) {
@@ -1318,6 +1454,7 @@ function renderSnapshotTable() {
         var snap = DATA.snapshot[b.id] || {};
         var now = sum(arr, lastIdx - 11, lastIdx + 1), prev = sum(arr, lastIdx - 23, lastIdx - 11);
         return {
+            id: b.id,
             label: b.label,
             isTarget: b.isTarget,
             brandSearch: extra ? Math.round(now / 12) : arr[lastIdx],
@@ -1331,14 +1468,19 @@ function renderSnapshotTable() {
     });
     rows.sort(function(a, b) { return b.brandSearch - a.brandSearch; });
     tbody.innerHTML = rows.map(function(r, i) {
+        var c = cmp[r.id] || {}, s = c.snap || {};
+        var noApr = extra && !c.snap;
+        var org = function(now, prev) {
+            if (!extra) return '<td>' + (now != null ? fmtNum(now) : '–') + '</td>';
+            return cmpCell(now, noApr ? 'nově sledovaná' : (deltaPct(now, prev) ? deltaPct(now, prev) + ' od dubna' : ''));
+        };
         return '<tr' + (r.isTarget ? ' class="target-row"' : '') + '>' +
-            '<td>' + (i + 1) + '</td>' +
+            '<td data-v="' + (i + 1) + '"><span class="rk">' + (i + 1) + '</span>' + (extra && c.rankApr ? '<span class="delta">v dubnu ' + c.rankApr + '</span>' : '') + '</td>' +
             '<td>' + r.label + '</td>' +
-            '<td>' + fmtNum(r.brandSearch) + '</td>' +
-            (extra ? '<td>' + fmtSigned(r.yoy, 0) + ' %</td>' : '') +
-            '<td>' + fmtNum(r.orgTraffic) + '</td>' +
-            '<td>' + fmtNum(r.orgKw) + '</td>' +
-            '<td>' + (r.kwTop3 != null ? fmtNum(r.kwTop3) : '–') + '</td>' +
+            (extra ? cmpCell(r.brandSearch, deltaPct(r.brandSearch, c.avgApr) + ' od dubna, ' + fmtSigned(r.yoy, 0) + ' % za rok') : '<td>' + fmtNum(r.brandSearch) + '</td>') +
+            org(r.orgTraffic, s.orgTraffic) +
+            org(r.orgKw, s.orgKeywords) +
+            org(r.kwTop3, s.orgKeywords1_3) +
             (extra ? '<td>' + (r.dr != null ? Math.round(r.dr) : '–') + '</td><td>' + fmtNum(r.ref) + '</td>' : '') +
         '</tr>';
     }).join('');
@@ -1352,6 +1494,7 @@ function initTableSort(tableId, hasRank) {
     var tbody = table.querySelector('tbody');
     var currentSort = { col: -1, asc: false };
     var parse = function(cell) {
+        if (cell.dataset.v !== undefined) return cell.dataset.v;
         return cell.textContent.replace(/[\s %]/g, '').replace(',', '.').replace('−', '-').replace('–', '-999999');
     };
     headers.forEach(function(th, idx) {
@@ -1369,7 +1512,10 @@ function initTableSort(tableId, hasRank) {
             });
             rows.forEach(function(r) { tbody.appendChild(r); });
             if (hasRank) {
-                Array.from(tbody.querySelectorAll('tr')).forEach(function(r, i) { r.cells[0].textContent = i + 1; });
+                Array.from(tbody.querySelectorAll('tr')).forEach(function(r, i) {
+                    var rk = r.cells[0].querySelector('.rk');
+                    if (rk) rk.textContent = i + 1; else r.cells[0].textContent = i + 1;
+                });
             }
         });
     });

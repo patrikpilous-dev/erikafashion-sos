@@ -17,7 +17,7 @@ yoy=lambda k:100*(sm(k,L)-sm(k,P))/sm(k,P)
 n1=lambda x:f"{x:.1f}".replace('.',',')
 n2=lambda x:f"{x:.2f}".replace('.',',')
 n0=lambda x:f"{round(x):,}".replace(',',' ')
-sg=lambda x:('+' if x>=0 else '−')+n1(abs(x))
+sg=lambda x:('0,0' if abs(x)<0.05 else ('+' if x>=0 else '−')+n1(abs(x)))
 sg0=lambda x:('+' if x>=0 else '−')+str(abs(round(x)))
 NARROW=['erikafashion','lelosi','glami','orsay','buga','evona','miadresses','blankastraka','londonclub','coolboutique','bestmoda','sqvele']
 NL=sum(sm(k,L) for k in NARROW); NP=sum(sm(k,P) for k in NARROW)
@@ -227,12 +227,114 @@ summary={
  ],
  'sources':[{'label':'Retail Gazette, clo EU na levné zásilky od 1. 7. 2026','url':'https://www.retailgazette.co.uk/blog/2026/07/shein-and-temu-hit-by-new-eu-customs-duty-on-cheap-parcels/'},{'label':'IPA, Les Binet a Share of Search','url':'https://ipa.co.uk/news/binet-presents-fast-cheap-predictive-share-of-search-metric/'},{'label':'Marketing Week, 83 % podílu na trhu','url':'https://www.marketingweek.com/share-of-search-market-share/'}],
 }
-content={'snapshotTitle':'Aktuální stav, 30. 10. 2026','sections':sections,'snapshotColumns':True,'czSet':NARROW,'snapshotFindings':[
+content={'snapshotTitle':'Aktuální stav, 30. 10. 2026','sections':sections,'snapshotColumns':True,'snapshotNote':'Pod každým číslem je změna proti dubnovému měření. Hledání je průměr 12 měsíců do dubna 2026, přepočítaný stejným způsobem, aby šel srovnat. Stav domén je snímek z 19. 4. proti 30. 10., návštěvnost je proto ovlivněná sezónou a změnou modelu Ahrefs.','assocNote':'Hledanost za měsíc podle Ahrefs, duben proti dnešku. Pomlčka znamená, že dotaz v dubnovém výběru nebyl, ne že ho nikdo nehledal. Objemy jsou zaokrouhlené, malé změny neberte vážně.','czSet':NARROW,'snapshotFindings':[
   f"Erika Fashion má {n0(snapshot['erikafashion']['orgKeywords'])} klíčových slov v ČR proti 4 473 v dubnu a {n0(snapshot['erikafashion']['orgKeywords1_3'])} v top 3 proti 2 023. To je {sg0(exsh(snapshot['erikafashion']['orgKeywords1_3'],2023))} % za půl roku.",
+  f"Erika je v hledání na {sorted(ids,key=lambda k:-sm(k,L)).index('erikafashion')+1}. místě, stejně jako v dubnu. Modivo si prohodilo pozici s Lelosi a About You předběhl Shein.",
   f"Doménová autorita Eriky je {round(snapshot['erikafashion']['dr'])}, u přímých konkurentů v šatech 11 (MiaDresses), 13 (Blanka Straka), 15 (Lelosi) a 18 (Sqvele)."],
  'method':[['Datový zdroj','Ahrefs (Keywords Explorer, Site Explorer), Google Search Console přes Ahrefs a Marketing Miner, Google Trends'],['Region','Česká republika'],['Období','Duben 2024 až září 2026 (30 měsíců), stav domén k 30. 10. 2026'],['Brandové hledání','Součet stejných variant značky jako v dubnu, pro Modivo a Sqvele nově. Jeden stažený výpis, historie je přepočítaná'],['Organický traffic','Odhad Ahrefs. Domény .cz bez filtru na zemi, mezinárodní domény s filtrem na ČR od 11/2024'],['Google Trends','Týdně, ČR, ukotvení na Shein, 13 značek'],['Aktualizace','Ručně přes Claude Code, každá edice se ukládá jako vlastní záložka'],['Kontrola','Rok k roku a tři zdroje vedle sebe, viz záložka Shrnutí a doporučení']]}
+
+# ---------- Srovnání s dubnem, brandové dotazy, citace v AI ----------
+apr=J('data/editions/2026-04.json')
+W=slice(i('2025-05'),i('2026-04')+1); TW=sum(sm(k,W) for k in ids); NW=sum(sm(k,W) for k in NARROW)
+rankW=sorted(ids,key=lambda k:-sm(k,W))
+aprCompare={k:{'avgApr':round(sm(k,W)/12),'shareApr':round(100*sm(k,W)/TW,2),'rankApr':rankW.index(k)+1,'snap':apr['snapshot'].get(k)} for k in ids}
+for m_ in moves: m_['apr']=aprCompare[m_['id']]['shareApr']
+# aktuální objemy všech dotazů
+curVol={}
+for r in raw:
+    if r['tool']=='keywords-explorer-overview' and 'HTTP 400' not in r['text'][:60] and 'volume' in r['input'].get('select','').split(','):
+        t=r['text']
+        if t.lstrip().startswith('['): t=json.loads(t)[0]['text']
+        for x in json.JSONDecoder().raw_decode(t.lstrip())[0]['keywords']: curVol[x['keyword']]=x['volume']
+    if r['tool']=='keywords-explorer-matching-terms':
+        for x in json.JSONDecoder().raw_decode(r['text'].lstrip())[0]['keywords']: curVol.setdefault(x['keyword'],x['volume'])
+KMAP={'erikafashion saty':'erikafashion šaty'}  # v dubnu uloženo bez diakritiky, objem 350 patřil tvaru se š
+def merge(nowrows,aprrows):
+    prev={KMAP.get(a['kw'],a['kw']):a['vol'] for a in aprrows}
+    out={x['kw']:{'kw':x['kw'],'vol':x['vol'],'prev':prev.get(x['kw'])} for x in nowrows}
+    for k,v in prev.items():
+        if k not in out and k in curVol: out[k]={'kw':k,'vol':curVol[k],'prev':v}
+    return sorted(out.values(),key=lambda x:-x['vol'])
+assocCmp={k:merge(v,apr['brandAssociations'].get(k,[])) for k,v in assoc.items()}
+termsNow=[{'kw':t['keyword'],'vol':t['volume']} for t in terms][:14]
+termsCmp=merge(termsNow,apr['brandTerms']['erikafashion'])
+# brandové dotazy v GSC
+bm=[m for m in gm['months'] if '2025-07'<=m<='2026-09']
+BR=gm['brand']
+brandGsc={'months':bm,'clicks':[BR[m][0] for m in bm],'impressions':[BR[m][1] for m in bm],'ctr':[round(100*BR[m][0]/BR[m][1],2) for m in bm],'position':[round(BR[m][2]/BR[m][1],2) for m in bm]}
+qi=sum(BR[k][1] for k in Q);qip=sum(BR[k][1] for k in Qp)
+ctrQ,ctrQp=100*qb/qi,100*qbp/qip
+peak=max(bm,key=lambda m:BR[m][0])
+mname={'01':'leden','02':'únor','03':'březen','04':'duben','05':'květen','06':'červen','07':'červenec','08':'srpen','09':'září','10':'říjen','11':'listopad','12':'prosinec'}
+brandFindings=[
+ f"Za červenec až září 2026 přišlo z brandových dotazů {n0(qb)} kliků proti {n0(qbp)} o rok dřív ({sg0(exsh(qb,qbp))} %). Zobrazení vyrostla z {n0(qip)} na {n0(qi)} ({sg0(exsh(qi,qip))} %).",
+ f"Kliky rostou rychleji než zobrazení, protože proklikovost se zvedla z {n1(ctrQp)} % na {n1(ctrQ)} %. Část zobrazení z léta 2025 je ale nafouknutá starým měřením, Google omezil zobrazení na nízkých pozicích až v září 2025.",
+ f"Nejsilnější měsíc byl {mname[peak[5:]]} {peak[:4]} s {n0(BR[peak][0])} kliky a {n0(BR[peak][1])} zobrazeními. Brandové dotazy tvoří {n1(100*qb/qa)} % všech kliků z Google.",
+ "Jde jen o organické výsledky, kliky na placenou reklamu tu nejsou. Započítané jsou všechny dotazy se slovem erika, tedy i vrácení zboží, recenze a jméno zakladatelky. Search Console drží data jen 16 měsíců, proto graf začíná červencem 2025.",
+]
+# citace v AI
+AI=J(Z+'ai.json')
+PL=['chatgpt','google_ai_overviews','google_ai_mode','perplexity','copilot','gemini']
+PN={'chatgpt':'ChatGPT','google_ai_overviews':'AI Overviews','google_ai_mode':'AI Mode','perplexity':'Perplexity','copilot':'Copilot','gemini':'Gemini'}
+did={x['domain']:x['id'] for x in brands}
+s6=lambda x:sum(x[p] for p in PL)
+AN=sum(s6(v['now']) for v in AI.values());AA=sum(s6(v['apr']) for v in AI.values())
+air=[]
+for d,v in AI.items():
+    k=did[d]
+    air.append({'id':k,'now':s6(v['now']),'apr':s6(v['apr']),'shareNow':round(100*s6(v['now'])/AN,2),'shareApr':round(100*s6(v['apr'])/AA,2),'sos':round(sos(k,L,TL),2),'platforms':v['now']})
+air.sort(key=lambda x:-x['now'])
+E_=[x for x in air if x['id']=='erikafashion'][0]; erank=air.index(E_)+1
+ep=AI['erikafashion.cz']
+pt=lambda p,k:sum(v[k][p] for v in AI.values())
+aip=[{'p':p,'label':PN[p],'now':ep['now'][p],'apr':ep['apr'][p],'totNow':pt(p,'now'),'totApr':pt(p,'apr'),'shareNow':round(100*ep['now'][p]/pt(p,'now'),1) if pt(p,'now') else 0,'shareApr':round(100*ep['apr'][p]/pt(p,'apr'),1) if pt(p,'apr') else 0} for p in PL]
+topin=lambda p:sorted(air,key=lambda x:-x['platforms'][p])
+nm=lambda k:[b_['label'] for b_ in brands if b_['id']==k][0]
+aio_rank=[x['id'] for x in topin('google_ai_overviews')].index('erikafashion')+1
+cg_rank=[x['id'] for x in topin('chatgpt')].index('erikafashion')+1
+NA=[x for x in air if x['id'] in NARROW]; NAN=sum(x['now'] for x in NA); NAA=sum(x['apr'] for x in NA)
+n_sh=lambda k,f,T:100*[x for x in NA if x['id']==k][0][f]/T
+cgTop=topin('chatgpt')[:3]
+aiTab={
+ 'lead':f"Erika Fashion má {n1(E_['shareNow'])} % citací v AI odpovědích mezi 20 sledovanými značkami a je {erank}. v pořadí. V hledání má přitom {n1(E_['sos'])} %, odpovědi AI ji tedy odkazují {n1(E_['shareNow']/E_['sos']).replace(',0','')}krát častěji, než odpovídá jejímu podílu na hledání. Silná je v AI Overviews, v ChatGPT skoro chybí.",
+ 'kpis':[
+  {'label':'Podíl na citacích','value':n1(E_['shareNow'])+' %','delta':f"{sg(E_['shareNow']-E_['shareApr'])} p. b. od dubna",'note':f"v dubnu {n1(E_['shareApr'])} %, {erank}. místo z 20"},
+  {'label':'Citace celkem','value':n0(E_['now']),'delta':f"{sg0(exsh(E_['now'],E_['apr']))} % od dubna",'note':f"v dubnu {n0(E_['apr'])}, šest platforem"},
+  {'label':'AI Overviews','value':str(ep['now']['google_ai_overviews']),'delta':f"{aio_rank}. místo ze 20",'note':f"v dubnu {ep['apr']['google_ai_overviews']}, podíl {n1(aip[1]['shareNow'])} %"},
+  {'label':'ChatGPT','value':str(ep['now']['chatgpt']),'delta':f"{cg_rank}. místo ze 20",'note':f"v dubnu {ep['apr']['chatgpt']}, podíl {n1(aip[0]['shareNow'])} %"},
+ ],
+ 'brands':air,'platforms':aip,
+ 'findings':[
+  f"Citací ubylo z {n0(E_['apr'])} na {n0(E_['now'])}. Propad je v ChatGPT ({ep['apr']['chatgpt']} na {ep['now']['chatgpt']}), AI Mode ({ep['apr']['google_ai_mode']} na {ep['now']['google_ai_mode']}) a Perplexity ({ep['apr']['perplexity']} na {ep['now']['perplexity']}), růst v AI Overviews ({ep['apr']['google_ai_overviews']} na {ep['now']['google_ai_overviews']}) a Copilotu ({ep['apr']['copilot']} na {ep['now']['copilot']}).",
+  f"V AI Overviews je Erika {aio_rank}. těsně za Modivem ({[x for x in air if x['id']=='modivo'][0]['platforms']['google_ai_overviews']} citací). Tady má největší dosah, protože AI Overviews se ukazují přímo ve vyhledávání Googlu.",
+  f"V ChatGPT má Erika jen {ep['now']['chatgpt']} citací, {n1(aip[0]['shareNow'])} % sledované skupiny. Vedou {nm(cgTop[0]['id'])} ({cgTop[0]['platforms']['chatgpt']}), {nm(cgTop[1]['id'])} ({cgTop[1]['platforms']['chatgpt']}) a {nm(cgTop[2]['id'])} ({cgTop[2]['platforms']['chatgpt']}).",
+  f"V užší české skupině má Erika {n1(n_sh('erikafashion','now',NAN))} % citací, druhá po Glami ({n1(n_sh('glami','now',NAN))} %). Lelosi, jednička české skupiny v hledání, má jen {n1(n_sh('lelosi','now',NAN))} %.",
+  f"Největší vzestup mají Shein ({n1([x for x in air if x['id']=='shein'][0]['shareApr'])} % na {n1([x for x in air if x['id']=='shein'][0]['shareNow'])} %) a Reserved ({n1([x for x in air if x['id']=='reserved'][0]['shareApr'])} % na {n1([x for x in air if x['id']=='reserved'][0]['shareNow'])} %). Glami ztrácí nejvíc ({n1([x for x in air if x['id']=='glami'][0]['shareApr'])} % na {n1([x for x in air if x['id']=='glami'][0]['shareNow'])} %), hlavně kvůli ChatGPT."],
+ 'caveats':[
+  ['Měříme citace, ne zmínky.','Počítá se, kolikrát odpověď AI odkáže na web značky. Značka zmíněná bez odkazu tu není, skutečný podíl hlasu by dalo až měření vlastních promptů.'],
+  ['Vzorek se mění.',f"Ahrefs testuje vlastní sadu dotazů pro ČR a ta se hýbe. Součet za ChatGPT klesl z {n0(pt('chatgpt','apr'))} na {n0(pt('chatgpt','now'))}, u Gemini vzrostl z {pt('gemini','apr')} na {pt('gemini','now')}. Proto sledujeme podíly, ne absolutní čísla, a posun o bod nebo dva neberte jako trend."],
+  ['Citace nejsou návštěvy.','Citace ukazují dosah, ne návštěvnost ani tržby. Kolik lidí z odpovědí AI opravdu přijde na web, tahle data neříkají.'],
+  ['Co tu chybí.','Grok v součtu není, v říjnu u Eriky Ahrefs nevrací žádná data (v dubnu 149). 76 připravených promptů v Marketing Mineru zatím do dashboardu nevstupuje.'],
+ ]}
+nsh=lambda k,s_,T:100*sm(k,s_)/T
+sinceApril=[
+ {'m':'Průměrné hledání značky za měsíc (12 měsíců, Ahrefs)','a':n0(sm('erikafashion',W)/12),'n':n0(sm('erikafashion',L)/12),'d':f"{sg0(exsh(sm('erikafashion',L),sm('erikafashion',W)))} %"},
+ {'m':'Podíl na hledání, všechny značky (12 měsíců)','a':n2(nsh('erikafashion',W,TW))+' %','n':n2(nsh('erikafashion',L,TL))+' %','d':f"−{n2(abs(nsh('erikafashion',L,TL)-nsh('erikafashion',W,TW)))} p. b."},
+ {'m':'Podíl na hledání, užší česká skupina (12 měsíců)','a':n1(nsh('erikafashion',W,NW))+' %','n':n1(nsh('erikafashion',L,NL))+' %','d':f"{sg(nsh('erikafashion',L,NL)-nsh('erikafashion',W,NW))} p. b."},
+ {'m':'Kliky z Google za 12 měsíců (Search Console)','a':n0(gc('2025-05','2026-04')),'n':n0(G12),'d':f"{sg0(exsh(G12,gc('2025-05','2026-04')))} %"},
+ {'m':'Odhad organické návštěvnosti ČR (Ahrefs, sezónní)','a':n0(apr['snapshot']['erikafashion']['orgTraffic']),'n':n0(snapshot['erikafashion']['orgTraffic']),'d':f"{sg0(exsh(snapshot['erikafashion']['orgTraffic'],apr['snapshot']['erikafashion']['orgTraffic']))} %"},
+ {'m':'Klíčová slova v ČR (Ahrefs)','a':n0(apr['snapshot']['erikafashion']['orgKeywords']),'n':n0(snapshot['erikafashion']['orgKeywords']),'d':f"{sg0(exsh(snapshot['erikafashion']['orgKeywords'],apr['snapshot']['erikafashion']['orgKeywords']))} %"},
+ {'m':'Klíčová slova v top 3 (Ahrefs)','a':n0(apr['snapshot']['erikafashion']['orgKeywords1_3']),'n':n0(snapshot['erikafashion']['orgKeywords1_3']),'d':f"{sg0(exsh(snapshot['erikafashion']['orgKeywords1_3'],apr['snapshot']['erikafashion']['orgKeywords1_3']))} %"},
+ {'m':'Podíl na citacích v AI odpovědích (Ahrefs)','a':n1(E_['shareApr'])+' %','n':n1(E_['shareNow'])+' %','d':f"{sg(E_['shareNow']-E_['shareApr'])} p. b."},
+]
+summary['sinceApril']=sinceApril; summary['brandGsc']=brandGsc; summary['brandFindings']=brandFindings
+summary['recs'].insert(6,{'prio':'Střední','area':'AI viditelnost','title':'Dostat Eriku do odpovědí ChatGPT',
+ 'why':f"V citacích AI má Erika {n1(E_['shareNow'])} % proti {n1(E_['sos'])} % v hledání a v AI Overviews je {aio_rank}. ze 20. V ChatGPT ale jen {ep['now']['chatgpt']} citací a {cg_rank}. místo, od dubna pokles ze {ep['apr']['chatgpt']}. Vedou tam {nm(cgTop[0]['id'])}, {nm(cgTop[1]['id'])} a {nm(cgTop[2]['id'])}. Vzorek Ahrefs se mění, proto to berte jako signál k ověření.",
+ 'what':'Spustit 76 připravených promptů v Marketing Mineru, ať je vidět podíl hlasu i bez odkazu. Podívat se, které zdroje ChatGPT u dotazů na šaty cituje, a na ty se dostat přes články, srovnání a PR. Texty, které citují AI Overviews, nerozbíjet.',
+ 'measure':'Podíl na citacích v ChatGPT a viditelnost v promptech po 3 měsících měření, záložka AI odpovědi.','effort':'Střední'})
+
 hist={'lastUpdated':'2026-10-30','edition':'2026-10','dates':ms,'brands':brands,'brandSearch':bs,'organicTraffic':organic,'organicIntl':organicIntl,'snapshot':snapshot,'gsc':gsc,
- 'brandTerms':{'erikafashion':[{'kw':t['keyword'],'vol':t['volume']} for t in terms][:14]},'brandAssociations':assoc,'googleTrends':gt,'brandVariants':variants,'content':content,'summary':summary}
+ 'brandTerms':{'erikafashion':termsCmp},'brandAssociations':assocCmp,'googleTrends':gt,'brandVariants':variants,'content':content,'summary':summary,'aprCompare':aprCompare,'ai':aiTab}
 # dubnová edice beze změny dat, texty přesně z původní stránky
 if not os.path.exists('data/editions/2026-04.json'):
     os.makedirs('data/editions',exist_ok=True)
@@ -258,6 +360,7 @@ json.dump(hist,open('data/history.json','w',encoding='utf-8'),ensure_ascii=False
 json.dump({'current':'2026-10','tabs':[
  {'id':'shrnuti','label':'Shrnutí a doporučení','kind':'summary','file':'history.json'},
  {'id':'data-2026-10','label':'Data, říjen 2026','kind':'data','file':'history.json','badge':'Poslední aktualizace: 30. 10. 2026 | Data do září 2026'},
+ {'id':'ai-odpovedi','label':'AI odpovědi','kind':'ai','file':'history.json','badge':'Citace v AI, ČR, 30. 10. proti 19. 4. 2026'},
  {'id':'archiv-2026-04','label':'Archiv, duben 2026','kind':'data','file':'editions/2026-04.json','badge':'Archiv: stav z 19. 4. 2026, čísla ani závěry se nemění'}]},
  open('data/editions/index.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)
 print('hotovo')

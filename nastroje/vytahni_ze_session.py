@@ -19,7 +19,7 @@ out=[]
 for i,t in res:
     if i not in uses: continue
     n,a=uses[i]
-    if not re.search(r'keywords-explorer|metrics-history|batch-analysis|gsc-performance|gsc_',n): continue
+    if not re.search(r'keywords-explorer|metrics-history|batch-analysis|gsc-performance|gsc_|ai-responses',n): continue
     if t and t.startswith('Error: result'):
         p=re.search(r'saved to (.+?\.txt)',t).group(1)
         t=open(p,encoding='utf-8').read()

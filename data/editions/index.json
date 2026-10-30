@@ -15,6 +15,13 @@
    "badge": "Poslední aktualizace: 30. 10. 2026 | Data do září 2026"
   },
   {
+   "id": "ai-odpovedi",
+   "label": "AI odpovědi",
+   "kind": "ai",
+   "file": "history.json",
+   "badge": "Citace v AI, ČR, 30. 10. proti 19. 4. 2026"
+  },
+  {
    "id": "archiv-2026-04",
    "label": "Archiv, duben 2026",
    "kind": "data",
