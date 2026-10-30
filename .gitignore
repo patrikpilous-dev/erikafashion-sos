@@ -1,4 +1,4 @@
-﻿# Ĺ ablona .gitignore pro klientskĂ© projekty
+# Ĺ ablona .gitignore pro klientskĂ© projekty
 # Zdroj: C:\Users\patri\.claude\gitignore-projekt.txt
 
 # --- TajemstvĂ­: nikdy do gitu ---
@@ -71,3 +71,5 @@ Thumbs.db
 desktop.ini
 .DS_Store
 
+# --- Pracovní data edic (obsahují výstupy Ads a GSC, repo je veřejné) ---
+zdroje/

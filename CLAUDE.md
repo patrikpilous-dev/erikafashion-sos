@@ -7,10 +7,28 @@ Kompetitivní analýza českého fashion trhu pro erikafashion.cz.
 
 ## Architektura
 
-- `index.html` — statický dashboard, načítá data z `data/history.json` přes `fetch()`
-- `data/history.json` — kanonická databáze (25 měsíců historie)
+- `index.html` — statický dashboard se záložkami, čte `data/editions/index.json` a data přes `fetch()`
+- `data/history.json` — aktuální edice včetně textů (zjištění, doporučení, metodika)
+- `data/editions/<rok-mesic>.json` — zmrazené starší edice, každá je vlastní záložka Archiv
+- `data/editions/index.json` — seznam záložek
+- `zdroje/` — pracovní data edic, jen lokálně (v .gitignore, repo je veřejné)
 - `logo.svg` — logo erikafashion.cz
 - `.github/workflows/deploy.yml` — auto-deploy na GitHub Pages při push do master
+
+## Nová edice (zásady platné od 30. 10. 2026)
+
+1. **Zmrazit starou edici:** zkopírovat `data/history.json` do `data/editions/<rok-mesic>.json`, v `content` nastavit `archive: true` a přidat řádek do `data/editions/index.json`.
+2. **Stáhnout celou historii znovu, nedoplňovat jen poslední měsíc.** Ahrefs zpětně přepočítává i staré měsíce, jinak vznikne schod. Hromadně: `keywords-explorer-overview` se `select=keyword,volume_monthly_history`, `volume_monthly_date_to` musí být první den měsíce.
+3. **Zkontrolovat proti přímým datům Googlu.** Brandové kliky z GSC a Google Trends vedle Ahrefs. 10/2026 se rozcházely o 50 procentních bodů (Ahrefs -10 %, Trends +39 %, GSC +40 %).
+4. **Srovnávat rok k roku,** ne měsíc s předchozí edicí, trh je sezónní.
+5. **Veřejné repo:** `data/*.json` jde stáhnout i bez hesla. Žádné tržby ani Kč z Ads, jen poměry.
+6. Postup této edice je v `nastroje/` (`vytahni_ze_session.py`, `analyza_2026_10.py`, `sestav_edici_2026_10.py`).
+
+Co zjistila edice 10/2026 o zdrojích:
+- GSC v Ahrefs (projekt 7274954) končí červencem 2026, novější data z Marketing Mineru (`https://www.erikafashion.cz/`), překryv sedí na klik.
+- `site-explorer-metrics-history` s `country=CZ` jde jen dva roky zpět, proto mezinárodní domény od 11/2024.
+- Od září 2025 nesrovnávat zobrazení a pozici s dřívějškem (Google zrušil 100 výsledků na stránku).
+- SERP v Ahrefs se u brandu mýlil (homepage není první), pozice ověřovat v GSC.
 
 ## Měsíční aktualizace dat
 
@@ -25,7 +43,7 @@ Aktualizace probíhá ručně přes Claude Code.
 **Co se má aktualizovat (checklist pro Claude):**
 
 ### 1. Brandové hledání (Ahrefs Keywords Explorer, CZ)
-Pro každý z 18 brandů (podle `data/history.json` > brands) stáhnout aktuální měsíční volume přes `keywords-explorer-overview` s:
+Pro každý z 20 brandů (podle `data/history.json` > brands) stáhnout aktuální měsíční volume přes `keywords-explorer-overview` s:
 - `country: "CZ"`
 - `select: "keyword,volume"`
 - `keywords`: všechny brandové varianty (viz `BRAND_KEYWORDS` níže)
@@ -90,6 +108,8 @@ Přidat nový kompletní měsíc (pozor: aktuální měsíc obsahuje částečn�
     "londonclub": ["londonclub", "london club"],
     "coolboutique": ["coolboutique"],
     "bestmoda": ["bestmoda"],
+    "modivo": ["modivo", "modivo.cz", "modivo cz"],
+    "sqvele": ["sqvele"],
 }
 ```
 

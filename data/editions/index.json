@@ -1,0 +1,25 @@
+{
+ "current": "2026-10",
+ "tabs": [
+  {
+   "id": "shrnuti",
+   "label": "Shrnutí a doporučení",
+   "kind": "summary",
+   "file": "history.json"
+  },
+  {
+   "id": "data-2026-10",
+   "label": "Data, říjen 2026",
+   "kind": "data",
+   "file": "history.json",
+   "badge": "Poslední aktualizace: 30. 10. 2026 | Data do září 2026"
+  },
+  {
+   "id": "archiv-2026-04",
+   "label": "Archiv, duben 2026",
+   "kind": "data",
+   "file": "editions/2026-04.json",
+   "badge": "Archiv: stav z 19. 4. 2026, čísla ani závěry se nemění"
+  }
+ ]
+}

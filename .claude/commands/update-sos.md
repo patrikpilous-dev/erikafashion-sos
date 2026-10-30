@@ -4,6 +4,8 @@ description: Aktualizuje data v Share of Search dashboardu pro erikafashion.cz
 
 Spusť měsíční aktualizaci dat v Share of Search dashboardu podle postupu v `CLAUDE.md`.
 
+Před začátkem si přečti část „Nová edice“ v `CLAUDE.md`, starou edici zmraz do `data/editions/` a historii stáhni celou znovu.
+
 Kroky:
 
 1. **Načti aktuální stav** `data/history.json` (Read)

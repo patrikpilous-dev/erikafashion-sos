@@ -6,7 +6,7 @@ Share of Search dashboard pro erikafashion.cz — kompetitivní analýza české
 
 ## Co to je
 
-Interaktivní dashboard, který sleduje 18 značek na českém fashion trhu (Shein, Sinsay, Zalando, About You, erikafashion.cz atd.) přes několik metrik:
+Interaktivní dashboard, který sleduje 20 značek na českém fashion trhu (Shein, Sinsay, Zalando, About You, erikafashion.cz atd.) přes několik metrik:
 
 - **Share of Search** — podíl brandového hledání v Google (metodika Les Binet, IPA 2020)
 - **Organický traffic** — odhad měsíčních návštěv z Ahrefs
@@ -17,7 +17,9 @@ Interaktivní dashboard, který sleduje 18 značek na českém fashion trhu (She
 
 ```
 index.html              — statický dashboard (Chart.js + vanilla JS)
-data/history.json       — kanonická databáze (25+ měsíců historie)
+data/history.json       — aktuální edice (data i texty)
+data/editions/          — zmrazené edice a seznam záložek
+nastroje/               — skripty pro sestavení edice
 logo.svg                — logo erikafashion.cz
 .github/workflows/
   deploy.yml            — auto-deploy na GitHub Pages při push
