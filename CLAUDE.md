@@ -25,7 +25,7 @@ Kompetitivní analýza českého fashion trhu pro erikafashion.cz.
 6. Postup této edice je v `nastroje/` (`vytahni_ze_session.py`, `analyza_2026_10.py`, `sestav_edici_2026_10.py`).
 
 7. **Srovnání s minulou edicí:** hledání porovnávat přes stejný výpis (12 měsíců do data minulé edice), ne proti tehdy zveřejněnému číslu. Stav domén a asociace přímo proti minulé edici (`aprCompare`, `brandAssociations[].prev`). U asociací nutné dotáhnout dnešní objem i pro dotazy z minulého výběru.
-8. **Záložka AI odpovědi:** `site-explorer-ai-responses-count`, `country=CZ`, `mode=subdomains`, parametr `date` jde i zpětně. Součet šesti platforem bez Groku (u Eriky v 10/2026 prázdný), srovnávat podíly, ne absolutní čísla. Brand Radar na plánu není. Skutečný podíl hlasu by dal AI tracker Marketing Mineru přes Chrome, potřebuje přihlášení (76 promptů v `projects\erikafashion\prompty-ai-mereni.md`).
+8. **Záložka AI odpovědi:** `site-explorer-ai-responses-count`, `country=CZ`, `mode=subdomains`, parametr `date` jde i zpětně. Součet šesti platforem bez Groku (u Eriky v 10/2026 prázdný), srovnávat podíly, ne absolutní čísla. Brand Radar na plánu není. Podíl hlasu je z AI trackeru Marketing Mineru (projekt 81b2762c-1199-41a1-8877-877c4b60dbd9), čte se přes přihlášený Chrome: Konkurence, Prompty, Zdroje podle domén, hodnoty modelů a týdnů přes hover na graf. Běží 43 promptů, ne 76 z `projects\erikafashion\prompty-ai-mereni.md`. Prompty se parsují ze záznamu session do `zdroje/2026-10/mm_prompty.json`.
 
 Co zjistila edice 10/2026 o zdrojích:
 - GSC v Ahrefs (projekt 7274954) končí červencem 2026, novější data z Marketing Mineru (`https://www.erikafashion.cz/`), překryv sedí na klik.

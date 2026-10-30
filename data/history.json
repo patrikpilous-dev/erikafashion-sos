@@ -5134,6 +5134,15 @@
     "effort": "Malá"
    },
    {
+    "prio": "Vysoká",
+    "area": "AI viditelnost a SEO",
+    "title": "Doplnit Eriku do odpovědí na dotazy o plnoštíhlých a do Gemini",
+    "why": "Ve 43 měřených promptech o módě je Erika v 16 a má 21 % podílu hlasu, druhá za Bonprixem. Na všech 7 dotazech o plnoštíhlých má ale 0 %, Bonprix je v 5 z nich. Přitom „šaty pro plnoštíhlé“ mají 3 980 hledání měsíčně a Erika pro ně nemá vlastní stránku. AI tu cituje Verino, Blanka Straka a Glami. V Gemini má Erika 2 %, Bonprix 13 % a Zara 12 %.",
+    "what": "Založit stránku šaty pro plnoštíhlé postavenou na střizích a univerzálních velikostech, bez hodnocení postavy. Propojit ji se stránkami zeštíhlujících šatů a velikostí XL a XXL a s existujícím článkem. Mezi konkurenty v Marketing Mineru zvážit C&A, který je nejcitovanějším zdrojem a dnes se nesleduje.",
+    "measure": "Viditelnost Eriky na 7 promptech o plnoštíhlých a v Gemini, pozice stránky na „šaty pro plnoštíhlé“, po 3 měsících.",
+    "effort": "Střední"
+   },
+   {
     "prio": "Střední",
     "area": "Značka a obsah",
     "title": "Využít zájem o Eriku Eliášovou",
@@ -5159,15 +5168,6 @@
     "what": "Na začátek hlavní stránky dát přehled (počet hodnocení, průměr, co zákaznice chválí a co se řeší), doplnit strukturovaná data a stránkování nastavit tak, aby se ve výsledcích ukazovala první strana. Adresy neměnit.",
     "measure": "Podíl kliků a pozice hlavní stránky, jestli ji cituje AI přehled.",
     "effort": "Malá"
-   },
-   {
-    "prio": "Střední",
-    "area": "AI viditelnost",
-    "title": "Dostat Eriku do odpovědí ChatGPT",
-    "why": "V citacích AI má Erika 9,5 % proti 2,0 % v hledání a v AI Overviews je 2. ze 20. V ChatGPT ale jen 11 citací a 11. místo, od dubna pokles ze 75. Vedou tam Zalando, Shein a About You. Vzorek Ahrefs se mění, proto to berte jako signál k ověření.",
-    "what": "Spustit 76 připravených promptů v Marketing Mineru, ať je vidět podíl hlasu i bez odkazu. Podívat se, které zdroje ChatGPT u dotazů na šaty cituje, a na ty se dostat přes články, srovnání a PR. Texty, které citují AI Overviews, nerozbíjet.",
-    "measure": "Podíl na citacích v ChatGPT a viditelnost v promptech po 3 měsících měření, záložka AI odpovědi.",
-    "effort": "Střední"
    },
    {
     "prio": "Sledovat",
@@ -5550,7 +5550,7 @@
   }
  },
  "ai": {
-  "lead": "Erika Fashion má 9,5 % citací v AI odpovědích mezi 20 sledovanými značkami a je 5. v pořadí. V hledání má přitom 2,0 %, odpovědi AI ji tedy odkazují 4,7krát častěji, než odpovídá jejímu podílu na hledání. Silná je v AI Overviews, v ChatGPT skoro chybí.",
+  "lead": "Erika Fashion má 9,5 % citací v AI odpovědích mezi 20 sledovanými značkami a je 5. v pořadí. V hledání má přitom 2,0 %, odpovědi AI ji tedy odkazují 4,7krát častěji, než odpovídá jejímu podílu na hledání. Ahrefs měří citace odkazem na velkém vzorku dotazů, Marketing Miner výše skutečné zmínky ve vybraných dotazech.",
   "kpis": [
    {
     "label": "Podíl na citacích",
@@ -5961,17 +5961,739 @@
     "shareApr": 11.1
    }
   ],
+  "mm": {
+   "period": "30. 9. až 30. 10. 2026",
+   "models": [
+    "ChatGPT",
+    "Gemini",
+    "Perplexity",
+    "AI Overviews"
+   ],
+   "weeks": [
+    "6. 10.",
+    "13. 10.",
+    "20. 10.",
+    "27. 10."
+   ],
+   "brands": [
+    {
+     "label": "Bonprix",
+     "pos": 1.3,
+     "vis": 9,
+     "sent": 29,
+     "poz": 30,
+     "neu": 72,
+     "sov": 23.1,
+     "models": [
+      10,
+      13,
+      8,
+      3
+     ],
+     "weeks": [
+      6,
+      12,
+      8,
+      9
+     ],
+     "color": "#B91C1C"
+    },
+    {
+     "label": "Erika Fashion",
+     "pos": 1.3,
+     "vis": 7,
+     "sent": 23,
+     "poz": 21,
+     "neu": 71,
+     "sov": 20.8,
+     "models": [
+      8,
+      2,
+      12,
+      5
+     ],
+     "weeks": [
+      6,
+      6,
+      9,
+      6
+     ],
+     "color": "#AE821F"
+    },
+    {
+     "label": "Zara",
+     "pos": 1.5,
+     "vis": 7,
+     "sent": 27,
+     "poz": 19,
+     "neu": 52,
+     "sov": 16.1,
+     "models": [
+      6,
+      12,
+      5,
+      5
+     ],
+     "weeks": [
+      7,
+      7,
+      8,
+      5
+     ],
+     "color": "#2E7D32"
+    },
+    {
+     "label": "HM",
+     "pos": 1.6,
+     "vis": 5,
+     "sent": 7,
+     "poz": 4,
+     "neu": 51,
+     "sov": 12.4,
+     "models": [
+      2,
+      10,
+      5,
+      5
+     ],
+     "weeks": [
+      7,
+      3,
+      5,
+      6
+     ],
+     "color": "#7E57C2"
+    },
+    {
+     "label": "Mohito",
+     "pos": 1.6,
+     "vis": 3,
+     "sent": 39,
+     "poz": 14,
+     "neu": 22,
+     "sov": 8.1,
+     "models": [
+      2,
+      6,
+      1,
+      4
+     ],
+     "weeks": [
+      2,
+      4,
+      3,
+      5
+     ],
+     "color": "#0891B2"
+    },
+    {
+     "label": "Orsay",
+     "pos": 1.2,
+     "vis": 2,
+     "sent": 7,
+     "poz": 6,
+     "neu": 80,
+     "sov": 19.5,
+     "models": [
+      4,
+      2,
+      1,
+      1
+     ],
+     "weeks": [
+      2,
+      1,
+      2,
+      3
+     ],
+     "color": "#EC4899"
+    }
+   ],
+   "prompts": [
+    {
+     "prompt": "Kde najdu hezké letní komplety, topy a kalhoty",
+     "tag": "nonbrand",
+     "my": 44,
+     "comp": {
+      "Zara": 44,
+      "HM": 25,
+      "Bonprix": 6
+     },
+     "sent": "18"
+    },
+    {
+     "prompt": "Hledám šaty na maturitní ples syna pro mě jako maminku",
+     "tag": "nonbrand",
+     "my": 31,
+     "comp": {},
+     "sent": "8"
+    },
+    {
+     "prompt": "Koho doporučujete z českých e-shopů se společenskými šaty a šaty na ples",
+     "tag": "nonbrand",
+     "my": 31,
+     "comp": {
+      "Mohito": 6
+     },
+     "sent": "67"
+    },
+    {
+     "prompt": "Mám silikonová prsa a chci nějaké oblečení, které mi bude sedět. Jaké eshopy bys mi doporučil?",
+     "tag": "Přidat štítek",
+     "my": 31,
+     "comp": {
+      "Bonprix": 25
+     },
+     "sent": "25"
+    },
+    {
+     "prompt": "Hledám boho šaty pro celou skupinku družiček",
+     "tag": "nonbrand",
+     "my": 31,
+     "comp": {
+      "Bonprix": 6
+     },
+     "sent": "50"
+    },
+    {
+     "prompt": "Jsem žena nad 40 a hledám květinové letní šaty",
+     "tag": "nonbrand",
+     "my": 25,
+     "comp": {
+      "Mohito": 19,
+      "Zara": 19,
+      "HM": 13,
+      "Orsay": 6,
+      "Bonprix": 6
+     },
+     "sent": "0"
+    },
+    {
+     "prompt": "Jedu k moři a potřebuju lehké letní šaty",
+     "tag": "nonbrand",
+     "my": 19,
+     "comp": {
+      "Mohito": 13,
+      "HM": 6,
+      "Zara": 6,
+      "Bonprix": 6
+     },
+     "sent": "30"
+    },
+    {
+     "prompt": "Hledám krajkové šaty na svatbu na zahradě",
+     "tag": "nonbrand",
+     "my": 13,
+     "comp": {
+      "Bonprix": 13,
+      "Mohito": 6
+     },
+     "sent": "20"
+    },
+    {
+     "prompt": "Hledám vzdušné maxi šaty na léto",
+     "tag": "nonbrand",
+     "my": 13,
+     "comp": {
+      "HM": 13,
+      "Bonprix": 13,
+      "Zara": 6
+     },
+     "sent": "0"
+    },
+    {
+     "prompt": "Kde sehnat krásné pouzdrové šaty pro matku nevěsty",
+     "tag": "nonbrand",
+     "my": 13,
+     "comp": {
+      "Mohito": 6,
+      "Zara": 6,
+      "Orsay": 6,
+      "Bonprix": 6
+     },
+     "sent": "67"
+    },
+    {
+     "prompt": "Je mi vedro a chci vzdušné šaty",
+     "tag": "nonbrand",
+     "my": 13,
+     "comp": {
+      "Bonprix": 19
+     },
+     "sent": "0"
+    },
+    {
+     "prompt": "Jsem malá a hledám společenské šaty které opticky prodlouží nohy",
+     "tag": "nonbrand",
+     "my": 6,
+     "comp": {},
+     "sent": "0"
+    },
+    {
+     "prompt": "Hledám plesové šaty které mi sednou ve 45 letech",
+     "tag": "nonbrand",
+     "my": 6,
+     "comp": {
+      "Mohito": 6
+     },
+     "sent": "0"
+    },
+    {
+     "prompt": "Vdávám se ve 47 a hledám neformální svatební šaty pro starší nevěstu",
+     "tag": "nonbrand",
+     "my": 6,
+     "comp": {
+      "Zara": 6
+     },
+     "sent": "0"
+    },
+    {
+     "prompt": "Nosí se ještě saténové plesové šaty nebo už jsou out",
+     "tag": "nonbrand",
+     "my": 6,
+     "comp": {
+      "Zara": 6
+     },
+     "sent": "0"
+    },
+    {
+     "prompt": "Doporučte mi krajkové plesové šaty s delší sukní",
+     "tag": "nonbrand",
+     "my": 6,
+     "comp": {
+      "Bonprix": 6
+     },
+     "sent": "0"
+    },
+    {
+     "prompt": "Jaký je nejlepší e-shop pro ženy 30 až 50 let s rychlým doručením s oblečením a módou",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Mohito": 13,
+      "Zara": 13,
+      "Bonprix": 13,
+      "Orsay": 6
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám e-shop kde mají velikosti i pro plnoštíhlé a rychlé vrácení",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Bonprix": 50,
+      "HM": 13,
+      "Orsay": 6
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Jak vybrat koktejlové šaty na firemní raut",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Kdo v ČR prodává lněné šaty na léto",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "HM": 44,
+      "Zara": 44,
+      "Mohito": 13,
+      "Bonprix": 13
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Žerzejové šaty které neprůsvitnou na světle",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Bonprix": 31,
+      "HM": 19
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Doporučte e-shop s plesovými šaty pro plnoštíhlé",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Bonprix": 19
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám šaty z příjemného materiálu pro citlivou pokožku",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Kde koupit společenské šaty pro plnoštíhlé",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Bonprix": 31,
+      "Mohito": 6
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Dcera má promoci a já potřebuju slušné šaty které ale nebudou usedlé",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Zara": 13
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám decentní černé šaty na pohřeb které nebudou působit smutně",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Orsay": 25
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Jaký trend v kalhotách se aktuálně nosí do práce i ven",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Zara": 6
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Doporučte mi e-shop s luxusními šaty pro matku nevěsty",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Jak sladit outfit maminky a maturantky na maturitní ples",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Měřím jen 158 cm a hledám šaty na svatbu které mi budou slušet",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Mohito": 6
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Jak se obléct na ples po čtyřicítce abych nepůsobila zoufale a byla svůdná",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám midi šaty na běžné nošení i do práce",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "HM": 19,
+      "Zara": 13,
+      "Orsay": 13
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám pohodlný komplet kalhoty a sako do kanceláře",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Mohito": 25,
+      "Zara": 25,
+      "HM": 13,
+      "Bonprix": 6
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Inspirujte mě, šaty na ples ve stylu old money",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Doporučte e-shop s pouzdrovými sukněmi do kanceláře",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Bonprix": 31,
+      "Mohito": 19,
+      "HM": 19,
+      "Orsay": 19,
+      "Zara": 13
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám košilové šaty pro plnoštíhlou ženu do práce i ven",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Bonprix": 31,
+      "HM": 19
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám pouzdrové šaty pro plnoštíhlou maminku nevěsty",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Bonprix": 13
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Které jsou nejvíc elegantní šaty na večerní akci",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Jdeme s manželem na obnovení slibu, jaké šaty zvolit ať nejsou klasicky bílé",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám plus size kalhoty které neudělají široký zadek",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Zara": 6
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Vdávám se a hledám svatební šaty pro plnoštíhlou nevěstu. Dej mi tipy, kde koupit",
+     "tag": "Přidat štítek",
+     "my": 0,
+     "comp": {},
+     "sent": "-"
+    },
+    {
+     "prompt": "Mám měnší prsa, jak je opticky zvětšit pomocí střihu šatů a kde vybrat?",
+     "tag": "Přidat štítek",
+     "my": 0,
+     "comp": {
+      "Zara": 44,
+      "HM": 25,
+      "Mohito": 13,
+      "Bonprix": 13
+     },
+     "sent": "-"
+    },
+    {
+     "prompt": "Hledám kalhoty s vyšším pasem které zformují postavu",
+     "tag": "nonbrand",
+     "my": 0,
+     "comp": {
+      "Zara": 25,
+      "Bonprix": 13,
+      "HM": 6
+     },
+     "sent": "-"
+    }
+   ],
+   "themes": [
+    {
+     "t": "Plnoštíhlé a větší velikosti",
+     "n": 7,
+     "avg": 0.0,
+     "hit": 0,
+     "best": "Bonprix",
+     "bestAvg": 20.6
+    },
+    {
+     "t": "Plesy a maturita",
+     "n": 8,
+     "avg": 10.0,
+     "hit": 5,
+     "best": "Mohito",
+     "bestAvg": 1.5
+    },
+    {
+     "t": "Svatby a události",
+     "n": 9,
+     "avg": 7.0,
+     "hit": 4,
+     "best": "Orsay",
+     "bestAvg": 3.4
+    },
+    {
+     "t": "Léto",
+     "n": 6,
+     "avg": 19.0,
+     "hit": 5,
+     "best": "Zara",
+     "bestAvg": 19.8
+    },
+    {
+     "t": "Práce a kancelář",
+     "n": 4,
+     "avg": 0.0,
+     "hit": 0,
+     "best": "Zara",
+     "bestAvg": 14.2
+    },
+    {
+     "t": "Výběr e-shopu",
+     "n": 2,
+     "avg": 15.5,
+     "hit": 1,
+     "best": "Bonprix",
+     "bestAvg": 19.0
+    },
+    {
+     "t": "Ostatní",
+     "n": 7,
+     "avg": 0.9,
+     "hit": 1,
+     "best": "Zara",
+     "bestAvg": 9.9
+    }
+   ],
+   "domains": [
+    {
+     "d": "c-and-a.com",
+     "n": 104,
+     "pct": 3.8
+    },
+    {
+     "d": "glami.cz",
+     "n": 98,
+     "pct": 3.58
+    },
+    {
+     "d": "erikafashion.cz",
+     "n": 92,
+     "pct": 3.36
+    },
+    {
+     "d": "aboutyou.cz",
+     "n": 69,
+     "pct": 2.52
+    },
+    {
+     "d": "blankastraka.cz",
+     "n": 59,
+     "pct": 2.15
+    },
+    {
+     "d": "verino.cz",
+     "n": 47,
+     "pct": 1.72
+    },
+    {
+     "d": "miadresses.cz",
+     "n": 36,
+     "pct": 1.31
+    },
+    {
+     "d": "modio.cz",
+     "n": 36,
+     "pct": 1.31
+    },
+    {
+     "d": "zara.com",
+     "n": 31,
+     "pct": 1.13
+    },
+    {
+     "d": "bestmoda.cz",
+     "n": 28,
+     "pct": 1.02
+    },
+    {
+     "d": "trendy-obleceni.cz",
+     "n": 28,
+     "pct": 1.02
+    },
+    {
+     "d": "zalando.cz",
+     "n": 28,
+     "pct": 1.02
+    },
+    {
+     "d": "bonprix.cz",
+     "n": 21,
+     "pct": 0.77
+    },
+    {
+     "d": "mohito.com",
+     "n": 18,
+     "pct": 0.66
+    }
+   ],
+   "kpis": [
+    {
+     "label": "Podíl hlasu",
+     "value": "21 %",
+     "delta": "2. místo z 6",
+     "note": "Bonprix 23 %, Orsay 20 %"
+    },
+    {
+     "label": "Viditelnost",
+     "value": "7 %",
+     "delta": "2. až 3. místo",
+     "note": "podíl odpovědí se zmínkou, Bonprix 9 %, Zara 7 %"
+    },
+    {
+     "label": "Průměrná pozice",
+     "value": "1,3",
+     "delta": "mezi nejlepšími",
+     "note": "když AI Eriku zmíní, bývá v seznamu první"
+    },
+    {
+     "label": "Sentiment",
+     "value": "23",
+     "delta": "0 negativních zmínek",
+     "note": "21 pozitivních, 71 neutrálních, Mohito 39"
+    }
+   ],
+   "findings": [
+    "Erika je v 16 ze 43 měřených promptů a s 21 % podílu hlasu je druhá za Bonprixem. Orsay má podíl 20 % při viditelnosti jen 2 %, zmínky se u ní kupí v malém počtu odpovědí.",
+    "Podle modelů je Erika první v Perplexity (12 %), druhá v ChatGPT (8 %) a v AI Overviews se dělí o první místo s HM a Zarou (5 %). V Gemini je poslední spolu s Orsay (2 %), Bonprix tam má 13 %, Zara 12 % a HM 10 %.",
+    "Největší mezera jsou plnoštíhlé. Na všech 7 promptech má Erika 0 %, Bonprix je v 5 z nich, nejvýš 50 %. Druhá mezera je oblečení do práce, 0 ze 4 promptů, Zara tam má průměrně 14 %.",
+    "Silná je tam, kde je doma. Společenské šaty a ples 31 %, šaty pro maminku maturanta 31 %, boho šaty pro družičky 31 %, letní komplety 44 %.",
+    "Na 18 promptech je zmíněný aspoň jeden konkurent a Erika ne. Na dalších 9 nezazní žádná ze šesti značek, tady je prostor volný.",
+    "Erika je třetí nejcitovanější doména (92 výskytů) za C&A (104) a Glami (98). Bonprix zmiňují odpovědi nejčastěji, jeho web ale cituje jen 21krát. Nejcitovanější stránky Eriky jsou /maturitni-saty-host-maminka/ a /saty-na-ples/.",
+    "ChatGPT v měřených odpovědích za poslední měsíc nezobrazil žádnou reklamu."
+   ],
+   "note": "Marketing Miner se ptá na 43 obecných dotazů bez značky ve čtyřech modelech jednou týdně, tedy 172 odpovědí týdně. Sledované značky jsou Bonprix, Zara, HM, Mohito a Orsay, jiná sada než v hlavním srovnání. Podíl hlasu je podíl na zmínkách těchto šesti značek. Čísla ze 4 týdnů, zatím nejde o trend, srovnání s dubnem tu není."
+  },
   "findings": [
    "Citací ubylo z 599 na 472. Propad je v ChatGPT (75 na 11), AI Mode (179 na 68) a Perplexity (171 na 107), růst v AI Overviews (138 na 194) a Copilotu (35 na 87).",
    "V AI Overviews je Erika 2. těsně za Modivem (199 citací). Tady má největší dosah, protože AI Overviews se ukazují přímo ve vyhledávání Googlu.",
-   "V ChatGPT má Erika jen 11 citací, 2,2 % sledované skupiny. Vedou Zalando (85), Shein (75) a About You (68).",
+   "V ChatGPT vidí Ahrefs jen 11 citací (2,2 % skupiny), vedou Zalando, Shein a About You. Marketing Miner ale ve stejném modelu ukazuje 8% viditelnost a druhé místo. Vzorek Ahrefs je tady malý, pro ChatGPT platí spíš měření promptů.",
    "V užší české skupině má Erika 23,5 % citací, druhá po Glami (41,5 %). Lelosi, jednička české skupiny v hledání, má jen 3,2 %.",
    "Největší vzestup mají Shein (1,2 % na 3,9 %) a Reserved (2,2 % na 4,5 %). Glami ztrácí nejvíc (19,3 % na 16,8 %), hlavně kvůli ChatGPT."
   ],
   "caveats": [
    [
-    "Měříme citace, ne zmínky.",
-    "Počítá se, kolikrát odpověď AI odkáže na web značky. Značka zmíněná bez odkazu tu není, skutečný podíl hlasu by dalo až měření vlastních promptů."
+    "Citace nejsou zmínky.",
+    "Ahrefs počítá, kolikrát odpověď AI odkáže na web značky. Značka zmíněná bez odkazu tu není. Zmínky měří Marketing Miner v první části této záložky."
    ],
    [
     "Vzorek se mění.",
@@ -5983,7 +6705,7 @@
    ],
    [
     "Co tu chybí.",
-    "Grok v součtu není, v říjnu u Eriky Ahrefs nevrací žádná data (v dubnu 149). 76 připravených promptů v Marketing Mineru zatím do dashboardu nevstupuje."
+    "Grok v součtu není, v říjnu u Eriky Ahrefs nevrací žádná data (v dubnu 149). Marketing Miner nabízí jen čtyři modely a pět konkurentů, proto se sady značek v obou zdrojích liší."
    ]
   ]
  }

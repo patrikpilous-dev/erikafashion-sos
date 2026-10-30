@@ -272,6 +272,52 @@ brandFindings=[
  f"Nejsilnější měsíc byl {mname[peak[5:]]} {peak[:4]} s {n0(BR[peak][0])} kliky a {n0(BR[peak][1])} zobrazeními. Brandové dotazy tvoří {n1(100*qb/qa)} % všech kliků z Google.",
  "Jde jen o organické výsledky, kliky na placenou reklamu tu nejsou. Započítané jsou všechny dotazy se slovem erika, tedy i vrácení zboží, recenze a jméno zakladatelky. Search Console drží data jen 16 měsíců, proto graf začíná červencem 2025.",
 ]
+
+# ---------- Marketing Miner, AI tracker, 30. 9. až 30. 10. 2026 (přečteno z webové aplikace) ----------
+import re as _re
+mmP=J(Z+'mm_prompty.json')
+mmRaw=[('Bonprix',1.3,9,29,30,72,[10,13,8,3],[6,12,8,9],'#B91C1C'),('Erika Fashion',1.3,7,23,21,71,[8,2,12,5],[6,6,9,6],'#AE821F'),('Zara',1.5,7,27,19,52,[6,12,5,5],[7,7,8,5],'#2E7D32'),('HM',1.6,5,7,4,51,[2,10,5,5],[7,3,5,6],'#7E57C2'),('Mohito',1.6,3,39,14,22,[2,6,1,4],[2,4,3,5],'#0891B2'),('Orsay',1.2,2,7,6,80,[4,2,1,1],[2,1,2,3],'#EC4899')]
+mmTot=sum(r[4]+r[5] for r in mmRaw)
+mmBrands=[{'label':r[0],'pos':r[1],'vis':r[2],'sent':r[3],'poz':r[4],'neu':r[5],'sov':round(100*(r[4]+r[5])/mmTot,1),'models':r[6],'weeks':r[7],'color':r[8]} for r in mmRaw]
+mmN=len(mmP); mmHit=sum(1 for r in mmP if r['my']>0)
+mmSov=round(mmBrands[1]['sov'])
+mmPlus=[r for r in mmP if _re.search('plnoštíhl|plus size',r['prompt'],_re.I)]
+mmPlusB=sum(1 for r in mmPlus if r['comp'].get('Bonprix',0)>0)
+mmNobody=sum(1 for r in mmP if r['my']==0 and not r['comp'])
+mmLost=sum(1 for r in mmP if r['my']==0 and r['comp'])
+TH=[('Plnoštíhlé a větší velikosti','plnoštíhl|plus size'),('Plesy a maturita','ples|maturit'),('Svatby a události','svatb|nevěst|vdávám|družič|slib|promoci|pohřeb'),('Léto','letní|léto|moři|vedro|vzdušn|lněn'),('Práce a kancelář','práce|prác|kancelář'),('Výběr e-shopu','e-shop|eshop')]
+rest=list(mmP); themes=[]
+for nm_,rx in TH:
+    g2=[r for r in rest if _re.search(rx,r['prompt'],_re.I)]; rest=[r for r in rest if r not in g2]
+    cs={}
+    for r in g2:
+        for k,v in r['comp'].items(): cs[k]=cs.get(k,0)+v
+    bk=max(cs,key=cs.get) if cs else None
+    themes.append({'t':nm_,'n':len(g2),'avg':round(sum(r['my'] for r in g2)/len(g2),1) if g2 else 0,'hit':sum(1 for r in g2 if r['my']>0),'best':bk,'bestAvg':round(cs[bk]/len(g2),1) if bk else 0})
+g2=rest
+cs={}
+for r in g2:
+    for k,v in r['comp'].items(): cs[k]=cs.get(k,0)+v
+bk=max(cs,key=cs.get) if cs else None
+themes.append({'t':'Ostatní','n':len(g2),'avg':round(sum(r['my'] for r in g2)/len(g2),1) if g2 else 0,'hit':sum(1 for r in g2 if r['my']>0),'best':bk,'bestAvg':round(cs[bk]/len(g2),1) if bk else 0})
+print('themes',themes)
+mmDomains=[('c-and-a.com',104,3.80),('glami.cz',98,3.58),('erikafashion.cz',92,3.36),('aboutyou.cz',69,2.52),('blankastraka.cz',59,2.15),('verino.cz',47,1.72),('miadresses.cz',36,1.31),('modio.cz',36,1.31),('zara.com',31,1.13),('bestmoda.cz',28,1.02),('trendy-obleceni.cz',28,1.02),('zalando.cz',28,1.02),('bonprix.cz',21,0.77),('mohito.com',18,0.66)]
+mmTab={'period':'30. 9. až 30. 10. 2026','models':['ChatGPT','Gemini','Perplexity','AI Overviews'],'weeks':['6. 10.','13. 10.','20. 10.','27. 10.'],'brands':mmBrands,'prompts':sorted(mmP,key=lambda r:-r['my']),'themes':themes,'domains':[{'d':d,'n':n,'pct':pc} for d,n,pc in mmDomains],
+ 'kpis':[
+  {'label':'Podíl hlasu','value':f"{mmSov} %",'delta':'2. místo z 6','note':f"Bonprix {round(mmBrands[0]['sov'])} %, Orsay {round(mmBrands[5]['sov'])} %"},
+  {'label':'Viditelnost','value':'7 %','delta':'2. až 3. místo','note':'podíl odpovědí se zmínkou, Bonprix 9 %, Zara 7 %'},
+  {'label':'Průměrná pozice','value':'1,3','delta':'mezi nejlepšími','note':'když AI Eriku zmíní, bývá v seznamu první'},
+  {'label':'Sentiment','value':'23','delta':'0 negativních zmínek','note':'21 pozitivních, 71 neutrálních, Mohito 39'},
+ ],
+ 'findings':[
+  f"Erika je v {mmHit} ze {mmN} měřených promptů a s {mmSov} % podílu hlasu je druhá za Bonprixem. Orsay má podíl {round(mmBrands[5]['sov'])} % při viditelnosti jen 2 %, zmínky se u ní kupí v malém počtu odpovědí.",
+  "Podle modelů je Erika první v Perplexity (12 %), druhá v ChatGPT (8 %) a v AI Overviews se dělí o první místo s HM a Zarou (5 %). V Gemini je poslední spolu s Orsay (2 %), Bonprix tam má 13 %, Zara 12 % a HM 10 %.",
+  f"Největší mezera jsou plnoštíhlé. Na všech {len(mmPlus)} promptech má Erika 0 %, Bonprix je v {mmPlusB} z nich, nejvýš 50 %. Druhá mezera je oblečení do práce, 0 ze 4 promptů, Zara tam má průměrně 14 %.",
+  "Silná je tam, kde je doma. Společenské šaty a ples 31 %, šaty pro maminku maturanta 31 %, boho šaty pro družičky 31 %, letní komplety 44 %.",
+  f"Na {mmLost} promptech je zmíněný aspoň jeden konkurent a Erika ne. Na dalších {mmNobody} nezazní žádná ze šesti značek, tady je prostor volný.",
+  "Erika je třetí nejcitovanější doména (92 výskytů) za C&A (104) a Glami (98). Bonprix zmiňují odpovědi nejčastěji, jeho web ale cituje jen 21krát. Nejcitovanější stránky Eriky jsou /maturitni-saty-host-maminka/ a /saty-na-ples/.",
+  "ChatGPT v měřených odpovědích za poslední měsíc nezobrazil žádnou reklamu."],
+ 'note':f"Marketing Miner se ptá na {mmN} obecných dotazů bez značky ve čtyřech modelech jednou týdně, tedy 172 odpovědí týdně. Sledované značky jsou Bonprix, Zara, HM, Mohito a Orsay, jiná sada než v hlavním srovnání. Podíl hlasu je podíl na zmínkách těchto šesti značek. Čísla ze 4 týdnů, zatím nejde o trend, srovnání s dubnem tu není."}
 # citace v AI
 AI=J(Z+'ai.json')
 PL=['chatgpt','google_ai_overviews','google_ai_mode','perplexity','copilot','gemini']
@@ -296,25 +342,25 @@ NA=[x for x in air if x['id'] in NARROW]; NAN=sum(x['now'] for x in NA); NAA=sum
 n_sh=lambda k,f,T:100*[x for x in NA if x['id']==k][0][f]/T
 cgTop=topin('chatgpt')[:3]
 aiTab={
- 'lead':f"Erika Fashion má {n1(E_['shareNow'])} % citací v AI odpovědích mezi 20 sledovanými značkami a je {erank}. v pořadí. V hledání má přitom {n1(E_['sos'])} %, odpovědi AI ji tedy odkazují {n1(E_['shareNow']/E_['sos']).replace(',0','')}krát častěji, než odpovídá jejímu podílu na hledání. Silná je v AI Overviews, v ChatGPT skoro chybí.",
+ 'lead':f"Erika Fashion má {n1(E_['shareNow'])} % citací v AI odpovědích mezi 20 sledovanými značkami a je {erank}. v pořadí. V hledání má přitom {n1(E_['sos'])} %, odpovědi AI ji tedy odkazují {n1(E_['shareNow']/E_['sos']).replace(',0','')}krát častěji, než odpovídá jejímu podílu na hledání. Ahrefs měří citace odkazem na velkém vzorku dotazů, Marketing Miner výše skutečné zmínky ve vybraných dotazech.",
  'kpis':[
   {'label':'Podíl na citacích','value':n1(E_['shareNow'])+' %','delta':f"{sg(E_['shareNow']-E_['shareApr'])} p. b. od dubna",'note':f"v dubnu {n1(E_['shareApr'])} %, {erank}. místo z 20"},
   {'label':'Citace celkem','value':n0(E_['now']),'delta':f"{sg0(exsh(E_['now'],E_['apr']))} % od dubna",'note':f"v dubnu {n0(E_['apr'])}, šest platforem"},
   {'label':'AI Overviews','value':str(ep['now']['google_ai_overviews']),'delta':f"{aio_rank}. místo ze 20",'note':f"v dubnu {ep['apr']['google_ai_overviews']}, podíl {n1(aip[1]['shareNow'])} %"},
   {'label':'ChatGPT','value':str(ep['now']['chatgpt']),'delta':f"{cg_rank}. místo ze 20",'note':f"v dubnu {ep['apr']['chatgpt']}, podíl {n1(aip[0]['shareNow'])} %"},
  ],
- 'brands':air,'platforms':aip,
+ 'brands':air,'platforms':aip,'mm':mmTab,
  'findings':[
   f"Citací ubylo z {n0(E_['apr'])} na {n0(E_['now'])}. Propad je v ChatGPT ({ep['apr']['chatgpt']} na {ep['now']['chatgpt']}), AI Mode ({ep['apr']['google_ai_mode']} na {ep['now']['google_ai_mode']}) a Perplexity ({ep['apr']['perplexity']} na {ep['now']['perplexity']}), růst v AI Overviews ({ep['apr']['google_ai_overviews']} na {ep['now']['google_ai_overviews']}) a Copilotu ({ep['apr']['copilot']} na {ep['now']['copilot']}).",
   f"V AI Overviews je Erika {aio_rank}. těsně za Modivem ({[x for x in air if x['id']=='modivo'][0]['platforms']['google_ai_overviews']} citací). Tady má největší dosah, protože AI Overviews se ukazují přímo ve vyhledávání Googlu.",
-  f"V ChatGPT má Erika jen {ep['now']['chatgpt']} citací, {n1(aip[0]['shareNow'])} % sledované skupiny. Vedou {nm(cgTop[0]['id'])} ({cgTop[0]['platforms']['chatgpt']}), {nm(cgTop[1]['id'])} ({cgTop[1]['platforms']['chatgpt']}) a {nm(cgTop[2]['id'])} ({cgTop[2]['platforms']['chatgpt']}).",
+  f"V ChatGPT vidí Ahrefs jen {ep['now']['chatgpt']} citací ({n1(aip[0]['shareNow'])} % skupiny), vedou {nm(cgTop[0]['id'])}, {nm(cgTop[1]['id'])} a {nm(cgTop[2]['id'])}. Marketing Miner ale ve stejném modelu ukazuje 8% viditelnost a druhé místo. Vzorek Ahrefs je tady malý, pro ChatGPT platí spíš měření promptů.",
   f"V užší české skupině má Erika {n1(n_sh('erikafashion','now',NAN))} % citací, druhá po Glami ({n1(n_sh('glami','now',NAN))} %). Lelosi, jednička české skupiny v hledání, má jen {n1(n_sh('lelosi','now',NAN))} %.",
   f"Největší vzestup mají Shein ({n1([x for x in air if x['id']=='shein'][0]['shareApr'])} % na {n1([x for x in air if x['id']=='shein'][0]['shareNow'])} %) a Reserved ({n1([x for x in air if x['id']=='reserved'][0]['shareApr'])} % na {n1([x for x in air if x['id']=='reserved'][0]['shareNow'])} %). Glami ztrácí nejvíc ({n1([x for x in air if x['id']=='glami'][0]['shareApr'])} % na {n1([x for x in air if x['id']=='glami'][0]['shareNow'])} %), hlavně kvůli ChatGPT."],
  'caveats':[
-  ['Měříme citace, ne zmínky.','Počítá se, kolikrát odpověď AI odkáže na web značky. Značka zmíněná bez odkazu tu není, skutečný podíl hlasu by dalo až měření vlastních promptů.'],
+  ['Citace nejsou zmínky.','Ahrefs počítá, kolikrát odpověď AI odkáže na web značky. Značka zmíněná bez odkazu tu není. Zmínky měří Marketing Miner v první části této záložky.'],
   ['Vzorek se mění.',f"Ahrefs testuje vlastní sadu dotazů pro ČR a ta se hýbe. Součet za ChatGPT klesl z {n0(pt('chatgpt','apr'))} na {n0(pt('chatgpt','now'))}, u Gemini vzrostl z {pt('gemini','apr')} na {pt('gemini','now')}. Proto sledujeme podíly, ne absolutní čísla, a posun o bod nebo dva neberte jako trend."],
   ['Citace nejsou návštěvy.','Citace ukazují dosah, ne návštěvnost ani tržby. Kolik lidí z odpovědí AI opravdu přijde na web, tahle data neříkají.'],
-  ['Co tu chybí.','Grok v součtu není, v říjnu u Eriky Ahrefs nevrací žádná data (v dubnu 149). 76 připravených promptů v Marketing Mineru zatím do dashboardu nevstupuje.'],
+  ['Co tu chybí.','Grok v součtu není, v říjnu u Eriky Ahrefs nevrací žádná data (v dubnu 149). Marketing Miner nabízí jen čtyři modely a pět konkurentů, proto se sady značek v obou zdrojích liší.'],
  ]}
 nsh=lambda k,s_,T:100*sm(k,s_)/T
 sinceApril=[
@@ -328,10 +374,10 @@ sinceApril=[
  {'m':'Podíl na citacích v AI odpovědích (Ahrefs)','a':n1(E_['shareApr'])+' %','n':n1(E_['shareNow'])+' %','d':f"{sg(E_['shareNow']-E_['shareApr'])} p. b."},
 ]
 summary['sinceApril']=sinceApril; summary['brandGsc']=brandGsc; summary['brandFindings']=brandFindings
-summary['recs'].insert(6,{'prio':'Střední','area':'AI viditelnost','title':'Dostat Eriku do odpovědí ChatGPT',
- 'why':f"V citacích AI má Erika {n1(E_['shareNow'])} % proti {n1(E_['sos'])} % v hledání a v AI Overviews je {aio_rank}. ze 20. V ChatGPT ale jen {ep['now']['chatgpt']} citací a {cg_rank}. místo, od dubna pokles ze {ep['apr']['chatgpt']}. Vedou tam {nm(cgTop[0]['id'])}, {nm(cgTop[1]['id'])} a {nm(cgTop[2]['id'])}. Vzorek Ahrefs se mění, proto to berte jako signál k ověření.",
- 'what':'Spustit 76 připravených promptů v Marketing Mineru, ať je vidět podíl hlasu i bez odkazu. Podívat se, které zdroje ChatGPT u dotazů na šaty cituje, a na ty se dostat přes články, srovnání a PR. Texty, které citují AI Overviews, nerozbíjet.',
- 'measure':'Podíl na citacích v ChatGPT a viditelnost v promptech po 3 měsících měření, záložka AI odpovědi.','effort':'Střední'})
+summary['recs'].insert(3,{'prio':'Vysoká','area':'AI viditelnost a SEO','title':'Doplnit Eriku do odpovědí na dotazy o plnoštíhlých a do Gemini',
+ 'why':f"Ve {mmN} měřených promptech o módě je Erika v {mmHit} a má {mmSov} % podílu hlasu, druhá za Bonprixem. Na všech {len(mmPlus)} dotazech o plnoštíhlých má ale 0 %, Bonprix je v {mmPlusB} z nich. Přitom „šaty pro plnoštíhlé“ mají 3 980 hledání měsíčně a Erika pro ně nemá vlastní stránku. AI tu cituje Verino, Blanka Straka a Glami. V Gemini má Erika 2 %, Bonprix 13 % a Zara 12 %.",
+ 'what':'Založit stránku šaty pro plnoštíhlé postavenou na střizích a univerzálních velikostech, bez hodnocení postavy. Propojit ji se stránkami zeštíhlujících šatů a velikostí XL a XXL a s existujícím článkem. Mezi konkurenty v Marketing Mineru zvážit C&A, který je nejcitovanějším zdrojem a dnes se nesleduje.',
+ 'measure':'Viditelnost Eriky na 7 promptech o plnoštíhlých a v Gemini, pozice stránky na „šaty pro plnoštíhlé“, po 3 měsících.','effort':'Střední'})
 
 hist={'lastUpdated':'2026-10-30','edition':'2026-10','dates':ms,'brands':brands,'brandSearch':bs,'organicTraffic':organic,'organicIntl':organicIntl,'snapshot':snapshot,'gsc':gsc,
  'brandTerms':{'erikafashion':termsCmp},'brandAssociations':assocCmp,'googleTrends':gt,'brandVariants':variants,'content':content,'summary':summary,'aprCompare':aprCompare,'ai':aiTab}
@@ -358,9 +404,9 @@ if not os.path.exists('data/editions/2026-04.json'):
     json.dump(a,open('data/editions/2026-04.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)
 json.dump(hist,open('data/history.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)
 json.dump({'current':'2026-10','tabs':[
+ {'id':'data-2026-10','label':'Říjen 2026','kind':'data','file':'history.json','badge':'Poslední aktualizace: 30. 10. 2026 | Data do září 2026'},
+ {'id':'archiv-2026-04','label':'Duben 2026','kind':'data','file':'editions/2026-04.json','badge':'Archiv: stav z 19. 4. 2026, čísla ani závěry se nemění'},
  {'id':'shrnuti','label':'Shrnutí a doporučení','kind':'summary','file':'history.json'},
- {'id':'data-2026-10','label':'Data, říjen 2026','kind':'data','file':'history.json','badge':'Poslední aktualizace: 30. 10. 2026 | Data do září 2026'},
- {'id':'ai-odpovedi','label':'AI odpovědi','kind':'ai','file':'history.json','badge':'Citace v AI, ČR, 30. 10. proti 19. 4. 2026'},
- {'id':'archiv-2026-04','label':'Archiv, duben 2026','kind':'data','file':'editions/2026-04.json','badge':'Archiv: stav z 19. 4. 2026, čísla ani závěry se nemění'}]},
+ {'id':'ai-odpovedi','label':'AI odpovědi','kind':'ai','file':'history.json','badge':'AI odpovědi, ČR, stav k 30. 10. 2026'}]},
  open('data/editions/index.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)
 print('hotovo')

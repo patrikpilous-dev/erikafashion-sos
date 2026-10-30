@@ -201,6 +201,8 @@ body {
     white-space: nowrap;
 }
 .tab-btn:hover { color: var(--accent); }
+.tab-btn:focus { outline: none; }
+.tab-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
 .filter-bar { top: 51px; }
 @media (max-width: 1200px) { .filter-bar { position: static; } }
@@ -1247,10 +1249,80 @@ function renderChartBrand() {
     });
 }
 
+// ========== MARKETING MINER ==========
+function buildMMSection(M) {
+    var mdl = M.models;
+    var html = '<div class="card"><div class="card-title">Podíl hlasu v AI odpovědech, Marketing Miner</div>' +
+        '<div class="info-box">' + M.note + '</div>' +
+        '<div class="kpi-grid">' + M.kpis.map(function(k) {
+            return '<div class="kpi"><div class="kpi-label">' + k.label + '</div><div class="kpi-value">' + k.value + '</div><div class="kpi-delta">' + k.delta + '</div><div class="kpi-note">' + k.note + '.</div></div>';
+        }).join('') + '</div>' +
+        '<div class="findings"><div class="findings-title">Klíčová zjištění, ' + M.period + '</div><ol>' + M.findings.map(function(t) { return '<li>' + t + '</li>'; }).join('') + '</ol></div>' +
+    '</div>';
+
+    html += '<div class="card"><div class="card-title">Značky a modely</div>' +
+        '<div style="overflow-x:auto"><table class="data-table" id="mmBrandTable"><thead><tr><th>Značka</th><th>Podíl hlasu</th><th>Viditelnost</th><th>Pozice</th><th>Sentiment</th>' +
+        mdl.map(function(m) { return '<th>' + m + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        M.brands.map(function(b) {
+            return '<tr' + (b.label === 'Erika Fashion' ? ' class="target-row"' : '') + '><td>' + b.label + '</td><td>' + fmtPct(b.sov, 1) + '</td><td>' + b.vis + ' %</td><td>' + b.pos.toFixed(1).replace('.', ',') + '</td><td>' + b.sent + '</td>' +
+                b.models.map(function(v) { return '<td>' + v + ' %</td>'; }).join('') + '</tr>';
+        }).join('') + '</tbody></table></div>' +
+        '<div class="chart-row" style="margin-top:20px">' +
+            '<div><div class="chart-label">Viditelnost podle modelů</div><div class="chart-wrap"><canvas id="chartMMModels"></canvas></div></div>' +
+            '<div><div class="chart-label">Viditelnost po týdnech</div><div class="chart-wrap"><canvas id="chartMMWeeks"></canvas></div></div>' +
+        '</div></div>';
+
+    html += '<div class="card"><div class="card-title">Kde Erika v odpovědech je a kde chybí</div>' +
+        '<div style="overflow-x:auto"><table class="data-table" id="mmThemeTable"><thead><tr><th>Téma</th><th>Promptů</th><th>S Erikou</th><th>Viditelnost Eriky</th><th>Nejlepší konkurent</th><th>Jeho viditelnost</th></tr></thead><tbody>' +
+        M.themes.map(function(t) {
+            return '<tr><td>' + t.t + '</td><td>' + t.n + '</td><td>' + t.hit + '</td><td>' + fmtPct(t.avg, 1) + '</td><td>' + (t.best || '–') + '</td><td>' + (t.best ? fmtPct(t.bestAvg, 1) : '–') + '</td></tr>';
+        }).join('') + '</tbody></table></div>' +
+        '<details style="margin-top:18px"><summary>Všech ' + M.prompts.length + ' promptů</summary><div class="details-content" style="overflow-x:auto"><table class="data-table" id="mmPromptTable"><thead><tr><th>Prompt</th><th>Erika</th><th>Konkurenti</th><th>Sentiment</th></tr></thead><tbody>' +
+        M.prompts.map(function(r) {
+            var c = Object.keys(r.comp).sort(function(a, b) { return r.comp[b] - r.comp[a]; }).map(function(k) { return k + ' ' + r.comp[k] + ' %'; }).join(', ');
+            return '<tr><td>' + r.prompt + '</td><td>' + r.my + ' %</td><td>' + (c || '–') + '</td><td>' + r.sent + '</td></tr>';
+        }).join('') + '</tbody></table></div></details></div>';
+
+    html += '<div class="card"><div class="card-title">Nejcitovanější domény v odpovědech</div>' +
+        '<div style="overflow-x:auto"><table class="data-table" id="mmDomainTable" style="max-width:640px"><thead><tr><th>Doména</th><th>Výskytů</th><th>Podíl</th></tr></thead><tbody>' +
+        M.domains.map(function(d) {
+            return '<tr' + (d.d === 'erikafashion.cz' ? ' class="target-row"' : '') + '><td>' + d.d + '</td><td>' + d.n + '</td><td>' + fmtPct(d.pct, 2) + '</td></tr>';
+        }).join('') + '</tbody></table></div></div>';
+    return html;
+}
+
+function renderMMCharts(M) {
+    var o1 = chartDefaults();
+    o1.plugins.legend.display = true;
+    o1.scales.x.grid = { display: false };
+    o1.scales.y.ticks.callback = function(v) { return v + ' %'; };
+    o1.plugins.tooltip.callbacks.label = function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + ' %'; };
+    chartInstances['chartMMModels'] = new Chart(document.getElementById('chartMMModels'), {
+        type: 'bar',
+        data: { labels: M.models, datasets: M.brands.map(function(b) {
+            return { label: b.label, data: b.models, backgroundColor: b.color, borderRadius: 3, barPercentage: 0.85, categoryPercentage: 0.8 };
+        }) },
+        options: o1
+    });
+    var o2 = chartDefaults();
+    o2.plugins.legend.display = true;
+    o2.scales.y.ticks.callback = function(v) { return v + ' %'; };
+    o2.plugins.tooltip.callbacks.label = function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + ' %'; };
+    chartInstances['chartMMWeeks'] = new Chart(document.getElementById('chartMMWeeks'), {
+        type: 'line',
+        data: { labels: M.weeks, datasets: M.brands.map(function(b) {
+            var t = b.label === 'Erika Fashion';
+            return { label: b.label, data: b.weeks, borderColor: b.color, backgroundColor: b.color, borderWidth: t ? 3 : 1.5, pointRadius: t ? 4 : 2, pointHoverRadius: 5, tension: 0.2, order: t ? 0 : 1 };
+        }) },
+        options: o2
+    });
+}
+
 // ========== ZÁLOŽKA AI ==========
 function renderAI() {
     var A = DATA.ai;
-    var html = '<div class="card"><div class="card-title">Pod\u00EDl v AI odpov\u011Bdech</div>' +
+    var html = buildMMSection(A.mm);
+    html += '<div class="card"><div class="card-title">Citace v AI odpov\u011Bdech, Ahrefs</div>' +
         '<p class="card-subtitle">' + A.lead + '</p>' +
         '<div class="kpi-grid">' + A.kpis.map(function(k) {
             return '<div class="kpi"><div class="kpi-label">' + k.label + '</div><div class="kpi-value">' + k.value + '</div><div class="kpi-delta">' + k.delta + '</div><div class="kpi-note">' + k.note + '.</div></div>';
@@ -1279,6 +1351,12 @@ function renderAI() {
         A.caveats.map(function(r) { return '<div class="reading-item"><strong>' + r[0] + '</strong><span>' + r[1] + '</span></div>'; }).join('') + '</div></div>';
 
     document.getElementById('mainContent').innerHTML = html;
+
+    renderMMCharts(A.mm);
+    initTableSort('mmBrandTable', false);
+    initTableSort('mmThemeTable', false);
+    initTableSort('mmPromptTable', false);
+    initTableSort('mmDomainTable', false);
 
     var top = A.brands.slice().sort(function(a, b) { return b.shareNow - a.shareNow; }).slice(0, 12);
     var bars = function(id, labels, now, apr, fmt, horizontal) {
